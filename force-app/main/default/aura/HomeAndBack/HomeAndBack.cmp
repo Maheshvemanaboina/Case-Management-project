@@ -1,0 +1,9 @@
+<aura:component implements="flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes" access="global" >
+	<aura:attribute name="LinkNm" type="String" required="true" access="public"/>
+    <aura:attribute name="HomeBut" type="Boolean" required="true" access="public"/>
+    <div class="slds-grid slds-gutters">
+        <div class="slds-col">
+            <span><a class="slds-button" onclick="{!c.handleBackOrHomeClick}"><div style="font-weight:900"><u>{!v.LinkNm}</u></div></a></span>
+        </div>
+    </div>
+</aura:component>

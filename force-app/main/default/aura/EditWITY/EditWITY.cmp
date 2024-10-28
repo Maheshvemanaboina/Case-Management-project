@@ -1,0 +1,74 @@
+<aura:component controller="CreateWITYService" implements="force:lightningQuickActionWithoutHeader,flexipage:availableForRecordHome,force:hasRecordId,lightning:actionOverride" access="global" >
+	<aura:attribute name="rId" type="String" />
+    <aura:attribute name="metaDatalist" type="Object" />
+    <aura:attribute name="enableRating" type="Boolean" default="true"/>
+    <aura:attribute name="metaDataLength" type="Integer"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <!--Custom Styles for Modal Header and Footer--> 
+    <div class="slds-section slds-is-open popup">
+        
+        <div class="popup_header">
+            <div class="slds-text-heading_medium slds-text-align_center" title="Section Title">Create WITY</div>
+        </div>
+        <div aria-hidden="false" class="slds-section__content">
+            <table class="t_design table table-striped slds-table slds-table--bordered slds-table--cell-buffer  slds-table_resizable-cols slds-table_fixed-layout slds-max-medium-table_stacked-horizontal" >
+                <thead>
+                    <tr>
+                        <th width="10%" scope="col"><div class="slds-truncate slds-text-align_center"><lightning:input type="checkbox" label="" onchange="{!c.handleTopCheck}" style="margin-top:14px;margin-right:10px;" /></div></th>
+                        <th width="30%" scope="col"><div class="slds-truncate slds-text-align_center">Key Areas</div></th>
+                        <th width="15%" scope="col"><div class="slds-truncate slds-text-align_center">Important To Customer</div></th>
+                        <th width="15%" scope="col"><div class="slds-truncate slds-text-align_center">FCI Current Performance</div></th>
+                        <th width="20%" scope="col"><div class="slds-truncate slds-text-align_center">Comments</div></th>
+                        <th width="10%" scope="col"><div class="slds-truncate slds-text-align_center"></div></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <!--<aura:if isTrue="{!and(v.testData !=null,v.subChildSampleType !='Re-Submission')}">-->
+                    <aura:iteration items="{!v.metaDatalist}" var="item" indexVar="index">
+                        <tr>
+                            
+                            <td scope="row" data-label=""><lightning:input aura:id="checkId" type="checkbox" label="" name="{!index}" onchange="{!c.handleClick}"/></td>
+                            <aura:if isTrue="{!and(v.metaDataLength > index,true)}">
+                                <td scope="row" data-label="Key Areas" style="white-space:normal"><div>{!item.quesName}</div></td>
+                                <aura:set attribute="else">
+                                    <td scope="row" data-label="Key Areas"><lightning:input type="text" variant = "label-hidden" name="{!index}" value ="{!item.quesName}" disabled="false"/></td>
+                                </aura:set>
+                            </aura:if>
+                            <td scope="row" data-label="Important To Customer"><lightning:input type="number" variant = "label-hidden" value="{!item.ratingone}" name="{!index}" disabled="{!item.readOnly}" max="5"/></td>
+                            <td scope="row" data-label="FCI Current Performance"><lightning:input type="number" variant = "label-hidden" value="{!item.ratingtwo}" name="{!index}" disabled="{!item.readOnly}" max="10"/></td>
+                            <td scope="row" data-label="Comments"><lightning:input type="text" variant = "label-hidden" name="{!index}" value ="{!item.comments}" disabled="false"/></td>
+                            <td>
+                                <aura:if isTrue = "{!and(index + 1 >= v.metaDataLength,true) }">
+                                    <a onclick="{!c.handleAddRow}">
+                                        <lightning:icon iconName="utility:add" class="slds-icon slds-icon_small" size="small" alternativeText="add"/>
+                                        <span class="slds-assistive-text">Add Icon</span>
+                                    </a>  
+                                    
+                                </aura:if>
+                                <aura:if isTrue = "{!and(index + 1 > v.metaDataLength,true) }">
+                                    <a data-index="{!index}" onclick="{!c.handleDeleteRow}">
+                                        <lightning:icon iconName="utility:delete" class="slds-icon slds-icon_small" size="small" alternativeText="add"/>
+                                        <span class="slds-assistive-text">Add Icon</span>
+                                    </a>  
+                                    
+                                </aura:if>
+                            </td>
+                        </tr>
+                        
+                    </aura:iteration>
+                    
+                    <!-- <aura:iteration items="{!v.testParameterList}" var="test"  indexVar="indexVal">
+                            <c:addTestComponent QCquestionsTestParam ="{!test}" rowIndex="{!indexVal}" countTestParamLength="{!v.countTestParamLength}" />   
+                           </aura:iteration>-->
+                    <!--</aura:if> -->
+                    
+                </tbody>
+            </table>
+            <div class="footerpopup">
+                <lightning:button variant="Brand" class="slds-button" label="Cancel" onclick="{!c.handleClose}"/>
+                <lightning:button variant="Brand" class="slds-button" label="Save" onclick="{!c.handleSubmit}"/>            
+            </div>
+        </div>
+    </div>
+</aura:component>

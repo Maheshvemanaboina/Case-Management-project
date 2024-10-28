@@ -1,0 +1,112 @@
+<aura:component controller="DistributorAddRelatedLocationController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction">
+    <aura:attribute name="isModalOpen" type="boolean" default="false"/>
+    
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="recordLabel" type="String" />
+    <aura:attribute name="custLocId" type="String" />
+    <aura:attribute name="custLocLabel" type="String" />
+    <aura:attribute name="currentUser" type="User" access="public"/>
+    <aura:attribute name="existingRelatedLocs" type="Object[]"/>
+    
+    <!--Design Attributes-->
+    <aura:attribute name="ObjectAPIName"  type="String"  access="public"/>
+    <aura:attribute name="masterBucketInitials"  type="String"  access="public"/>
+    <aura:attribute name="relatedLocationKPIObjectLookupAPIName"  type="String"  access="public"/>
+    <aura:attribute name="relatedLocationKPIObjectLookupRelationAPIName"  type="String"  access="public"/>
+    
+    <force:recordData aura:id="recordLoader" recordId="{!$SObjectType.CurrentUser.Id}"  fields="Name,FirstName,Id" targetFields="{!v.currentUser}"/>
+    
+    <aura:handler name="SObjectNotifierEvent" event="c:sObjectLookupSelectEvent" action="{! c.handleSObjectLookUpSelect }"
+                  description="Event handler to get the selected record Id and record Label from SObjectLookup component"/>
+    <lightning:layout horizontalAlign="end">
+        <lightning:button variant="brand"
+                          label="Add Related Locations"
+                          title="Add Related Locations"
+                          onclick="{! c.openModel }" />
+    </lightning:layout>                      
+    <!--Use aura:if tag to display/hide popup based on isModalOpen value-->  
+    <aura:if isTrue="{!v.isModalOpen}">
+        
+        <!-- Modal/Popup Box starts here-->
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- Modal/Popup Box Header Starts here-->
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon iconName="utility:close"
+                                          onclick="{! c.closeModel }"
+                                          alternativeText="close"
+                                          variant="bare-inverse"
+                                          class="slds-modal__close"/>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Add Related Location</h2>
+                </header>
+                <!--Modal/Popup Box Body Starts here-->
+                <div class="slds-modal__content slds-var-p-around_medium " id="modal-content-id-1">
+                    <div class="slds-grid slds-gutters">
+                        <div class="slds-col">
+                            <lightning:select aura:id="select" name="select1" label="Fiscal Year (FY)" required="true" onchange="{! c.onChange }">
+                                <option value="">choose one...</option>
+                                <option value="2020">2020</option>
+                                <option value="2021">2021</option>
+                                <option value="2022">2022</option>
+                            </lightning:select>
+                        </div>
+                        <div class="slds-col">
+                            <label>Distributor Location</label>
+                            <c:SObjectLookUp aura:id="distLocLookup" objectAPIName="Account" iconName="standard:account" fieldAPIName = "Name" placeholder="Search H5 Location" metaFieldsAPI="Name" recordLimit="11" whereFieldAPIName="Name" recordTypeDeveloperNames = "['BGI_Customer_Location']" />
+                        </div>
+                    </div>
+                    <div>
+                        
+                        
+                    </div>
+                    <aura:if isTrue="{! !empty(v.existingRelatedLocs) }">
+                        <table class="slds-table slds-table_bordered slds-table_cell-buffer slds-var-m-top_x-large">
+                            <thead>
+                                <tr class="slds-text-title_caps">
+                                    <th scope="col">
+                                        <div class="slds-truncate" title="Account Name">Distributor Location</div>
+                                    </th>
+                                    <th scope="col">
+                                        <div class="slds-truncate" title="Account Name">Action</div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <aura:iteration items="{!v.existingRelatedLocs}" var="a">
+                                    <tr>
+                                        <td data-label="Account Name">
+                                            <div class="slds-truncate" title="">{!a.Distributor_Location__r.Name}</div>
+                                        </td>
+                                        <td data-label="Delete">
+                                            <!--  <a onclick="{!c.removeRecord}" data-record="{!index}">
+                                                    <lightning:icon iconName="utility:delete" size="small" alternativeText="Delete"/>
+                                                    <span class="slds-assistive-text">Delete</span>
+                                                </a> -->
+                                            <button type="button" onclick="{!c.removeRecord}" id="{!a.Id}" class="slds-button slds-button_destructive">Delete</button>
+                                        </td>
+                                    </tr>
+                                </aura:iteration>
+                            </tbody>
+                        </table>
+                    </aura:if>
+                    
+                </div>
+                
+                
+                <!--Modal/Popup Box Footer Starts here-->
+                <footer class="slds-modal__footer">
+                    <lightning:button variant="neutral"
+                                      label="Cancel"
+                                      title="Cancel"
+                                      onclick="{! c.closeModel }"/>
+                    <lightning:button variant="brand"
+                                      label="Add"
+                                      title="Add"
+                                      onclick="{!c.submitDetails}" disabled= "{! empty(v.custLocId) }"/>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </aura:if>
+    
+</aura:component>

@@ -1,0 +1,5 @@
+@font-face {
+    font-family: 'Precious Sans Light';
+    src: url('sfsites/c/resource/preciousSansFont');
+}
+:root { --dxp-c-section-columns-max-width: 1170px; }

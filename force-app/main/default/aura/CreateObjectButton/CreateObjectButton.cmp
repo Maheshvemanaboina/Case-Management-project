@@ -1,0 +1,50 @@
+<!--
+ - Created by KJM on 08/04/2019.
+ -->
+
+<aura:component description="CreateObjectButton">
+    <aura:attribute name="recordTypeOptions" type="List" required="true" default=""/>
+    <aura:attribute name="objectLabel" type="String" required="true" default=""/>
+    <aura:attribute name="objectName" type="String" required="true" default=""/>
+    <aura:attribute name="defaultFieldValues" type="String" required="false" default=""/>
+
+    <aura:attribute name="recordTypeValue" type="String"/>
+
+    <aura:attribute name="errorMessage" type="String" />
+    <aura:attribute name="hasError" type="Boolean" default="false"/>
+
+    <lightning:button variant="neutral" label="{! 'New ' + v.objectLabel}" onclick="{!c.handleNewObjectClick}" />
+
+    <div aura:id="modalContainer" class="slds-hide">
+        <div role="dialog" tabindex="-1" aria-labelledby="modalTitle" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open" >
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon onclick="{!c.handleCloseModalClick}" iconName="utility:close" alternativeText="Close" class="slds-modal__close" variant="bare-inverse" size="large"/>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">{! 'Create ' + v.objectLabel}</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <aura:if isTrue="{!v.hasError}">
+                        <div class="recordSaveError">
+                            <ui:message title="Error" severity="error" closable="false">
+                                {!v.errorMessage}
+                            </ui:message>
+                        </div>
+                    </aura:if>
+
+                    <span>Select Record Type</span>
+                    <lightning:radioGroup name="radioGroupRequired"
+                                          label="{! 'Select ' + v.objectLabel + ' Record Type'}"
+                                          options="{!v.recordTypeOptions}"
+                                          value="{!v.recordTypeValue}"
+                                          type="radio"
+                                          required="true"/>
+                </div>
+                <div class="slds-modal__footer">
+                    <lightning:button class="Neutral" onclick="{!c.handleCloseModalClick}" label="Cancel"/>
+                    <lightning:button variant="brand" onclick="{!c.handleNextButtonClick}" label="Next"/>
+                </div>
+            </div>
+        </div>
+        <div class="slds-backdrop slds-backdrop--open"></div>
+    </div>
+</aura:component>

@@ -1,0 +1,8 @@
+<!--
+ - Created by krzys on 19/06/2019.
+ -->
+
+<design:component>
+    <design:attribute name="firstTileName" label="First Tile Name" description="Name of tile from which Tile tree starts" />
+    <design:attribute name="tilesType" label="Tiles Type" description="Name of the tiles type" />
+</design:component>

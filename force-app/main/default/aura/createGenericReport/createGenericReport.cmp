@@ -1,0 +1,38 @@
+<aura:component controller="LeadVisitRT" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction,lightning:actionOverride" access="global" >
+   <aura:handler name="init" value="{!this}" action="{!c.fetchListOfRecordTypes}"/>
+   <aura:attribute name="lstOfRecordType" type="List" />
+   <aura:attribute name="isOpen" type="boolean" default="false" />
+   <aura:attribute   name="selectedOption" type="String" default=""/>
+   <aura:if isTrue="{!v.isOpen}">
+        <div role="dialog" tabindex="-1" aria-labelledby="header43" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <div class="slds-modal__header">
+                    <button class="slds-button slds-modal__close slds-button--icon-inverse" title="Close" onclick="{!c.closeModal}">
+                        X<span class="slds-assistive-text">Cancel</span>
+                    </button>
+                    <h2 id="header43" class="slds-text-heading--medium">New Visit Report</h2>
+                </div>
+                
+                <div class="slds-modal__content slds-p-around--medium">
+                    <div class="slds-grid slds-wrap">
+                             <div class="slds-align--absolute-center">
+                                 <lightning:radioGroup
+                                    aura:id="mygroup"
+                                    label="Select a Record Type"
+                                    options="{! v.lstOfRecordType }"
+                                    value="{! v.selectedOption }"
+                                    required="true" />
+                            
+                            </div>                            
+                    </div>                   
+                </div>
+                
+                <div class="slds-modal__footer">
+                    <lightning:button class="slds-button slds-button--neutral" onclick="{!c.closeModal}">Cancel</lightning:button>
+                    <lightning:button class="slds-button slds-button--brand" onclick="{!c.createRecord}">Next</lightning:button>
+                </div>
+            </div>
+        </div>
+        <div class="slds-backdrop slds-backdrop--open"></div>
+    </aura:if>
+</aura:component>

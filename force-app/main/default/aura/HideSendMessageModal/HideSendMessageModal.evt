@@ -1,0 +1,8 @@
+<!--
+ - Created by KJM on 27/06/2019.
+ -->
+
+<aura:event type="COMPONENT" description="HideSendMessageModal">
+    <aura:attribute name="onHideMessage" type="String" />
+    <aura:attribute name="manually" type="Boolean" />
+</aura:event>

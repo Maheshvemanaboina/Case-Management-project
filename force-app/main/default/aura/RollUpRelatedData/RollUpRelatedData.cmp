@@ -1,0 +1,151 @@
+<aura:component implements="force:appHostable,force:hasRecordId,flexipage:availableForRecordHome,force:appHostable,forceCommunity:availableForAllPageTypes"  controller="RollUpChildsToParent">
+    <aura:attribute name="mydata" type="Object"/>
+    <aura:attribute name="mydataProj" type="Object"/>
+    <aura:attribute name="mydataClaims" type="Object"/>
+    <aura:attribute name="mydataComplaints" type="Object"/>
+     <aura:attribute name="mydataCplans" type="Object"/>
+    <aura:attribute name="mycolumns" type="List"/>
+    <aura:attribute name="mycolumnsProj" type="List"/>
+    <aura:attribute name="mycolumnsClaims" type="List"/>
+    <aura:attribute name="mycolumnsComplaints" type="List"/>
+    <aura:attribute name="mycolumnsCplans" type="List"/>
+    <aura:attribute name="sortedBy" type="String" default="Name"/>
+    <aura:attribute name="selectedTab" type="String" />
+ 	<aura:attribute name="sortedDirection" type="string" default="asc" />
+    <aura:attribute name="renderTabset" type="boolean" />
+    <aura:attribute name="mydataCategories" type="Object"/>
+    <aura:attribute name="mycolumnsCategories" type="List"/>
+    <aura:attribute name="mydataMeetingSummaries" type="Object"/>
+    <aura:attribute name="mycolumnsMeetingSummaries" type="List"/>
+     <aura:attribute name="mydataMeetingStructures" type="Object"/>
+    <aura:attribute name="mycolumnsMeetingStructures" type="List"/>
+    
+    <aura:attribute name="mydataRisks" type="Object"/>
+    <aura:attribute name="mycolumnsRisks" type="List"/>
+    
+    <aura:attribute name="mydataVendorBks" type="Object"/>
+    <aura:attribute name="mycolumnsVendorBks" type="List"/>
+    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+   <aura:if isTrue="{! !v.renderTabset}">
+    <lightning:tabset >
+        <lightning:tab label="Contracts" onactive="{! c.handleActive }" id="contracts" >
+            <lightning:datatable data="{! v.mydata }"
+        		columns="{! v.mycolumns }"
+        		keyField="id"
+        		onrowselection="{! c.getSelectedName }"
+				onrowaction="{! c.handleRowAction }"
+				hideCheckboxColumn="true"
+				onsort="{!c.updateSorting}"
+				sortedBy="{!v.sortedBy}"
+				sortedDirection="{!v.sortedDirection}"/>
+        </lightning:tab>
+        <lightning:tab label="Projects" title="2nd tab extended title" onactive="{! c.handleActive }" id="projects">
+            <lightning:datatable data="{! v.mydataProj }"
+        		columns="{! v.mycolumnsProj }"
+        		keyField="id"
+        		onrowselection="{! c.getSelectedName }"
+				onrowaction="{! c.handleRowAction }"
+				hideCheckboxColumn="true"
+				onsort="{!c.updateSorting}"
+				sortedBy="{!v.sortedBy}"
+				sortedDirection="{!v.sortedDirection}"/>
+        </lightning:tab>
+        <lightning:tab label="Claims" onactive="{! c.handleActive }" id="claims">
+            <lightning:datatable data="{! v.mydataClaims }"
+        		columns="{! v.mycolumnsClaims }"
+        		keyField="id"
+        		onrowselection="{! c.getSelectedName }"
+				onrowaction="{! c.handleRowAction }"
+				hideCheckboxColumn="true"
+				onsort="{!c.updateSorting}"
+				sortedBy="{!v.sortedBy}"
+				sortedDirection="{!v.sortedDirection}"/>
+        </lightning:tab>
+         <lightning:tab label="Complaints" onactive="{! c.handleActive }" id="complaints">
+            <lightning:datatable data="{! v.mydataComplaints }"
+        		columns="{! v.mycolumnsComplaints }"
+        		keyField="id"
+        		onrowselection="{! c.getSelectedName }"
+				onrowaction="{! c.handleRowAction }"
+				hideCheckboxColumn="true"
+				onsort="{!c.updateSorting}"
+				sortedBy="{!v.sortedBy}"
+				sortedDirection="{!v.sortedDirection}"/>
+        </lightning:tab>
+        <lightning:tab label="Contingency Plans" onactive="{! c.handleActive }" id="cPlans">
+            <lightning:datatable data="{! v.mydataCplans }"
+        		columns="{! v.mycolumnsCplans }"
+        		keyField="id"
+        		onrowselection="{! c.getSelectedName }"
+				onrowaction="{! c.handleRowAction }"
+				hideCheckboxColumn="true"
+				onsort="{!c.updateSorting}"
+				sortedBy="{!v.sortedBy}"
+				sortedDirection="{!v.sortedDirection}"/>
+        </lightning:tab>
+        <lightning:tab label="Supplier Combined Categories" onactive="{! c.handleActive }" id="categories">
+            <lightning:datatable data="{! v.mydataCategories }"
+        		columns="{! v.mycolumnsCategories }"
+        		keyField="id"
+        		onrowselection="{! c.getSelectedName }"
+				onrowaction="{! c.handleRowAction }"
+				hideCheckboxColumn="true"
+				onsort="{!c.updateSorting}"
+				sortedBy="{!v.sortedBy}"
+				sortedDirection="{!v.sortedDirection}"/>
+        </lightning:tab>
+        <lightning:tab label="Meeting Summary" onactive="{! c.handleActive }" id="meetingSummary">
+            <lightning:datatable data="{! v.mydataMeetingSummaries }"
+        		columns="{! v.mycolumnsMeetingSummaries }"
+        		keyField="id"
+        		onrowselection="{! c.getSelectedName }"
+				onrowaction="{! c.handleRowAction }"
+				hideCheckboxColumn="true"
+				onsort="{!c.updateSorting}"
+				sortedBy="{!v.sortedBy}"
+				sortedDirection="{!v.sortedDirection}"/>
+        </lightning:tab>
+        <lightning:tab label="Meeting Structure" onactive="{! c.handleActive }" id="meetingStructure">
+            <lightning:datatable data="{! v.mydataMeetingStructures }"
+        		columns="{! v.mycolumnsMeetingStructures }"
+        		keyField="id"
+        		onrowselection="{! c.getSelectedName }"
+				onrowaction="{! c.handleRowAction }"
+				hideCheckboxColumn="true"
+				onsort="{!c.updateSorting}"
+				sortedBy="{!v.sortedBy}"
+				sortedDirection="{!v.sortedDirection}"/>
+        </lightning:tab>
+        
+        <lightning:tab label="Vendor BK" onactive="{! c.handleActive }" id="VendorBK">
+            <lightning:datatable data="{! v.mydataVendorBks }"
+        		columns="{! v.mycolumnsVendorBks }"
+        		keyField="id"
+        		onrowselection="{! c.getSelectedName }"
+				onrowaction="{! c.handleRowAction }"
+				hideCheckboxColumn="true"
+				onsort="{!c.updateSorting}"
+				sortedBy="{!v.sortedBy}"
+				sortedDirection="{!v.sortedDirection}"/>
+        </lightning:tab>
+        
+        <lightning:tab label="Risk Details" onactive="{! c.handleActive }" id="Risk">
+            <lightning:datatable data="{! v.mydataRisks }"
+        		columns="{! v.mycolumnsRisks }"
+        		keyField="id"
+        		onrowselection="{! c.getSelectedName }"
+				onrowaction="{! c.handleRowAction }"
+				hideCheckboxColumn="true"
+				onsort="{!c.updateSorting}"
+				sortedBy="{!v.sortedBy}"
+				sortedDirection="{!v.sortedDirection}"/>
+        </lightning:tab>
+        
+    </lightning:tabset>
+       <aura:set attribute="else">
+     <div class="demo-only" style="padding:0.5rem;background:#16325c">
+<div class="slds-text-color_inverse slds-text-align_center slds-text-heading_small">This is a child supplier. Please navigate to the parent supplier for a full overview of all parent and child records.</div>
+</div>
+    </aura:set>
+    </aura:if>
+</aura:component>

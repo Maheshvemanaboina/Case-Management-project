@@ -1,0 +1,30 @@
+.THIS {
+}
+.THIS .footerpopup {
+    
+    width: 100%;
+    background: #ffffff;
+    z-index: 9;
+    padding: 10px;
+    text-align: right;
+}
+.THIS .popup_header {
+      
+    width: 100%;
+    background: #ffffff;
+    z-index:9;
+}
+
+.THIS .popup_header {
+    border-bottom:1px solid #cacaca;
+    padding-bottom:13px;
+    
+}
+.THIS .slds-card__header {
+    padding:0!important;
+}
+
+.THIS.slds-spinner_container {  
+  z-index: 10000;
+  position: fixed;   
+}

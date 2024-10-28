@@ -1,0 +1,6 @@
+<aura:event type="COMPONENT" description="Set selected value to CoA component" >
+     <aura:attribute name="recordLabel" type="String" 
+                     required="true" description="Used to send selected record Label" />
+     <aura:attribute name="TypeOfNumber" type="String" 
+                     required="true" description="Used to determine type od number entered by the user" />
+</aura:event>

@@ -1,0 +1,92 @@
+<aura:component controller="TileAccountsSelectorController" implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId" access="global">
+    <!-- Attributes -->
+    <aura:attribute name="isUpdate" type="Boolean" default="false"/>
+    <aura:attribute name="isCreation" type="Boolean" default="false"/>
+    <aura:attribute name="isDelete" type="Boolean" default="false"/>
+    <aura:attribute name="isH1Account" type="Boolean" default="false"/>
+    <aura:attribute name="isH5Account" type="Boolean" default="false"/>
+    <aura:attribute name="modelLabel" type="String" default="H1 Account" />
+    <aura:attribute name="sourceLabel" type="String" default="" />
+    <aura:attribute name="selectedLabel" type="String" default="" />
+    <aura:attribute name="allAvailableAccounts" type="List" />
+    <aura:attribute name="searchAllAvailableAccounts" type="List" />
+    <aura:attribute name="availableAccounts" type="List" />
+    <aura:attribute name="selectedAccounts" type="List" default="" />
+    <aura:attribute name="selectedAccountsIds" type="List" />
+    <aura:attribute name="selectedAccountsNames" type="List" default="" />
+    <aura:attribute name="tempSelectedAccountsIds" type="List" />
+    <aura:attribute name="tempSelectedAccountsNames" type="List" />
+    <aura:attribute name="searchTerm" type="String" default="" />
+    <aura:attribute name="isOpen" type="boolean" default="false"/>
+    <aura:attribute name="isSaveEnabled" type="boolean" default="false"/>
+    <aura:attribute name="addRemCount" type="Integer" default = "0"/>
+     <!--B2B-326 -->
+    <aura:registerEvent name="onChangeEvent" type="c:OnChangeEvent" />
+    <!--B2B-326 -->
+    <ltng:require styles="{!$Resource.ModalCrossHide1}"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+     <!-- update list when term changes -->
+    <aura:handler name="change" value="{!v.searchTerm}" action="{!c.handleSearch}" />
+    
+    <aura:registerEvent name="sendAccountEvt" type="c:sendSelectedAccount"/>
+    
+    <lightning:button label="{!v.modelLabel}" variant="brand" onclick="{! c.openModel }" class="slds-button slds-button_brand" />
+    
+    <aura:if isTrue="{!v.isOpen}">
+        <!--###### MODAL BOX Start######--> 
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- ###### MODAL BOX HEADER Start ######-->
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon iconName="utility:close"
+                                          onclick="{!c.closeModel }"
+                                          alternativeText="close"
+                                          variant="bare-inverse"
+                                          class="slds-modal__close"/>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">{!v.modelLabel}</h2>
+                </header>
+                <!--###### MODAL BOX BODY Part Start######-->
+                <!-- Search Field -->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <div class="slds-form-element">
+                        <div class="slds-input-has-icon slds-input-has-icon_left-right">
+                            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                                <!-- Input Field -->
+                                <ui:inputText aura:id="searchInput" Label='Seach Accounst'  value="{!v.searchTerm}" class="slds-input" placeholder="Search Accounts..."
+                                              keyup="{!c.handleSearch}" updateOn="keyup"/>
+                            </div>                    
+                        </div>
+                    </div>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <!-- Available and Selected Accounts -->
+                        <div class="slds-grid slds-wrap slds-gutters">
+                            <div class="slds-col slds-size_3-of-3">
+                                <lightning:dualListbox 
+                                                       name="availableAccounts"
+                                                       addButtonLabel="Add Account"
+                                                       label="{!v.modelLabel}"
+                                                       sourceLabel="{!v.sourceLabel}"
+                                                       selectedLabel="{!v.selectedLabel}"
+                                                       options="{!v.availableAccounts}"
+                                                       value="{!v.selectedAccountsIds}" 
+                                                       onchange="{!c.handleAccountSelection}"
+                                                       size="10"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+                <!--###### MODAL BOX FOOTER Part Start ######-->
+                <footer class="slds-modal__footer">
+                    <!-- Buttons -->
+                    <div class="slds-p-around_medium">
+                        <lightning:button label="Save" variant="brand" onclick="{!c.handleSave}" class="slds-m-right_small" disabled="{! !v.isSaveEnabled}" />
+                        <lightning:button label="Cancel" onclick="{!c.handleCancel}" />
+                    </div>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+        <!--###### MODAL BOX Part END Here ######-->
+    </aura:if>
+</aura:component>

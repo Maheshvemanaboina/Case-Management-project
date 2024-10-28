@@ -1,0 +1,21 @@
+.THIS .slds-truncate {
+    text-overflow: inherit;
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word; 
+}
+.THIS .slds-th__action {
+    min-height: 3rem !important;
+}
+
+.THIS .slds-table_header-fixed_container {
+    padding-top: 5em;
+}
+
+.THIS td .slds-grid_align-end, .THIS td .slds-grid_align-spread {
+    justify-content: center !important;
+}
+
+.THIS .align-to-datatable {
+    text-align: center;
+}

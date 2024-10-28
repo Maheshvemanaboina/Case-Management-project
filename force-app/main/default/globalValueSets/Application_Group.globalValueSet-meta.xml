@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Mousses &amp; Desserts</fullName>
+        <default>false</default>
+        <label>Mousses &amp; Desserts</label>
+    </customValue>
+    <customValue>
+        <fullName>Savoury</fullName>
+        <default>false</default>
+        <label>Savoury</label>
+    </customValue>
+    <customValue>
+        <fullName>Ice Cream &amp; Milkshakes</fullName>
+        <default>false</default>
+        <label>Ice Cream &amp; Milkshakes</label>
+    </customValue>
+    <customValue>
+        <fullName>Bakery</fullName>
+        <default>false</default>
+        <label>Bakery</label>
+    </customValue>
+    <customValue>
+        <fullName>Instant Mixes</fullName>
+        <default>false</default>
+        <label>Instant Mixes</label>
+    </customValue>
+    <customValue>
+        <fullName>Vending</fullName>
+        <default>false</default>
+        <label>Vending</label>
+    </customValue>
+    <customValue>
+        <fullName>RtD</fullName>
+        <default>false</default>
+        <label>RtD</label>
+    </customValue>
+    <customValue>
+        <fullName>SSBS</fullName>
+        <default>false</default>
+        <label>SSBS</label>
+    </customValue>
+    <customValue>
+        <fullName>Table Top</fullName>
+        <default>false</default>
+        <label>Table Top</label>
+    </customValue>
+    <customValue>
+        <fullName>Other</fullName>
+        <default>false</default>
+        <label>Other</label>
+    </customValue>
+    <masterLabel>Application Group</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

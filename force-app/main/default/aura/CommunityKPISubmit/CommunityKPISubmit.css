@@ -1,0 +1,29 @@
+.THIS {
+    
+}
+.THIS .btn_btm {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.THIS .content_size {
+    font-size:16px;
+}
+
+.THIS .content_height {
+    height:100px;
+}
+
+.THIS .centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Container holding the image and the text */
+.THIS .container {
+    position: relative;
+    text-align: center;
+}

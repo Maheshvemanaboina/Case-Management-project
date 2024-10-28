@@ -1,0 +1,98 @@
+/**
+ * Created by krzys on 18/04/2019.
+ */
+ .THIS .imagePreview {
+     border: none;
+     background-repeat: no-repeat;
+     background-size: cover;
+     background-position: center;
+     width: 100%;
+     height: 125px;
+     position: inherit;
+ }
+.THIS .imgborder {
+
+     position: inherit;
+}
+ .THIS .navTileLink {
+     box-sizing: border-box;
+     cursor: pointer;
+     color: rgb(0, 95, 178);
+     text-decoration: none;
+     transition: color 0.1s linear 0s;
+     background-color: transparent;
+     width:100%;
+     height:202px;
+ }
+ .THIS .slds-image-cust {
+     max-width: 340px;
+     box-sizing: border-box;
+     border: none;
+     width: 100%;
+     display: inline-block;
+ }
+ .THIS .slds-box-cust {
+     border: none
+ }
+ .THIS .selected{
+     color:orange;
+ }
+.THIS .lghtree [aria-level="1"] > .slds-tree__item .slds-tree__item-label {
+    color: rgb(0, 148, 217) !important;
+    font-size: medium;
+}
+
+.THIS .lghtree .slds-tree_container {
+    min-width: 7.5rem;
+    max-width: 100rem;
+}
+.THIS .slds-breadcrumb__item {
+    font-weight:bold;
+}
+
+.THIS .slds-breadcrumb__item {
+    font-weight: normal;
+    font-size: .80rem;
+}
+
+.THIS .tileLabel {
+    width: 100%;
+    text-align: center;
+    font-family: Precious Sans Light;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: none;
+    background-color: white;
+    color: rgb(0, 148, 217);
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    transition: all .8s ease;
+    border: 2px solid rgb(0, 148, 217);
+}
+
+.THIS .tileHeading  {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+     border: 1px solid rgb(0,147,217)!important;
+    border-radius: 20px 20px 0 0 !important;
+    background: rgb(255,255,255);
+    color: rgb(0,147,217);
+    padding: 0.3rem;
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.THIS .tileImage {
+    border: none;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 163px;
+    position: inherit;
+    border-bottom-left-radius: 20px!important;
+    border-bottom-right-radius: 20px!important;
+}

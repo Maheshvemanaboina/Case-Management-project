@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Butter</fullName>
+        <default>false</default>
+        <label>Butter</label>
+    </customValue>
+    <customValue>
+        <fullName>Cheese</fullName>
+        <default>false</default>
+        <label>Cheese</label>
+    </customValue>
+    <customValue>
+        <fullName>China</fullName>
+        <default>false</default>
+        <label>China</label>
+    </customValue>
+    <customValue>
+        <fullName>BGI</fullName>
+        <default>false</default>
+        <label>CKA</label>
+    </customValue>
+    <customValue>
+        <fullName>Creamy Creation</fullName>
+        <default>false</default>
+        <label>Creamy Creation</label>
+    </customValue>
+    <customValue>
+        <fullName>DMV</fullName>
+        <default>false</default>
+        <label>DMV</label>
+    </customValue>
+    <customValue>
+        <fullName>DOMO</fullName>
+        <default>false</default>
+        <label>DOMO</label>
+    </customValue>
+    <customValue>
+        <fullName>Export</fullName>
+        <default>false</default>
+        <label>Export</label>
+    </customValue>
+    <customValue>
+        <fullName>Kievit</fullName>
+        <default>false</default>
+        <label>Kievit</label>
+    </customValue>
+    <customValue>
+        <fullName>Milkpowder</fullName>
+        <default>false</default>
+        <label>Milkpowder</label>
+    </customValue>
+    <customValue>
+        <fullName>Nutrifeed</fullName>
+        <default>false</default>
+        <label>Nutrifeed</label>
+    </customValue>
+    <customValue>
+        <fullName>Medical Nutrition</fullName>
+        <default>false</default>
+        <label>Medical Nutrition</label>
+    </customValue>
+    <description>(BGI) (DE)</description>
+    <masterLabel>Operating Company</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

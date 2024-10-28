@@ -1,0 +1,54 @@
+<!--SampleComponent.cmp-->
+<aura:component implements="flexipage:availableForAllPageTypes,force:appHostable" access="global">
+    <!--Declare Attributes-->
+    <aura:attribute name="vfMsgMethod" type="String" description="this attribute is for visualforce page javascript method"/>
+     
+    <aura:handler name="init" value="{!this}" action="{!c.doAction}"/>
+    
+    
+    <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_small" aria-labelledby="modal-heading-01" aria-modal="true">
+        <div class="slds-modal__container">
+            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                
+                <span class="slds-assistive-text">Cancel and close</span>
+            </button>
+            <div class="slds-modal__header">
+                <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Help- Supplier Rating</h1>
+            </div>
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                
+                <div class="demo-only" style="padding:0.5rem;background:#16325c">
+                    <div class="slds-text-color_inverse slds-text-title_caps">Below is the help text for the Rating:</div>
+                </div>
+                <div class="slds-m-top_large" style="padding:0.5rem;background:#16325c">
+                    <div class="slds-text-color_inverse">Rating: 0 star -  Supplier is not rated yet</div>
+                </div>
+                <div class="slds-m-top_xxx-small" style="padding:0.5rem;background:#16325c">
+                    <div class="slds-text-color_inverse">Rating: 1 star - Bad</div>
+                </div>
+                <div class="slds-m-top_xxx-small" style="padding:0.5rem;background:#16325c">
+                    <div class="slds-text-color_inverse">Rating: 2 star - Underperforming</div>
+                </div>
+                <div class="slds-m-top_xxx-small" style="padding:0.5rem;background:#16325c">
+                    <div class="slds-text-color_inverse">Rating: 3 star - Average</div>
+                </div>
+                <div class="slds-m-top_xxx-small" style="padding:0.5rem;background:#16325c">
+                    <div class="slds-text-color_inverse">Rating: 4 star - Good</div>
+                </div>
+                <div class="slds-m-top_xxx-small" style="padding:0.5rem;background:#16325c">
+                    <div class="slds-text-color_inverse">N/A ratings can only be used in the following scenarios. Each N/A rating requires an explanatory comment:<br/>* For Innovation and Sustainability elements in case there are no initiatives for that location in line with category/supplier strategy<br/>* Supplier is not supplying your location (there is no spend in the rated year)
+                       </div>
+                </div>
+                <div class="slds-m-top_xxx-small" style="padding:0.5rem;background:#16325c">
+                    <div class="slds-text-color_inverse">QA to add in the comment field information which manufacturing location has been rated.</div>
+                </div>
+                <p class="slds-m-top_large slds-text-color_inverse slds-text-title_caps"><lightning:formattedUrl value="https://ourfrieslandcampina.sharepoint.com/sites/pro_Procurement/org/Source/Supplier%20Management/Supplier%20Evaluation%20-%20Rating%20descriptions.pptx?web=1" tooltip="Click to nevigate to help manual" target="_blank" label="Click to open Manual"/></p>
+            </div>
+            <div class="slds-modal__footer">
+                <lightning:button variant="brand" label="Back" title="Brand action" onclick="{! c.handleClick }" />
+            </div>
+        </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    
+</aura:component>

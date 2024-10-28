@@ -1,0 +1,43 @@
+.THIS {
+}
+
+.THIS .formattedRegion {
+    font-size: 1vw;
+}
+
+.THIS .centerClass {
+    text-align: center;
+}
+
+.THIS .leftPaddingClass {
+    padding-left: 10rem;
+}
+
+.THIS .slds-card__header {
+    padding:0px!important;
+}
+
+.THIS .slds-input {
+    text-align: center;
+}
+
+.THIS.slds-spinner_container {  
+    z-index: 10000;
+    position: fixed;   
+}
+
+.THIS .icn span {
+  fill : red;
+}
+.THIS .slds-popover__body {
+    color:white;
+}
+
+.THIS .slds-popover_tooltip .slds-popover__body {
+        font-size: .75rem;
+        color: #fff
+}
+
+.THIS .paddingleft{
+    padding-left: 20px;
+}

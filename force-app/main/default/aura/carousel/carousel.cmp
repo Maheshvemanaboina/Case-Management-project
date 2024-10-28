@@ -1,0 +1,21 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+   <lightning:carousel>
+     <lightning:carouselImage 
+        src = "{!$Resource.carousel2}"
+        header = "Coffee pod revolution"
+        description = "Our dairy-based solutions for single-serve coffee makers help to replicate the indulgence of a coffee-shop treat, creating an affordable luxury that can be enjoyed in the home. "
+        alternativeText = "Coffee pod revolution"></lightning:carouselImage>
+    <lightning:carouselImage
+		src = "{!$Resource.carousel1}"
+        header = "New Vana®-Monte DP57"
+        description = "Our new Vana®-Monte DP570 powder topping delivers superb firmness and lasting foam stability, in all climates worldwide. Precisely because it comes in powder form, it promises easier storage, especially in warm climates."
+        alternativeText = "New Vana®-Monte DP57">
+    </lightning:carouselImage>
+    <lightning:carouselImage
+		src = "{!$Resource.carousel}"
+        header = "Peak indulgence"
+        description = "Our new foaming creamers turn an Italian style coffee into an instant indulgent experience. They create a beautifully textured, spoonable and frothy foam that lasts to the end of the cup."
+        alternativeText = "Peak indulgence">
+    </lightning:carouselImage>
+   </lightning:carousel>
+</aura:component>

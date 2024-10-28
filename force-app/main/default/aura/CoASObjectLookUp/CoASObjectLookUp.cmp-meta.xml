@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AuraDefinitionBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>51.0</apiVersion>
+    <description>This Lookup Component referenced in the DisplayAndDownloadCoA component so that user can search their required number.</description>
+</AuraDefinitionBundle>

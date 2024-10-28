@@ -1,0 +1,760 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Application__c</fullName>
+    <externalId>false</externalId>
+    <label>Application</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Sub_Segment__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetName>Application</valueSetName>
+        <valueSettings>
+            <controllingFieldValue>Active Nutrition</controllingFieldValue>
+            <controllingFieldValue>Biotis</controllingFieldValue>
+            <controllingFieldValue>Performance Nutrition</controllingFieldValue>
+            <valueName>Clear drinks</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Active Nutrition</controllingFieldValue>
+            <controllingFieldValue>Biotis</controllingFieldValue>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <controllingFieldValue>Performance Nutrition</controllingFieldValue>
+            <valueName>DMV: RTDs</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Active Nutrition</controllingFieldValue>
+            <valueName>Snacks</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Active Nutrition</controllingFieldValue>
+            <valueName>Supplements</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Active Nutrition</controllingFieldValue>
+            <valueName>Yoghurt</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Food</controllingFieldValue>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Bakery - Bakery cream &amp; fillings</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Food</controllingFieldValue>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Bakery- Bread &amp; savoury baking</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Food</controllingFieldValue>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Bakery- Cakes</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Food</controllingFieldValue>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Bakery- Crème Chantilly</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Food</controllingFieldValue>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Bakery- Pastries &amp; cookies</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Food</controllingFieldValue>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Ice Cream &amp; Milkshakes - Artisanal</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Food</controllingFieldValue>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Ice Cream &amp; Milkshakes - Household</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Food</controllingFieldValue>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Ice Cream &amp; Milkshakes- Industrial ice cream</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Food</controllingFieldValue>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Ice Cream &amp; Milkshakes - Milkshakes</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Food</controllingFieldValue>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Ice Cream &amp; Milkshakes - Soft Serve</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Food</controllingFieldValue>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Mousses &amp; Desserts - Dessert mixes</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Food</controllingFieldValue>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Mousses &amp; Desserts - Mousses</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Food</controllingFieldValue>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Mousses &amp; Desserts - Yoghurt</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Food</controllingFieldValue>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Savoury- meat replacers</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Food</controllingFieldValue>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Savoury- processed cheese</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Food</controllingFieldValue>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Savoury- processed meat</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Food</controllingFieldValue>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Savoury- Ready-to-eat mealkit</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Food</controllingFieldValue>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Savoury- Sauces</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Food</controllingFieldValue>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Savoury- Soup</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Fill &amp; Rock</controllingFieldValue>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Medical Nutrition</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Other</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Food Ingredients</controllingFieldValue>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <valueName>DMV: Bakery</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Food Ingredients</controllingFieldValue>
+            <valueName>DMV: Blends</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Food Ingredients</controllingFieldValue>
+            <valueName>DMV: Cheese</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Food Ingredients</controllingFieldValue>
+            <valueName>DMV: Cream liquors</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Food Ingredients</controllingFieldValue>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Kievit: Frozen Desserts</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Food Ingredients</controllingFieldValue>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Kievit: Pastry &amp; Decoration</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Biotis</controllingFieldValue>
+            <controllingFieldValue>Performance Nutrition</controllingFieldValue>
+            <valueName>DMV: Bars</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Biotis</controllingFieldValue>
+            <controllingFieldValue>Performance Nutrition</controllingFieldValue>
+            <valueName>DMV: Shakes</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Biotis</controllingFieldValue>
+            <valueName>Supplement gummies</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Biotis</controllingFieldValue>
+            <valueName>Supplement sachet</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Hamburger</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Cheese Powder</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Cheese Production / Pasta Filata</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Kievit: Coffee whiteners</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Distributor</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Dry Cheese</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Fresh Pizza</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Frozen Pizza</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Grated Cheese</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Beverages</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Instant Mixes- Beverages fruit or milk based</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Beverages</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Instant Mixes- Beverages small pack (20g- 5kg)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Beverages</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Instant Mixes- Beverages topper</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Beverages</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Instant Mixes - Chocolate</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Beverages</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Instant Mixes -Foaming coffee</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Beverages</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Instant Mixes- Ice Cream</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Beverages</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Instant Mixes - Milk coffee</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Bakery – Non Laminated</controllingFieldValue>
+            <controllingFieldValue>Beverages</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Instant Mixes- Milk tea</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Intercompany</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Kievit: Milk Tea Mixes</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Early Life Nutrition</controllingFieldValue>
+            <controllingFieldValue>Medical Nutrition</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Multiple</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Pizza</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Processed Cheese</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Kievit: Ready To Drink (coffee/tea)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Beverages</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>RtD- Beverages fruit or milk based</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Beverages</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>RtD- Chocolate</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Beverages</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>RtD- Milk Coffee</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Beverages</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>RtD- Milk Tea</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Salad</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Sandwich</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Slices Cheese</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Beverages</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>SSBS- Cappuccino (2 step application)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Beverages</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>SSBS- Chocolate</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Beverages</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>SSBS- Iced Cappuccino</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Beverages</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>SSBS-Milk Coffee (1 step)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Beverages</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>SSBS- Milk Tea</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Beverages</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Table Top- Coffee Whiteners (jars)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Beverages</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Table Top- Sticks</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Beverages</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Vending- chocolate</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Beverages</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Vending- Foaming coffee</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Beverages</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Vending - Milk coffee</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Butter</controllingFieldValue>
+            <controllingFieldValue>Cheese</controllingFieldValue>
+            <controllingFieldValue>Cream</controllingFieldValue>
+            <controllingFieldValue>Dairy Proteins</controllingFieldValue>
+            <controllingFieldValue>Beverages</controllingFieldValue>
+            <controllingFieldValue>Encaps</controllingFieldValue>
+            <valueName>Vending- milk tea</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Early Life Nutrition</controllingFieldValue>
+            <valueName>DOMO: IFT 2FL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Early Life Nutrition</controllingFieldValue>
+            <valueName>DOMO: IFT Basepowders</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Early Life Nutrition</controllingFieldValue>
+            <valueName>DOMO: IFT Bioactive Proteins</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Early Life Nutrition</controllingFieldValue>
+            <valueName>IMF Dairy Lipids</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Early Life Nutrition</controllingFieldValue>
+            <valueName>IMF Encaps</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Early Life Nutrition</controllingFieldValue>
+            <valueName>DOMO: IFT Finals</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Early Life Nutrition</controllingFieldValue>
+            <valueName>DOMO: IFT GOS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Early Life Nutrition</controllingFieldValue>
+            <valueName>DOMO: IFT Hydrolysates</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Early Life Nutrition</controllingFieldValue>
+            <valueName>IMF Intact Proteins</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Early Life Nutrition</controllingFieldValue>
+            <valueName>DOMO: IFT Lactose</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Early Life Nutrition</controllingFieldValue>
+            <valueName>IMF SMP</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Early Life Nutrition</controllingFieldValue>
+            <valueName>DOMO: IFT Whey Proteins</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Medical Nutrition</controllingFieldValue>
+            <valueName>Classic Sip Tube</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Medical Nutrition</controllingFieldValue>
+            <valueName>Clear</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Medical Nutrition</controllingFieldValue>
+            <valueName>Compact</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Medical Nutrition</controllingFieldValue>
+            <valueName>DOMO: Medical 2FL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Medical Nutrition</controllingFieldValue>
+            <valueName>DOMO: Medical Base Powders</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Medical Nutrition</controllingFieldValue>
+            <valueName>DOMO: Medical Bioactive Proteins</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Medical Nutrition</controllingFieldValue>
+            <valueName>DOMO: Medical Finals</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Medical Nutrition</controllingFieldValue>
+            <valueName>DOMO: Medical GOS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Medical Nutrition</controllingFieldValue>
+            <valueName>DOMO: Medical Hydrolysates</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Medical Nutrition</controllingFieldValue>
+            <valueName>DOMO: Medical Lactose</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Medical Nutrition</controllingFieldValue>
+            <valueName>DOMO: Medical Milk Powders</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Medical Nutrition</controllingFieldValue>
+            <valueName>DOMO: Medical Milk Proteins</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Medical Nutrition</controllingFieldValue>
+            <valueName>DOMO: Medical Single Ingredients</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Medical Nutrition</controllingFieldValue>
+            <valueName>DOMO: Medical Whey Proteins</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Medical Nutrition</controllingFieldValue>
+            <valueName>Powder</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Medical Nutrition</controllingFieldValue>
+            <valueName>Texturized</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cell Nutrition</controllingFieldValue>
+            <valueName>Cell Cultured Meat</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cell Nutrition</controllingFieldValue>
+            <valueName>DOMO: Cell Nutrition Biopharma</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cell Nutrition</controllingFieldValue>
+            <valueName>DOMO: Cell Nutrition Microbial Diagnostics</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

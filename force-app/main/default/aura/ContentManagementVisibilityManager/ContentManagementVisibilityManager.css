@@ -1,0 +1,33 @@
+.THIS .slds-card__header {
+
+    display: none;
+}
+
+.THIS .slds-checkbox_faux{
+
+   width: 60px;
+}
+
+.THIS .greyClass{
+    background-color: rgb(236, 235, 234);
+}
+
+.THIS .contentDisabledText {
+    padding: 85px 0;
+    text-align: center; 
+    transform: rotate(-45deg);
+    font-size: 1.2em;
+}
+
+.THIS.slds-spinner_container {  
+    z-index: 1;
+    position: fixed;   
+}
+
+.THIS .centerClass {
+    text-align: center;
+}
+
+.THIS li::marker {
+    text-align: center;
+}

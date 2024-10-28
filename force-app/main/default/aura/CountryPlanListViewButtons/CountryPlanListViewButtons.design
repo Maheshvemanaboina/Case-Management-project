@@ -1,0 +1,8 @@
+<design:component>
+    <design:attribute name="buttonLabel" label="Label" description="Button Label Name" />
+    <design:attribute name="SubmitbuttonLabel" label="Submit button Label" description="Submit Button Label Name" />
+    <design:attribute name="buttonCSSClass" label="button CSS Class" description="Button CSS Name" />
+    <design:attribute name="SubmitButtonCSSClass" label="Submit Button CSS Class" description="Submit Button CSS Name" />
+    <design:attribute name="ClonebuttonLabel" label="Clone button Label" description="Clone Button Label Name" />
+    <design:attribute name="ClonebuttonCSSClass" label="Clone Submit Button CSS Class" description="Clone Button CSS Name" />
+</design:component>

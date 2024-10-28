@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Alcoholic Beverages</fullName>
+        <default>false</default>
+        <label>Alcoholic Beverages</label>
+    </customValue>
+    <customValue>
+        <fullName>Bakery – Laminated</fullName>
+        <default>false</default>
+        <label>Bakery – Laminated</label>
+    </customValue>
+    <customValue>
+        <fullName>Bakery – Non Laminated</fullName>
+        <default>false</default>
+        <label>Bakery – Non Laminated</label>
+    </customValue>
+    <customValue>
+        <fullName>Beverages</fullName>
+        <default>false</default>
+        <label>Beverages</label>
+    </customValue>
+    <customValue>
+        <fullName>Calf Feed</fullName>
+        <default>false</default>
+        <label>Calf Feed</label>
+    </customValue>
+    <customValue>
+        <fullName>Cell Nutrition</fullName>
+        <default>false</default>
+        <label>Cell Nutrition</label>
+    </customValue>
+    <customValue>
+        <fullName>Chocolate</fullName>
+        <default>false</default>
+        <label>Chocolate</label>
+    </customValue>
+    <customValue>
+        <fullName>Dairy</fullName>
+        <default>false</default>
+        <label>Dairy</label>
+    </customValue>
+    <customValue>
+        <fullName>Encaps</fullName>
+        <default>false</default>
+        <label>Encaps</label>
+    </customValue>
+    <customValue>
+        <fullName>Fats / Oils</fullName>
+        <default>false</default>
+        <label>Fats / Oils</label>
+    </customValue>
+    <customValue>
+        <fullName>Food Ingredients</fullName>
+        <default>false</default>
+        <label>Food Ingredients</label>
+    </customValue>
+    <customValue>
+        <fullName>Ice Creame</fullName>
+        <default>false</default>
+        <label>Ice Cream</label>
+    </customValue>
+    <customValue>
+        <fullName>Industrial Food Applications</fullName>
+        <default>false</default>
+        <label>Industrial Food Applications</label>
+    </customValue>
+    <customValue>
+        <fullName>Infant Nutrition</fullName>
+        <default>false</default>
+        <label>Infant Nutrition</label>
+    </customValue>
+    <customValue>
+        <fullName>Ingredient Applications</fullName>
+        <default>false</default>
+        <label>Ingredient Applications</label>
+    </customValue>
+    <customValue>
+        <fullName>Medical</fullName>
+        <default>false</default>
+        <label>Medical</label>
+    </customValue>
+    <customValue>
+        <fullName>Milk Powder</fullName>
+        <default>false</default>
+        <label>Milk Powder</label>
+    </customValue>
+    <customValue>
+        <fullName>Multiple</fullName>
+        <default>false</default>
+        <label>Multiple</label>
+    </customValue>
+    <customValue>
+        <fullName>Non Alcoholic Beverages</fullName>
+        <default>false</default>
+        <label>Non Alcoholic Beverages</label>
+    </customValue>
+    <customValue>
+        <fullName>Performance Nutrition</fullName>
+        <default>false</default>
+        <label>Performance Nutrition</label>
+    </customValue>
+    <customValue>
+        <fullName>Pharma</fullName>
+        <default>false</default>
+        <label>Pharma</label>
+    </customValue>
+    <customValue>
+        <fullName>Piglet Feed</fullName>
+        <default>false</default>
+        <label>Piglet Feed</label>
+    </customValue>
+    <customValue>
+        <fullName>Repackers</fullName>
+        <default>false</default>
+        <label>Repackers</label>
+    </customValue>
+    <customValue>
+        <fullName>Resellers C&amp;C - Wholesale</fullName>
+        <default>false</default>
+        <label>Resellers C&amp;C - Wholesale</label>
+    </customValue>
+    <customValue>
+        <fullName>Savory</fullName>
+        <default>false</default>
+        <label>Savory</label>
+    </customValue>
+    <customValue>
+        <fullName>Trading Single Ingredients</fullName>
+        <default>false</default>
+        <label>Trading Single Ingredients</label>
+    </customValue>
+    <customValue>
+        <fullName>Other</fullName>
+        <default>false</default>
+        <label>Other</label>
+    </customValue>
+    <customValue>
+        <fullName>PLN</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>PLN</label>
+    </customValue>
+    <customValue>
+        <fullName>IFT</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>IFT</label>
+    </customValue>
+    <customValue>
+        <fullName>Bakery</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Bakery</label>
+    </customValue>
+    <description>(BGI) (DE)</description>
+    <masterLabel>Market Segment</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

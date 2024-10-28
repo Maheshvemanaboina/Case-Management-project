@@ -1,0 +1,4 @@
+<aura:event type="COMPONENT" description="Used for Delete Row Event for My Country Plan">
+	<aura:attribute name="indexVar" type="Integer" description="Use For Delete Row" />
+    <aura:attribute name="CompetitorInfoObj" type="Object" description="Use For Storing Competitor Info Record" />
+</aura:event>

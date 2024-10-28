@@ -1,0 +1,910 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>DMV: Bakery</fullName>
+        <default>false</default>
+        <label>Bakery</label>
+    </customValue>
+    <customValue>
+        <fullName>Bakery - Bakery cream &amp; fillings</fullName>
+        <default>false</default>
+        <label>Bakery - Bakery cream &amp; fillings</label>
+    </customValue>
+    <customValue>
+        <fullName>Bakery- Bread &amp; savoury baking</fullName>
+        <default>false</default>
+        <label>Bakery- Bread &amp; savoury baking</label>
+    </customValue>
+    <customValue>
+        <fullName>Bakery- Cakes</fullName>
+        <default>false</default>
+        <label>Bakery- Cakes</label>
+    </customValue>
+    <customValue>
+        <fullName>Bakery- Crème Chantilly</fullName>
+        <default>false</default>
+        <label>Bakery- Crème Chantilly</label>
+    </customValue>
+    <customValue>
+        <fullName>Bakery- Pastries &amp; cookies</fullName>
+        <default>false</default>
+        <label>Bakery- Pastries &amp; cookies</label>
+    </customValue>
+    <customValue>
+        <fullName>DMV: Bars</fullName>
+        <default>false</default>
+        <label>Bars</label>
+    </customValue>
+    <customValue>
+        <fullName>DMV: Blends</fullName>
+        <default>false</default>
+        <label>Blends</label>
+    </customValue>
+    <customValue>
+        <fullName>Hamburger</fullName>
+        <default>false</default>
+        <label>Burger</label>
+    </customValue>
+    <customValue>
+        <fullName>Cell Cultured Meat</fullName>
+        <default>false</default>
+        <label>Cell Cultured Meat</label>
+    </customValue>
+    <customValue>
+        <fullName>DOMO: Cell Nutrition Biopharma</fullName>
+        <default>false</default>
+        <label>Cell Nutrition Biopharma</label>
+    </customValue>
+    <customValue>
+        <fullName>DOMO: Cell Nutrition Microbial Diagnostics</fullName>
+        <default>false</default>
+        <label>Cell Nutrition Microbial Diagnostics</label>
+    </customValue>
+    <customValue>
+        <fullName>DMV: Cheese</fullName>
+        <default>false</default>
+        <label>Cheese</label>
+    </customValue>
+    <customValue>
+        <fullName>Cheese Powder</fullName>
+        <default>false</default>
+        <label>Cheese Powder</label>
+    </customValue>
+    <customValue>
+        <fullName>Cheese Production / Pasta Filata</fullName>
+        <default>false</default>
+        <label>Cheese Production / Pasta Filata</label>
+    </customValue>
+    <customValue>
+        <fullName>Classic Sip Tube</fullName>
+        <default>false</default>
+        <label>Classic Sip Tube</label>
+    </customValue>
+    <customValue>
+        <fullName>Clear</fullName>
+        <default>false</default>
+        <label>Clear</label>
+    </customValue>
+    <customValue>
+        <fullName>Clear drinks</fullName>
+        <default>false</default>
+        <label>Clear drinks</label>
+    </customValue>
+    <customValue>
+        <fullName>Kievit: Coffee whiteners</fullName>
+        <default>false</default>
+        <label>Coffee Whiteners</label>
+    </customValue>
+    <customValue>
+        <fullName>Compact</fullName>
+        <default>false</default>
+        <label>Compact</label>
+    </customValue>
+    <customValue>
+        <fullName>Cream Liqueur Concentrate</fullName>
+        <default>false</default>
+        <label>Cream Liqueur Concentrate</label>
+    </customValue>
+    <customValue>
+        <fullName>Cream Liqueur Ready-to-Bottle</fullName>
+        <default>false</default>
+        <label>Cream Liqueur Ready-to-Bottle</label>
+    </customValue>
+    <customValue>
+        <fullName>DMV: Cream liquors</fullName>
+        <default>false</default>
+        <label>Cream Liquors</label>
+    </customValue>
+    <customValue>
+        <fullName>Distributor</fullName>
+        <default>false</default>
+        <label>Distributor</label>
+    </customValue>
+    <customValue>
+        <fullName>Dry Cheese</fullName>
+        <default>false</default>
+        <label>Dry Cheese</label>
+    </customValue>
+    <customValue>
+        <fullName>Foodservice</fullName>
+        <default>false</default>
+        <label>Foodservice</label>
+    </customValue>
+    <customValue>
+        <fullName>Fresh Pizza</fullName>
+        <default>false</default>
+        <label>Fresh Pizza</label>
+    </customValue>
+    <customValue>
+        <fullName>Kievit: Frozen Desserts</fullName>
+        <default>false</default>
+        <label>Frozen Desserts</label>
+    </customValue>
+    <customValue>
+        <fullName>Frozen Pizza</fullName>
+        <default>false</default>
+        <label>Frozen Pizza</label>
+    </customValue>
+    <customValue>
+        <fullName>Grated Cheese</fullName>
+        <default>false</default>
+        <label>Grated Cheese</label>
+    </customValue>
+    <customValue>
+        <fullName>DMV: Ice Cream</fullName>
+        <default>false</default>
+        <label>Ice Cream</label>
+    </customValue>
+    <customValue>
+        <fullName>Ice Cream &amp; Milkshakes - Artisanal</fullName>
+        <default>false</default>
+        <label>Ice Cream &amp; Milkshakes - Artisanal</label>
+    </customValue>
+    <customValue>
+        <fullName>Ice Cream &amp; Milkshakes - Household</fullName>
+        <default>false</default>
+        <label>Ice Cream &amp; Milkshakes - Household</label>
+    </customValue>
+    <customValue>
+        <fullName>Ice Cream &amp; Milkshakes- Industrial ice cream</fullName>
+        <default>false</default>
+        <label>Ice Cream &amp; Milkshakes- Industrial ice cream</label>
+    </customValue>
+    <customValue>
+        <fullName>Ice Cream &amp; Milkshakes - Milkshakes</fullName>
+        <default>false</default>
+        <label>Ice Cream &amp; Milkshakes - Milkshakes</label>
+    </customValue>
+    <customValue>
+        <fullName>Ice Cream &amp; Milkshakes - Soft Serve</fullName>
+        <default>false</default>
+        <label>Ice Cream &amp; Milkshakes - Soft Serve</label>
+    </customValue>
+    <customValue>
+        <fullName>DOMO: IFT 2FL</fullName>
+        <default>false</default>
+        <label>IMF 2FL</label>
+    </customValue>
+    <customValue>
+        <fullName>DOMO: IFT Basepowders</fullName>
+        <default>false</default>
+        <label>IMF Basepowders</label>
+    </customValue>
+    <customValue>
+        <fullName>DOMO: IFT Bioactive Proteins</fullName>
+        <default>false</default>
+        <label>IMF Bioactive Proteins</label>
+    </customValue>
+    <customValue>
+        <fullName>IMF Dairy Lipids</fullName>
+        <default>false</default>
+        <label>IMF Dairy Lipids</label>
+    </customValue>
+    <customValue>
+        <fullName>IMF Encaps</fullName>
+        <default>false</default>
+        <label>IMF Encaps</label>
+    </customValue>
+    <customValue>
+        <fullName>DOMO: IFT Finals</fullName>
+        <default>false</default>
+        <label>IMF Finals</label>
+    </customValue>
+    <customValue>
+        <fullName>DOMO: IFT GOS</fullName>
+        <default>false</default>
+        <label>IMF GOS</label>
+    </customValue>
+    <customValue>
+        <fullName>DOMO: IFT Hydrolysates</fullName>
+        <default>false</default>
+        <label>IMF Hydrolysates</label>
+    </customValue>
+    <customValue>
+        <fullName>IMF Intact Proteins</fullName>
+        <default>false</default>
+        <label>IMF Intact Proteins</label>
+    </customValue>
+    <customValue>
+        <fullName>DOMO: IFT Lactose</fullName>
+        <default>false</default>
+        <label>IMF Lactose</label>
+    </customValue>
+    <customValue>
+        <fullName>IMF SMP</fullName>
+        <default>false</default>
+        <label>IMF SMP</label>
+    </customValue>
+    <customValue>
+        <fullName>DOMO: IFT Whey Proteins</fullName>
+        <default>false</default>
+        <label>IMF Whey Proteins</label>
+    </customValue>
+    <customValue>
+        <fullName>Instant Desserts</fullName>
+        <default>false</default>
+        <label>Instant Desserts</label>
+    </customValue>
+    <customValue>
+        <fullName>Instant Mixes- Beverages fruit or milk based</fullName>
+        <default>false</default>
+        <label>Instant Mixes- Beverages fruit or milk based</label>
+    </customValue>
+    <customValue>
+        <fullName>Instant Mixes- Beverages small pack (20g- 5kg)</fullName>
+        <default>false</default>
+        <label>Instant Mixes- Beverages small pack (20g- 5kg)</label>
+    </customValue>
+    <customValue>
+        <fullName>Instant Mixes- Beverages topper</fullName>
+        <default>false</default>
+        <label>Instant Mixes- Beverages topper</label>
+    </customValue>
+    <customValue>
+        <fullName>Instant Mixes - Chocolate</fullName>
+        <default>false</default>
+        <label>Instant Mixes - Chocolate</label>
+    </customValue>
+    <customValue>
+        <fullName>Instant Mixes -Foaming coffee</fullName>
+        <default>false</default>
+        <label>Instant Mixes -Foaming coffee</label>
+    </customValue>
+    <customValue>
+        <fullName>Instant Mixes- Ice Cream</fullName>
+        <default>false</default>
+        <label>Instant Mixes- Ice Cream</label>
+    </customValue>
+    <customValue>
+        <fullName>Instant Mixes - Milk coffee</fullName>
+        <default>false</default>
+        <label>Instant Mixes - Milk coffee</label>
+    </customValue>
+    <customValue>
+        <fullName>Instant Mixes- Milk tea</fullName>
+        <default>false</default>
+        <label>Instant Mixes- Milk tea</label>
+    </customValue>
+    <customValue>
+        <fullName>Intercompany</fullName>
+        <default>false</default>
+        <label>Intercompany</label>
+    </customValue>
+    <customValue>
+        <fullName>DOMO: Medical 2FL</fullName>
+        <default>false</default>
+        <label>Medical 2FL</label>
+    </customValue>
+    <customValue>
+        <fullName>DOMO: Medical Base Powders</fullName>
+        <default>false</default>
+        <label>Medical Base Powders</label>
+    </customValue>
+    <customValue>
+        <fullName>DOMO: Medical Bioactive Proteins</fullName>
+        <default>false</default>
+        <label>Medical Bioactive Proteins</label>
+    </customValue>
+    <customValue>
+        <fullName>DOMO: Medical Finals</fullName>
+        <default>false</default>
+        <label>Medical Finals</label>
+    </customValue>
+    <customValue>
+        <fullName>DOMO: Medical GOS</fullName>
+        <default>false</default>
+        <label>Medical GOS</label>
+    </customValue>
+    <customValue>
+        <fullName>DOMO: Medical Hydrolysates</fullName>
+        <default>false</default>
+        <label>Medical Hydrolysates</label>
+    </customValue>
+    <customValue>
+        <fullName>DOMO: Medical Lactose</fullName>
+        <default>false</default>
+        <label>Medical Lactose</label>
+    </customValue>
+    <customValue>
+        <fullName>DOMO: Medical Milk Powders</fullName>
+        <default>false</default>
+        <label>Medical Milk Powders</label>
+    </customValue>
+    <customValue>
+        <fullName>DOMO: Medical Milk Proteins</fullName>
+        <default>false</default>
+        <label>Medical Milk Proteins</label>
+    </customValue>
+    <customValue>
+        <fullName>DOMO: Medical Single Ingredients</fullName>
+        <default>false</default>
+        <label>Medical Single Ingredients</label>
+    </customValue>
+    <customValue>
+        <fullName>DOMO: Medical Whey Proteins</fullName>
+        <default>false</default>
+        <label>Medical Whey Proteins</label>
+    </customValue>
+    <customValue>
+        <fullName>Kievit: Milk Tea Mixes</fullName>
+        <default>false</default>
+        <label>Milk Tea Mixes</label>
+    </customValue>
+    <customValue>
+        <fullName>Mousses &amp; Desserts - Dessert mixes</fullName>
+        <default>false</default>
+        <label>Mousses &amp; Desserts - Dessert mixes</label>
+    </customValue>
+    <customValue>
+        <fullName>Mousses &amp; Desserts - Mousses</fullName>
+        <default>false</default>
+        <label>Mousses &amp; Desserts - Mousses</label>
+    </customValue>
+    <customValue>
+        <fullName>Mousses &amp; Desserts - Yoghurt</fullName>
+        <default>false</default>
+        <label>Mousses &amp; Desserts - Yoghurt</label>
+    </customValue>
+    <customValue>
+        <fullName>Multiple</fullName>
+        <default>false</default>
+        <label>Multiple</label>
+    </customValue>
+    <customValue>
+        <fullName>Nutrition</fullName>
+        <default>false</default>
+        <label>Nutrition</label>
+    </customValue>
+    <customValue>
+        <fullName>Other</fullName>
+        <default>false</default>
+        <label>Other</label>
+    </customValue>
+    <customValue>
+        <fullName>Kievit: Pastry &amp; Decoration</fullName>
+        <default>false</default>
+        <label>Pastry &amp; Decoration</label>
+    </customValue>
+    <customValue>
+        <fullName>Pizza</fullName>
+        <default>false</default>
+        <label>Pizza</label>
+    </customValue>
+    <customValue>
+        <fullName>Powder</fullName>
+        <default>false</default>
+        <label>Powder</label>
+    </customValue>
+    <customValue>
+        <fullName>Processed Cheese</fullName>
+        <default>false</default>
+        <label>Processed Cheese</label>
+    </customValue>
+    <customValue>
+        <fullName>Kievit: Ready To Drink (coffee/tea)</fullName>
+        <default>false</default>
+        <label>Ready To Drink (coffee/tea)</label>
+    </customValue>
+    <customValue>
+        <fullName>RtD- Beverages fruit or milk based</fullName>
+        <default>false</default>
+        <label>RtD- Beverages fruit or milk based</label>
+    </customValue>
+    <customValue>
+        <fullName>RtD- Chocolate</fullName>
+        <default>false</default>
+        <label>RtD- Chocolate</label>
+    </customValue>
+    <customValue>
+        <fullName>RtD- Milk Coffee</fullName>
+        <default>false</default>
+        <label>RtD- Milk Coffee</label>
+    </customValue>
+    <customValue>
+        <fullName>RtD- Milk Tea</fullName>
+        <default>false</default>
+        <label>RtD- Milk Tea</label>
+    </customValue>
+    <customValue>
+        <fullName>DMV: RTDs</fullName>
+        <default>false</default>
+        <label>RTDs</label>
+    </customValue>
+    <customValue>
+        <fullName>Salad</fullName>
+        <default>false</default>
+        <label>Salad</label>
+    </customValue>
+    <customValue>
+        <fullName>Sandwich</fullName>
+        <default>false</default>
+        <label>Sandwich</label>
+    </customValue>
+    <customValue>
+        <fullName>Savoury- meat replacers</fullName>
+        <default>false</default>
+        <label>Savoury- meat replacers</label>
+    </customValue>
+    <customValue>
+        <fullName>Savoury- processed cheese</fullName>
+        <default>false</default>
+        <label>Savoury- processed cheese</label>
+    </customValue>
+    <customValue>
+        <fullName>Savoury- processed meat</fullName>
+        <default>false</default>
+        <label>Savoury- processed meat</label>
+    </customValue>
+    <customValue>
+        <fullName>Savoury- Ready-to-eat mealkit</fullName>
+        <default>false</default>
+        <label>Savoury- Ready-to-eat mealkit</label>
+    </customValue>
+    <customValue>
+        <fullName>Savoury- Sauces</fullName>
+        <default>false</default>
+        <label>Savoury- Sauces</label>
+    </customValue>
+    <customValue>
+        <fullName>Savoury- Soup</fullName>
+        <default>false</default>
+        <label>Savoury- Soup</label>
+    </customValue>
+    <customValue>
+        <fullName>DMV: Shakes</fullName>
+        <default>false</default>
+        <label>Shakes</label>
+    </customValue>
+    <customValue>
+        <fullName>Slices Cheese</fullName>
+        <default>false</default>
+        <label>Sliced Cheese</label>
+    </customValue>
+    <customValue>
+        <fullName>Snacks</fullName>
+        <default>false</default>
+        <label>Snacks</label>
+    </customValue>
+    <customValue>
+        <fullName>Sports Nutrition</fullName>
+        <default>false</default>
+        <label>Sports Nutrition</label>
+    </customValue>
+    <customValue>
+        <fullName>Spray Dried Emulsions</fullName>
+        <default>false</default>
+        <label>Spray Dried Emulsions</label>
+    </customValue>
+    <customValue>
+        <fullName>SSBS- Cappuccino (2 step application)</fullName>
+        <default>false</default>
+        <label>SSBS- Cappuccino (2 step application)</label>
+    </customValue>
+    <customValue>
+        <fullName>SSBS- Chocolate</fullName>
+        <default>false</default>
+        <label>SSBS- Chocolate</label>
+    </customValue>
+    <customValue>
+        <fullName>SSBS- Iced Cappuccino</fullName>
+        <default>false</default>
+        <label>SSBS- Iced Cappuccino</label>
+    </customValue>
+    <customValue>
+        <fullName>SSBS-Milk Coffee (1 step)</fullName>
+        <default>false</default>
+        <label>SSBS-Milk Coffee (1 step)</label>
+    </customValue>
+    <customValue>
+        <fullName>SSBS- Milk Tea</fullName>
+        <default>false</default>
+        <label>SSBS- Milk Tea</label>
+    </customValue>
+    <customValue>
+        <fullName>Supplement gummies</fullName>
+        <default>false</default>
+        <label>Supplement gummies</label>
+    </customValue>
+    <customValue>
+        <fullName>Supplements</fullName>
+        <default>false</default>
+        <label>Supplements</label>
+    </customValue>
+    <customValue>
+        <fullName>Supplement sachet</fullName>
+        <default>false</default>
+        <label>Supplement sachet</label>
+    </customValue>
+    <customValue>
+        <fullName>Table Top- Coffee Whiteners (jars)</fullName>
+        <default>false</default>
+        <label>Table Top- Coffee Whiteners (jars)</label>
+    </customValue>
+    <customValue>
+        <fullName>Table Top- Sticks</fullName>
+        <default>false</default>
+        <label>Table Top- Sticks</label>
+    </customValue>
+    <customValue>
+        <fullName>Texturized</fullName>
+        <default>false</default>
+        <label>Texturized</label>
+    </customValue>
+    <customValue>
+        <fullName>Vending- chocolate</fullName>
+        <default>false</default>
+        <label>Vending- chocolate</label>
+    </customValue>
+    <customValue>
+        <fullName>Vending- Foaming coffee</fullName>
+        <default>false</default>
+        <label>Vending- Foaming coffee</label>
+    </customValue>
+    <customValue>
+        <fullName>Vending - Milk coffee</fullName>
+        <default>false</default>
+        <label>Vending - Milk coffee</label>
+    </customValue>
+    <customValue>
+        <fullName>Vending- milk tea</fullName>
+        <default>false</default>
+        <label>Vending- milk tea</label>
+    </customValue>
+    <customValue>
+        <fullName>Creamy Creation: Weight Management</fullName>
+        <default>false</default>
+        <label>Weight Management</label>
+    </customValue>
+    <customValue>
+        <fullName>Yoghurt</fullName>
+        <default>false</default>
+        <label>Yoghurt</label>
+    </customValue>
+    <customValue>
+        <fullName>DOMO: IFT Powders</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>DOMO: IFT Powders</label>
+    </customValue>
+    <customValue>
+        <fullName>DOMO: IFT Nutritional Encapsulated Pills &amp; Milkfats</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>DOMO: IFT Nutritional Encapsulated Pills &amp; Milkfats</label>
+    </customValue>
+    <customValue>
+        <fullName>DOMO: IFT Milk Proteins</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>DOMO: IFT Milk Proteins</label>
+    </customValue>
+    <customValue>
+        <fullName>Instant Mixes Tea</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Instant Mixes Tea</label>
+    </customValue>
+    <customValue>
+        <fullName>DOMO: IFT Milk Powders</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>DOMO: IFT Milk Powders</label>
+    </customValue>
+    <customValue>
+        <fullName>DOMO: IFT Ingredients</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>DOMO: IFT Ingredients</label>
+    </customValue>
+    <customValue>
+        <fullName>DOMO: Cell Nutritional Microbial Diagnostics</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>DOMO: Cell Nutritional Microbial Diagnostics</label>
+    </customValue>
+    <customValue>
+        <fullName>DMV: Soups &amp; Sauces</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Soups &amp; Sauces</label>
+    </customValue>
+    <customValue>
+        <fullName>Instant Mixes Coffee</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Instant Mixes Coffee</label>
+    </customValue>
+    <customValue>
+        <fullName>Instant Mixes Chocolate</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Instant Mixes Chocolate</label>
+    </customValue>
+    <customValue>
+        <fullName>DMV: Meat</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Meat</label>
+    </customValue>
+    <customValue>
+        <fullName>Instant Fruit Drinks</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Instant Fruit Drinks</label>
+    </customValue>
+    <customValue>
+        <fullName>DMV: Dairy</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Dairy</label>
+    </customValue>
+    <customValue>
+        <fullName>Creamy Creation: Performance Nutrition</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Creamy Creation: Performance Nutrition</label>
+    </customValue>
+    <customValue>
+        <fullName>Creamy Creation: Wine Creams</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Creamy Creation: Wine Creams</label>
+    </customValue>
+    <customValue>
+        <fullName>Creamy Creation: Non-Dairy Liqueurs</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Creamy Creation: Non-Dairy Liqueurs</label>
+    </customValue>
+    <customValue>
+        <fullName>Creamy Creation: Innovations</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Creamy Creation: Innovations</label>
+    </customValue>
+    <customValue>
+        <fullName>Creamy Creation: Indulgence</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Indulgence</label>
+    </customValue>
+    <customValue>
+        <fullName>Creamy Creation: Healthy Ageing</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Creamy Creation: Healthy Ageing</label>
+    </customValue>
+    <customValue>
+        <fullName>Creamy Creation: Cream Liqueurs</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Creamy Creation: Cream Liqueurs</label>
+    </customValue>
+    <customValue>
+        <fullName>Creamy Creation: Yogurt Liqueurs</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Creamy Creation: Yogurt Liqueurs</label>
+    </customValue>
+    <customValue>
+        <fullName>Creamy Creation: Zero</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Creamy Creation: Zero</label>
+    </customValue>
+    <customValue>
+        <fullName>Liquid Vegetable Topping</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Liquid Vegetable Topping</label>
+    </customValue>
+    <customValue>
+        <fullName>Lippstadt Vending</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Lippstadt Vending</label>
+    </customValue>
+    <customValue>
+        <fullName>Lasagna</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Lasagna</label>
+    </customValue>
+    <customValue>
+        <fullName>Dairy Blends</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Dairy Blends</label>
+    </customValue>
+    <customValue>
+        <fullName>DMV: Topping</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Topping</label>
+    </customValue>
+    <customValue>
+        <fullName>DMV: Spray Dried Emulsions (Creamer)</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Spray Dried Emulsions (Creamer)</label>
+    </customValue>
+    <customValue>
+        <fullName>Kievit: Dairy Blends for Specialties</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Dairy Blends for Specialties</label>
+    </customValue>
+    <customValue>
+        <fullName>Kievit: Dairy Blends for Drinks</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Dairy Blends for Drinks</label>
+    </customValue>
+    <customValue>
+        <fullName>Kievit: Dairy Blends for Desserts</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Dairy Blends for Desserts</label>
+    </customValue>
+    <customValue>
+        <fullName>DOMO: Medical</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>DOMO: Medical</label>
+    </customValue>
+    <customValue>
+        <fullName>DOMO: IFT Nutritional Encapsulated Oils &amp; Milkfats</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>DOMO: IFT Nutritional Encapsulated Oils &amp; Milkfats</label>
+    </customValue>
+    <customValue>
+        <fullName>Nutrifeed: Sow Milk Replacers</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Sow Milk Replacers</label>
+    </customValue>
+    <customValue>
+        <fullName>Nutrifeed: Sow Feed Ingredient</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Sow Feed Ingredient</label>
+    </customValue>
+    <customValue>
+        <fullName>Nutrifeed: Piglet Feed Ingredient</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Piglet Feed Ingredient</label>
+    </customValue>
+    <customValue>
+        <fullName>Nutrifeed: Lamb Milk Replacer</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Lamb Milk Replacer</label>
+    </customValue>
+    <customValue>
+        <fullName>Nutrifeed:  Goat Milk Replacer</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Goat Milk Replacer</label>
+    </customValue>
+    <customValue>
+        <fullName>Nutrifeed: Calf Milk Replacer Ingredient</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Calf Milk Replacer Ingredient</label>
+    </customValue>
+    <customValue>
+        <fullName>Nutrifeed: Calf Milk Replacer</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Calf Milk Replacer</label>
+    </customValue>
+    <customValue>
+        <fullName>Kievit: Vending</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Vending</label>
+    </customValue>
+    <customValue>
+        <fullName>Dairy Compounds (Lippstadt)</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Dairy Compounds (Lippstadt)</label>
+    </customValue>
+    <customValue>
+        <fullName>Kievit: Savoury</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Savoury</label>
+    </customValue>
+    <customValue>
+        <fullName>Kievit: Instant Coffee Mixes</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Instant Coffee Mixes</label>
+    </customValue>
+    <customValue>
+        <fullName>Table Top</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Table Top</label>
+    </customValue>
+    <customValue>
+        <fullName>Kievit: In Home Brewing</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>In Home Brewing</label>
+    </customValue>
+    <customValue>
+        <fullName>Kievit: Cappuccino &amp; Specialty Concepts</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Cappuccino &amp; Specialty Concepts</label>
+    </customValue>
+    <customValue>
+        <fullName>Jalutra: Single Ingredients</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Jalutra: Single Ingredients</label>
+    </customValue>
+    <customValue>
+        <fullName>DOMO: Single Ingredients</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>DOMO: Single Ingredients</label>
+    </customValue>
+    <customValue>
+        <fullName>SSBS</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>SSBS</label>
+    </customValue>
+    <customValue>
+        <fullName>Ready to Drink</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Ready to Drink</label>
+    </customValue>
+    <customValue>
+        <fullName>Other Application</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Other Application</label>
+    </customValue>
+    <customValue>
+        <fullName>DOMO: Medical Nutritional Encapsulated Pills &amp; Milkfat</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>DOMO: Medical Nutritional Encapsulated Pills &amp; Milkfat</label>
+    </customValue>
+    <customValue>
+        <fullName>DOMO: IFT Single Ingredients</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>DOMO: IFT Single Ingredients</label>
+    </customValue>
+    <description>(BGI) (DE)</description>
+    <masterLabel>Application</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validate_Case_status</fullName>
+    <active>true</active>
+    <description>(BGI) This rule prevents API user from adding Status picklist values which are not available in Salesforce. This was done because it is not possible to restrict picklist values on Case Status field.</description>
+    <errorConditionFormula>NOT(OR(ISPICKVAL(Status, &apos;All Tasks Completed&apos;), 
+ ISPICKVAL(Status, &apos;Notification Completed&apos;) ,
+ ISPICKVAL(Status, &apos;Outstanding Notification&apos;),
+ ISPICKVAL(Status, &apos;New&apos;),
+ ISPICKVAL(Status, &apos;On Hold&apos;),
+ ISPICKVAL(Status, &apos;Reopened&apos;),
+ ISPICKVAL(Status, &apos;Closed&apos;),
+ ISPICKVAL(Status, &apos;Awaiting Customer Closure Confirmation&apos;),
+ ISPICKVAL(Status, &apos;Awaiting Integration Team Response&apos;),
+ ISPICKVAL(Status, &quot;Awaiting PO&apos;s Response&quot;),
+ ISPICKVAL(Status, &apos;Assigned&apos;),
+ ISPICKVAL(Status, &apos;Awaiting Customer Response&apos;),
+ ISPICKVAL(Status, &apos;Awaiting Cross Functional Team Response&apos;),
+ ISPICKVAL(Status, &apos;Awaiting Internal Requester Response&apos;),  
+ ISPICKVAL(Status, &apos;Response Received&apos;),
+ ISPICKVAL(Status, &apos;In Progress&apos;),
+ ISPICKVAL(Status, &apos;Notification In Process&apos;),
+ ISPICKVAL(Status, &apos;Notification (Internal)&apos;) ,
+ ISPICKVAL(Status, &apos;Outstanding Task(s) Exit(s)&apos;)))</errorConditionFormula>
+    <errorDisplayField>Status</errorDisplayField>
+    <errorMessage>This is not a valid status</errorMessage>
+</ValidationRule>

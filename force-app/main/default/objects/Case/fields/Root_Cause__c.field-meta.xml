@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Root_Cause__c</fullName>
+    <externalId>false</externalId>
+    <label>Root Cause</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Configuration Error</fullName>
+                <default>false</default>
+                <label>Configuration Error</label>
+            </value>
+            <value>
+                <fullName>Custom Code Issue</fullName>
+                <default>false</default>
+                <label>Custom Code Issue</label>
+            </value>
+            <value>
+                <fullName>Salesforce Platform Upgrade</fullName>
+                <default>false</default>
+                <label>Salesforce Platform Upgrade</label>
+            </value>
+            <value>
+                <fullName>Middleware Issue</fullName>
+                <default>false</default>
+                <label>Middleware Issue</label>
+            </value>
+            <value>
+                <fullName>SAP ECC Issue</fullName>
+                <default>false</default>
+                <label>SAP ECC Issue</label>
+            </value>
+            <value>
+                <fullName>User Permission Misconfiguration</fullName>
+                <default>false</default>
+                <label>User Permission Misconfiguration</label>
+            </value>
+            <value>
+                <fullName>Reports &amp; Dashboards Configuration</fullName>
+                <default>false</default>
+                <label>Reports &amp; Dashboards Configuration</label>
+            </value>
+            <value>
+                <fullName>Deployment Issue</fullName>
+                <default>false</default>
+                <label>Deployment Issue</label>
+            </value>
+            <value>
+                <fullName>Data Import/Discrepancy Issue</fullName>
+                <default>false</default>
+                <label>Data Import/Discrepancy Issue</label>
+            </value>
+            <value>
+                <fullName>User Training and Adoption</fullName>
+                <default>false</default>
+                <label>User Training and Adoption</label>
+            </value>
+            <value>
+                <fullName>Change Request</fullName>
+                <default>false</default>
+                <label>Change Request</label>
+            </value>
+            <value>
+                <fullName>Insufficient Permissions</fullName>
+                <default>false</default>
+                <label>Insufficient Permissions</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

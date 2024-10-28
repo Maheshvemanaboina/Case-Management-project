@@ -1,0 +1,232 @@
+<!--
+ - Created by KJM on 11/04/2019.
+ -->
+
+<aura:component description="UploadObject" controller="UploadObjectController">
+    <aura:attribute name="objectName" type="String" required="true" />
+    <aura:attribute name="objectAPIName" type="String" required="true" />
+    <aura:attribute name="templateNonLocaleId" type="String" required="true" />
+    <aura:attribute name="templateLocaleId" type="String" required="true" />
+    <aura:attribute name="allowOverwriteExistingRec" type="Boolean" required="true" />
+    <aura:attribute name="allowSkipExistingRec" type="Boolean" required="true" />
+    <aura:attribute name="templateFileId" type="String"/>
+
+    <aura:attribute name="baseUrl" type="String" />
+    <aura:attribute name="validationData" type="Object" />
+    <aura:attribute name="showLoadingSpinner" type="boolean" default="false" />
+    <aura:attribute name="fileName" type="String" default="" />
+    <aura:attribute name="buttonLabel" type="String" default="Validate" />
+    <aura:attribute name="errorMessage" type="String" default="" />
+    <aura:attribute name="successMessage" type="String" default="" />
+    <aura:attribute name="dataValidated" type="Boolean" default="false" />
+    <aura:attribute name="duplicatedDetected" type="Boolean" default="false" />
+    <aura:attribute name="csvType" type="String" default="nonLocale" />
+    <aura:attribute name="wasCsvChangeAfterExport" type="Boolean" default="" />
+
+    <aura:attribute name="fileCreationOptions" type="List" default="" />
+    <aura:attribute name="radioButtonValue" type="String" default="csvFileTemplate"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <div class="slds-grid slds-grid_vertical">
+        <aura:if isTrue="{!not(empty(v.errorMessage))}">
+            <div class="slds-col">
+                <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error" role="alert">
+                    <h2>{!v.errorMessage}</h2>
+                </div>
+            </div>
+        </aura:if>
+        <aura:if isTrue="{!not(empty(v.successMessage))}">
+            <div class="slds-col">
+                <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_success" role="alert">
+                    <h2>{!v.successMessage}</h2>
+                </div>
+            </div>
+        </aura:if>
+        
+        <div class="slds-col slds-p-top_medium mainContent">
+            
+         <!--   <div class="slds-col slds-p-top_medium slds-size_8-of-12">
+                <lightning:radioGroup name="radioGroup"
+                                      label="Way of file creation"
+                                      options="{! v.fileCreationOptions }"
+                                      value="{! v.radioButtonValue }"
+                                      type="radio"/>
+            </div>-->
+            
+            <!-- <div class="slds-col slds-p-top_medium slds-size_9-of-12">
+                <aura:if isTrue="{!v.radioButtonValue == 'csvReportExport'}">
+                    <ui:inputCheckbox  value="true" aura:id="wasCsvChangeCheckbox" label="The file was modified after export? - Even small changes are modifications of the file." change="{!c.handleClickCSVChangeCheckbox}" />
+                </aura:if>
+            </div> -->
+            <aura:if isTrue="{!v.radioButtonValue == 'csvFileTemplate'}">
+                <div class="slds-col slds-size_9-of-12 slds-p-top_large">
+                    <h3 class="slds-text-heading_small slds-m-bottom--small"><b>Actions to do:</b></h3>
+                    <li>Download the Excel-template &nbsp;<a href="{!v.baseUrl + '/servlet/servlet.FileDownload?file=' + v.templateFileId}">{!$Label.c.Here}</a></li>
+                    <!-- <aura:if isTrue="{!v.csvType == 'nonLocale'}"><li>Picklist values need to be separated by ',' char </li> </aura:if> -->
+                  	<!-- <aura:if isTrue="{!v.csvType == 'locale'}"><li>Picklist values need to be separated by ';' char </li> </aura:if> -->
+                    <li>Save your file as a CSV-file before uploading</li>
+                    <li>Use the instruction document for guidance</li>
+                    <li>Click on the “Upload Files” button to upload your CSV-file</li>
+                    <li>Click on Validate</li>
+                    <!-- <li>{!$Label.c.Csv_file_download_info}&nbsp;<a href="{!v.baseUrl + '/servlet/servlet.FileDownload?file=' + v.templateFileId}">{!$Label.c.Here}</a></li> -->
+                    <!-- <li>{!$Label.c.Date_format_info}</li>
+                    <li>{!$Label.c.Upload_prepared_file}</li>
+                    <li>{!$Label.c.Click_Validate_button}</li>
+                    <li>{!$Label.c.Check_mapped_data}</li>
+                    <li>{!$Label.c.Click_appropriate_action_button}</li>  -->
+                </div>
+            </aura:if>
+
+            <!-- <aura:if isTrue="{!v.radioButtonValue == 'csvReportExport'}">
+                <div class="slds-col slds-size_12-of-12 slds-p-top_large">
+                    <h3 class="slds-text-heading_small ">Actions to do:</h3>
+                    <li>{!$Label.c.Export_report_as_csv_file}</li>
+
+                    <aura:if isTrue="{!v.wasCsvChangeAfterExport == true}">
+                        <li>{!$Label.c.Remove_all_unnecessary_data}</li>
+                        <li>{!$Label.c.Replace_both_formats_info}
+                            <aura:if isTrue="{!v.csvType == 'locale'}">into 'Find what' put ';' (semicolon), into 'Replace With' put ',' (comma) -> Click 'Replace All' -> Save file. </aura:if>
+                            <aura:if isTrue="{!v.csvType == 'nonLocale'}">into 'Find what' put ',' (comma) into 'Replace With' put ';' (semicolon) -> Click 'Replace All' -> Save file. </aura:if>
+                        </li>
+                    </aura:if>
+
+                    <li>{!$Label.c.Upload_prepared_file}</li>
+                    <li>{!$Label.c.Click_Validate_button}</li>
+                    <li>{!$Label.c.Check_mapped_data}</li>
+                    <li>{!$Label.c.Click_appropriate_action_button}</li>
+                </div>
+            </aura:if> -->
+            
+            <h3 class="slds-text-heading_small slds-m-bottom--small  slds-m-top--small"><b>Which CSV file type to choose?</b></h3>
+            <div class="slds-col slds-size_9-of-12">
+                <p>There are two standards for CSV file creation</p>
+                <ol class="slds-list_ordered">
+                <li>Comma separating data in a CSV file </li>
+                <li>Semi-colon separating data in a CSV file</li>
+                </ol>
+                
+                <p class="slds-p-top_small">The standard that you need to choose depends on the settings on your computer.</p> 
+               <li>  For Windows, please click <a href="https://frieslandcampinaconnect--uat.my.salesforce.com/sfc/p/26000000G7z3/a/260000004ZIM/LRZUonuMkmczHk_v.09ZNgXOmT9j4a6ObS46tDHKBFI"
+                                                  target="_blank"> here</a> to check the list separator settings on your computer </li>   
+                
+                <li>For MacOS, please click <a href="https://frieslandcampinaconnect--uat.my.salesforce.com/sfc/p/26000000G7z3/a/260000004ZIR/JGFcE0YO4tgWl.UdSZutPuP2f9HA4voHslsSK0X.w1s"
+                                                 target="_blank">here</a> to check the list separator settings on your computer </li>
+                <lightning:select aura:id="csvFileType" name="csvFileType" label="Choose CSV file Type" onchange="{!c.handleChangeCsvFileType}">
+                   <option value="nonLocale">{!$Label.c.Csv_file_type_non_locale}</option>
+                   <option value="locale">{!$Label.c.Csv_file_type_locale}</option>
+                </lightning:select>
+            </div>
+        </div>
+        <div class="slds-col slds-p-top_medium">
+            <div class="slds-grid slds-grid_vertical">
+                <div class="slds-col">
+                    <lightning:input aura:id="fileId" onchange="{!c.handleFilesUploadChange}" type="file" name="file" label="{!$Label.c.Upload_File}" multiple="false"/>
+                    <div class="slds-text-body_small slds-text-color_error">{!v.fileName} </div>
+                    <aura:if isTrue="{!v.showLoadingSpinner}">
+                        <div class="slds-text-body_small slds-text-color_error">
+                            <img src="/auraFW/resources/aura/images/spinner.gif" class="spinner-img" alt="Loading"/>
+                        </div>
+                    </aura:if>
+                </div>
+                <div class="slds-col slds-p-top_x-small">
+                    <button class="slds-button slds-button_brand" onclick="{!c.handleActionButtonClick}">{!v.buttonLabel}</button>
+                </div>
+                <aura:if isTrue="{!and(v.allowSkipExistingRec, v.duplicatedDetected, v.dataValidated)}">
+                    <div class="slds-col slds-p-top_x-small">
+                        <button class="slds-button slds-button_brand" onclick="{!c.handleOnlyInsertNewButtonClick}">{!$Label.c.Insert_Only_New_Records}</button>
+                    </div>
+                </aura:if>
+                <aura:if isTrue="{!and(v.allowOverwriteExistingRec, v.duplicatedDetected, v.dataValidated)}">
+                    <div class="slds-col slds-p-top_x-small">
+                        <button class="slds-button slds-button_brand" onclick="{!c.handleOverwriteAndInsertButtonClick}">{!$Label.c.Update_Existing_And_Insert_New}</button>
+                    </div>
+                </aura:if>
+            </div>
+        </div>
+
+        <aura:if isTrue="{!not(empty(v.validationData.errors))}">
+            <div class="slds-col slds-p-top_medium">
+                <div class="slds-grid slds-grid_vertical">
+                    <div class="slds-col">
+                        <div class="slds-text-longform">
+                            <h3 class="{!v.validationData.onlyDuplicateErrors ? 'slds-text-heading_small slds-text-color_success' : 'slds-text-heading_small slds-text-color_error'}">
+                                {!v.validationData.onlyDuplicateErrors ? 'System detected duplicates, please check the list below and perform appropriate action: ' : 'Please revise below errors and try again: '}
+                            </h3>
+                            <ul>
+                                <aura:iteration items="{!v.validationData.errors}" var="error">
+                                    <li class="{!v.validationData.onlyDuplicateErrors ? 'slds-text-color_success' : 'slds-text-color_error'}">{!error.message}</li>
+                                </aura:iteration>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aura:if>
+
+        <aura:if isTrue="{!not(empty(v.validationData.tableValues))}">
+            <div class="slds-col slds-p-top_medium slds-size_12-of-12">
+                <aura:if isTrue="{!v.validationData.tableValues.length == 1}">
+                    <aura:iteration items="{!v.validationData.tableValues}" var="tableVal" indexVar="i">
+                        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped">
+                            <thead>
+                            <tr class="slds-line-height_reset">
+                                <th class="" scope="col"> <div class="slds-truncate" title="Nr">Nr</div> </th>
+                                <aura:iteration items="{!tableVal.headerValues}" var="valData">
+                                    <th class="" scope="col">
+                                        <div class="slds-truncate" title="{!valData}">{!valData}</div>
+                                    </th>
+                                </aura:iteration>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <aura:iteration items="{!tableVal.bodyValues}" var="valData"  indexVar="i">
+                                <tr class="slds-hint-parent" style="{! valData.isDuplicate ? 'background-color:rgb(169, 169, 169)' : ''}">
+                                    <th scope="row"><div class="slds-truncate" title="{!i}">{!i}</div> </th>
+                                    <aura:iteration items="{!valData.fieldValues}" var="obj">
+                                        <th scope="row">
+                                            <div class="slds-truncate" title="{!obj.fieldValue}">{!obj.fieldValue}</div>
+                                        </th>
+                                    </aura:iteration>
+                                </tr>
+                            </aura:iteration>
+                            </tbody>
+                        </table>
+                    </aura:iteration>
+                    <aura:set attribute="else">
+                        <lightning:tabset selectedTabId="1">
+                            <aura:iteration items="{!v.validationData.tableValues}" var="tableVal" indexVar="i">
+                                <lightning:tab label="{!tableVal.objectName}" id="{!i}">
+                                    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped">
+                                        <thead>
+                                        <tr class="slds-line-height_reset">
+                                            <th class="" scope="col"> <div class="slds-truncate" title="Nr">Nr</div> </th>
+                                            <aura:iteration items="{!tableVal.headerValues}" var="valData">
+                                                <th class="" scope="col">
+                                                    <div class="slds-truncate" title="{!valData}">{!valData}</div>
+                                                </th>
+                                            </aura:iteration>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <aura:iteration items="{!tableVal.bodyValues}" var="valData"  indexVar="i">
+                                            <tr class="slds-hint-parent" style="{! valData.isDuplicate ? 'background-color:rgb(169, 169, 169)' : ''}">
+                                                <th scope="row"><div class="slds-truncate" title="{!i}">{!i}</div> </th>
+                                                <aura:iteration items="{!valData.fieldValues}" var="obj">
+                                                    <th scope="row">
+                                                        <div class="slds-truncate" title="{!obj.fieldValue}">{!obj.fieldValue}</div>
+                                                    </th>
+                                                </aura:iteration>
+                                            </tr>
+                                        </aura:iteration>
+                                        </tbody>
+                                    </table>
+                                </lightning:tab>
+                            </aura:iteration>
+                        </lightning:tabset>
+                    </aura:set>
+                </aura:if>
+            </div>
+        </aura:if>
+    </div>
+</aura:component>

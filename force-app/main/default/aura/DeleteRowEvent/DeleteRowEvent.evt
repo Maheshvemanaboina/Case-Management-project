@@ -1,0 +1,5 @@
+<aura:event type="COMPONENT" description="Dlete Row event to delete an existing row, can be used in a component to delete new row">
+    <aura:attribute name="indexVar" type="Integer" description="Use For Delete Row and find the exact row to Delete" />
+    <aura:attribute name="recordObj" type="Object" description="The recordObj to delete. This represents/contains the entire row data to be deleted 
+                                                    and can be used in the handler to perform some operation" />
+</aura:event>

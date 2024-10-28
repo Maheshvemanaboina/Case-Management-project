@@ -1,0 +1,15 @@
+<aura:component >
+    
+    <aura:attribute name="helpTextMessage" type="String" default=""/>
+    
+    <div style="position:relative;display:inline;">
+        <button onmouseover="{!c.handleMouseOver}" data-tooltipId = "showHelpText" onmouseout="{!c.handleMouseOut}" class="slds-button slds-button_icon slds-button slds-button_icon" aria-describedby="help" aria-disabled="true" title="Help">
+            <lightning:icon class="slds-button__icon" size="xx-small" iconName="utility:info" alternativeText="HelpText" title="HelpText" />
+            <span class="slds-assistive-text"></span>
+        </button>
+        <div aura:id="showHelpText" class="slds-popover slds-popover_tooltip slds-nubbin_bottom-left slds-fall-into-ground" role="tooltip" id="help" style="position:absolute;bottom:27px;left:-15px">
+            <div class="slds-popover__body" style="width:160px;">{! v.helpTextMessage }</div>
+        </div>
+    </div>
+    
+</aura:component>

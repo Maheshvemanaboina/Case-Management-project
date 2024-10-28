@@ -1,0 +1,47 @@
+<aura:component implements="flexipage:availableForAllPageTypes,force:appHostable" access="global" controller="SRM_GetHistoryRecords">
+    <!--Declare Attributes-->
+    <aura:attribute name="ratingIds" type="String" />
+    <aura:attribute name="objectList" type="List"/>
+    <aura:attribute name="mydata" type="Object"/>
+    <aura:attribute name="mycolumns" type="List"/>
+    <aura:attribute name="showError" type="boolean" default="false"/>
+    <aura:attribute name="supplierName" type="String" />
+    <aura:attribute name="valueElement" type="String" />
+    <aura:attribute name="ratingName" type="String" />
+    <aura:attribute name="vfMsgMethod" type="String" description="this attribute is for visualforce page javascript method"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_small" aria-labelledby="modal-heading-01" aria-modal="true">
+        <div class="slds-modal__container">
+            <div class="slds-modal__header">
+                <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Supplier Rating History</h1>
+            </div>
+            <div class="slds-modal__content " id="modal-content-id-1">
+                <aura:if isTrue="{!v.showError}">
+                <div class="slds-text-title_caps slds-text-align_center slds-text-color_error slds-m-top_medium slds-m-bottom_medium slds-text-heading_large" >
+                SELECTED RATING HAS NO RATING HISTORY DATA PRESENT.
+                </div>
+                    </aura:if>
+                <aura:iteration items="{!v.objectList}" var="item">
+                    <div class = 'myTableDiv slds-m-left_x-small slds-m-right_xx-small'>
+                        <div class="slds-box slds-theme_shade">
+                            <strong>{! item.lstContact[0].Supplier_Hub__r.Supplier_Name__c} - {! item.lstContact[0].Value_Element__r.Name} - {! item.lstContact[0].Supplier_Rating__r.Name}</strong>
+                            
+                        </div>
+                        <lightning:datatable data="{!item.lstContact}"
+                                             columns="{! v.mycolumns }"
+                                             keyField="id"
+                                             hideCheckboxColumn='true'/>
+                        
+                        
+                    </div>                    
+                </aura:iteration>
+            </div>
+            <div class="slds-modal__footer">
+                <lightning:button variant="brand" label="Back" title="Brand action" onclick="{! c.handleClick }" />     
+            </div>
+        </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    
+    
+</aura:component>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Current_Volume__c</fullName>
+    <description>This field is used to track the volume in the current forecast. Disti user who is requesting the forecast change will enter the value in this field while raising a case.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Volume in Current Forecast</inlineHelpText>
+    <label>Current Volume</label>
+    <length>10</length>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sub_Segment__c</fullName>
+    <externalId>false</externalId>
+    <label>Sub Segment</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Business_Segment__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetName>Sub_Segment</valueSetName>
+        <valueSettings>
+            <controllingFieldValue>HoB</controllingFieldValue>
+            <controllingFieldValue>Industry</controllingFieldValue>
+            <controllingFieldValue>QSR EU</controllingFieldValue>
+            <controllingFieldValue>APAC</controllingFieldValue>
+            <controllingFieldValue>China</controllingFieldValue>
+            <valueName>Encaps</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>HoB</controllingFieldValue>
+            <controllingFieldValue>Industry</controllingFieldValue>
+            <controllingFieldValue>QSR EU</controllingFieldValue>
+            <controllingFieldValue>APAC</controllingFieldValue>
+            <controllingFieldValue>Food &amp; Beverages</controllingFieldValue>
+            <controllingFieldValue>China</controllingFieldValue>
+            <valueName>Fill &amp; Rock</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>HoB</controllingFieldValue>
+            <controllingFieldValue>Industry</controllingFieldValue>
+            <controllingFieldValue>QSR EU</controllingFieldValue>
+            <controllingFieldValue>APAC</controllingFieldValue>
+            <controllingFieldValue>China</controllingFieldValue>
+            <valueName>Milk Powder</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>HoB</controllingFieldValue>
+            <controllingFieldValue>Industry</controllingFieldValue>
+            <controllingFieldValue>QSR EU</controllingFieldValue>
+            <controllingFieldValue>APAC</controllingFieldValue>
+            <controllingFieldValue>China</controllingFieldValue>
+            <valueName>Multiple</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>HoB</controllingFieldValue>
+            <controllingFieldValue>Industry</controllingFieldValue>
+            <controllingFieldValue>QSR EU</controllingFieldValue>
+            <controllingFieldValue>APAC</controllingFieldValue>
+            <controllingFieldValue>China</controllingFieldValue>
+            <valueName>Other</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>HoB</controllingFieldValue>
+            <controllingFieldValue>Industry</controllingFieldValue>
+            <controllingFieldValue>QSR EU</controllingFieldValue>
+            <controllingFieldValue>APAC</controllingFieldValue>
+            <controllingFieldValue>China</controllingFieldValue>
+            <valueName>Butter</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>HoB</controllingFieldValue>
+            <controllingFieldValue>Industry</controllingFieldValue>
+            <controllingFieldValue>QSR EU</controllingFieldValue>
+            <controllingFieldValue>APAC</controllingFieldValue>
+            <controllingFieldValue>China</controllingFieldValue>
+            <valueName>Cheese</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>HoB</controllingFieldValue>
+            <controllingFieldValue>Industry</controllingFieldValue>
+            <controllingFieldValue>QSR EU</controllingFieldValue>
+            <controllingFieldValue>APAC</controllingFieldValue>
+            <controllingFieldValue>China</controllingFieldValue>
+            <valueName>Cream</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>HoB</controllingFieldValue>
+            <controllingFieldValue>Industry</controllingFieldValue>
+            <controllingFieldValue>QSR EU</controllingFieldValue>
+            <controllingFieldValue>APAC</controllingFieldValue>
+            <controllingFieldValue>China</controllingFieldValue>
+            <valueName>Dairy Proteins</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>HoB</controllingFieldValue>
+            <controllingFieldValue>Industry</controllingFieldValue>
+            <controllingFieldValue>QSR EU</controllingFieldValue>
+            <controllingFieldValue>APAC</controllingFieldValue>
+            <controllingFieldValue>China</controllingFieldValue>
+            <valueName>Lattiz</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Food &amp; Beverages</controllingFieldValue>
+            <valueName>Beverages</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Food &amp; Beverages</controllingFieldValue>
+            <valueName>Food</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Adult Nutrition</controllingFieldValue>
+            <valueName>Active Nutrition</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Adult Nutrition</controllingFieldValue>
+            <valueName>Biotis</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Adult Nutrition</controllingFieldValue>
+            <valueName>Medical Nutrition</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Adult Nutrition</controllingFieldValue>
+            <valueName>Performance Nutrition</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Early Life Nutrition &amp; Cell Nutrition</controllingFieldValue>
+            <valueName>Cell Nutrition</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Early Life Nutrition &amp; Cell Nutrition</controllingFieldValue>
+            <valueName>Early Life Nutrition</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

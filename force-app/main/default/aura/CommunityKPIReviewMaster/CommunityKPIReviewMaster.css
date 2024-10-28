@@ -1,0 +1,25 @@
+.THIS {
+}
+.THIS .popup_header {
+    border-bottom:1px solid #cacaca;
+    padding-bottom:13px;
+    padding-top:13px;
+}
+
+.THIS .popup_header {
+      position: fixed;
+    top: 48px;
+    left: 0;
+    width: 100%;
+    background: #ffffff;
+    z-index:9;
+}
+
+.THIS.slds-spinner_container {  
+  z-index: 10000;
+  position: fixed;   
+}
+
+.THIS .slds-form-element__label {
+    font-weight : bolder;
+}

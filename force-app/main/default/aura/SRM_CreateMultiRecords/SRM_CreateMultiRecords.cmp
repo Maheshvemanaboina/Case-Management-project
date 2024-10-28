@@ -1,0 +1,223 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickActionWithoutHeader" access="global" controller="SRM_CrateMultiRecords">
+	<aura:attribute name="options" type="List" default="[
+    
+    {'label': 'Go to Supplier', 'value': 'Supplier Hub'},
+                                                        {'label': 'Create Meeting Summary', 'value': 'Meeting Sumary'},
+                                                        {'label': 'Spend analysis', 'value': 'option3'},
+                                                        {'label': 'KPI analysis', 'value': 'Supplier KPI New'},
+                                                        {'label': 'Create a task', 'value': 'task'},
+                                                         {'label': 'Track KPI', 'value': 'track KPI'}
+    ]"/>
+    <aura:attribute name="value" type="String" default="option1"/>
+    <aura:attribute name="supplierName" type="String" />
+    <aura:attribute name="dunsNumber" type="String" />
+    <aura:attribute name="vendorNumber" type="String" />
+     <aura:attribute name="selectedType" type="String" />
+     <aura:attribute name="fields" type="String[]" default="['Name','AnnualRevenue','Industry']" />
+            <aura:attribute name="recordId" type="String"/>
+    
+    <aura:attribute name="isModalOpen" type="boolean" default="false"/>
+     <aura:attribute name="openKpiModel" type="boolean" default="false"/>
+    <aura:attribute name="openAnalytics" type="boolean" default="false"/>
+    <aura:attribute name="searchType" type="String" default="choose one..."/>
+    
+    <aura:attribute name="showVersionSelect" type="boolean" default="false"/>
+    <aura:attribute name="ShownameSelect" type="boolean" default="false"/>
+    <aura:attribute name="ShowVendorSelect" type="boolean" default="false"/>
+    
+      <aura:attribute name="showAmountValue" type="boolean" default="false"/>
+      <aura:attribute name="showNumberValue" type="boolean" default="false"/>
+      <aura:attribute name="showPercentageValue" type="boolean" default="false"/>
+    
+    <aura:attribute name="mydata" type="Object"/>
+    <aura:attribute name="mycolumns" type="List"/>
+    
+            <lightning:notificationsLibrary aura:id="notifLib"/>
+    <lightning:navigation aura:id="navService"/>
+
+          
+    <!--Custom Styles for Modal Header and Footer--> 
+    <aura:html tag="style">
+        .cuf-content {
+        padding: 0 0rem !important;
+        }
+        .slds-p-around--medium {
+        padding: 0rem !important;
+        }       
+        .slds-modal__content{
+        overflow-y:hidden !important;
+        height:unset !important;
+        max-height:unset !important;
+        }
+    </aura:html>
+     
+    <!--Modal Header-->  
+    <div class="modal-header slds-modal__header slds-size_1-of-1">
+        <h4 class="title slds-text-heading--medium">What do you want to do today?</h4>
+    </div>
+    <!--End Modal Header-->
+    <div >
+    <lightning:card variant="Narrow">
+        <form class="slds-form--stacked">
+            <div class="slds-m-left_medium">
+            <lightning:radioGroup name="radioGroup"
+                          label="Please select an option below:"
+                          options="{! v.options }"
+                          value="{! v.value }"
+                          type="radio"/>
+            </div>
+            
+            <div class="modal-footer slds-modal__footer slds-size_1-of-1">
+        <lightning:button variant="Brand" class="slds-button" label="Next" onclick="{!c.handleSubmit}"/>
+        <!--<lightning:button variant="Neutral" class="slds-button" label="Cancel" onclick="{!c.handleClose}"/>-->
+    </div>
+        </form> 
+    </lightning:card>
+   </div>  
+    <!--Modal Body--> 
+    <aura:if isTrue="{!v.isModalOpen}">
+            <div style='height: 80vh;'>
+             
+            <!-- Modal/Popup Box starts here-->
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <!-- Modal/Popup Box Header Starts here-->
+                    <header class="slds-modal__header">
+                        <lightning:buttonIcon iconName="utility:close"
+                                              onclick="{! c.closeModel }"
+                                              alternativeText="close"
+                                              variant="bare-inverse"
+                                              class="slds-modal__close"/>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Supplier search</h2>
+                    </header>
+                    <!--Modal/Popup Box Body Starts here-->
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        
+                            
+                                <h2 class="slds-text-heading_medium slds-m-bottom_medium">
+                                    Search
+                                </h2>
+                                <lightning:select aura:id="select" name="select1" label="Please select a value from drop-down below to search supplier " required="true" value="{!v.searchType}" onchange="{!c.onChangeSelect}">
+                                    <option value="">Choose one...</option>
+                                    <option value="Supplier Name">Supplier Name</option>
+                                    <option value="Duns Number">Duns Number</option>
+                                    <option value="Vendor BK Number">Vendor BK Number</option>
+                                </lightning:select>
+                                <div class="slds-grid slds-gutters">
+                                    <aura:if isTrue="{!v.ShownameSelect}">
+											<div class="slds-col">
+                                        <span>
+        									<lightning:input name="input8" value="{! v.supplierName }" placeholder="type your Supplier Name..." label="Supplier Name" />
+
+                                        </span>
+                                    </div>
+									</aura:if> 
+                                    <aura:if isTrue="{!v.showVersionSelect}">
+										<div class="slds-col">
+                                        <span>
+                                        	<lightning:input name="input9" value="{! v.dunsNumber }" placeholder="type your Duns Number..." label="Duns Number" />
+                                        </span>
+                                    </div>
+									</aura:if> 
+                                    <aura:if isTrue="{!v.ShowVendorSelect}">
+                                         <div class="slds-col">
+                                        <span>
+                                        	<lightning:input name="input10" value="{! v.vendorNumber }" placeholder="type your Vendor Number..." label="Vendor Number" />
+                                        </span>
+                                    </div>
+
+									</aura:if>
+                                   
+                                    
+
+                                </div>
+                                <div>
+                                	    <lightning:button variant="brand" label="Search" title="Brand action" onclick="{! c.handleClick }" class="slds-float_left slds-m-top_xx-small"/>
+
+                        </div><br/><br/><br/>
+                            <div>
+                              <lightning:datatable data="{! v.mydata }"
+                                columns="{! v.mycolumns }"
+                                keyField="id"
+                                onrowselection="{! c.getSelectedName  }" />
+                            </div>
+                           
+                           
+                            <!---->
+                        
+                         
+                    </div>
+                    <!--Modal/Popup Box Footer Starts here-->
+                    <footer class="slds-modal__footer">
+                        <lightning:button variant="neutral"
+                                          label="Cancel"
+                                          title="Cancel"
+                                          onclick="{! c.closeModel }"/>
+                        <lightning:button variant="brand"
+                                          label="OK"
+                                          title="OK"
+                                          onclick="{!c.submitDetails}"/>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+            </div>
+        </aura:if>
+    <aura:if isTrue="{!v.openKpiModel}">
+        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open slds-modal_full">
+            <div class="slds-modal__container">
+                <div class="slds-modal__header">
+                    <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">New Supplier KPI</h1>
+                </div>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <lightning:recordEditForm aura:id="recordEditForm"
+                                              objectApiName="Supplier_KPI__c"  onsuccess="{!c.handleSuccess}">
+                        <lightning:messages />
+                        <lightning:inputField fieldName="Supplier_Hub__c" />
+                         <lightning:inputField fieldName="Location__c" required="true"/>
+                         <lightning:inputField fieldName="KPI__c" required="true"/>
+                         <lightning:inputField fieldName="Start_Date__c" required="true"/>
+                        <lightning:inputField fieldName="End_Date__c" required="true"/>
+                        <lightning:inputField fieldName="Type__c" aura:id="picklistField" onchange="{!c.onPicklistChange}" required="true"/>
+                        
+                        <aura:if isTrue="{!v.showAmountValue}">
+                        <lightning:inputField fieldName="Actual_Amount_Value__c" />
+						<lightning:inputField fieldName="Target_Amount_Value__c" />
+                        </aura:if>
+                        
+                         <aura:if isTrue="{!v.showNumberValue}">
+                        <lightning:inputField fieldName="Actual_Number_Value__c" />
+						<lightning:inputField fieldName="Target_Number_Value__c" />
+                         </aura:if>
+                        
+                        <aura:if isTrue="{!v.showPercentageValue}">
+                        <lightning:inputField fieldName="Actual_Percent_Value__c" />
+						<lightning:inputField fieldName="Target_Percent_Value__c" />
+                         </aura:if>
+                        <lightning:inputField fieldName="Traffic_light__c" required="true"/>
+                        
+                       
+                    
+                
+                <div class="slds-modal__footer ">
+                    <lightning:button variant="neutral"
+                                          label="Cancel"
+                                          title="Cancel"
+                                          onclick="{! c.closeModel }"/>
+                     <lightning:button type="submit" label="Create" />
+                    
+                  </div> 
+                        </lightning:recordEditForm>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </aura:if>
+    <aura:if isTrue="{!v.openAnalytics}">
+        <wave:waveDashboard dashboardId="0FK4H000000Lan1WAC" />
+    </aura:if>
+     
+    <!--Modal Footer-->
+   
+    <!--End of Modal Footer-->
+</aura:component>

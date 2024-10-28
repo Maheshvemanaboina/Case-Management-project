@@ -1,0 +1,43 @@
+<!--
+ - Created by Sibananda on 08/04/2019.
+ -->
+
+<aura:component description="CountryPlanListViewButtons" implements="forceCommunity:availableForAllPageTypes,force:hasRecordId">
+    
+    <aura:attribute name="buttonLabel" type="String" required="true" access="public"/>
+    <aura:attribute name="ClonebuttonLabel" type="String" required="true" access="public"/>
+    <aura:attribute name="SubmitbuttonLabel" type="String" required="true" access="public"/>
+    <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="pageRedirect" type="String" default="country-plan"/>
+    <aura:attribute name="isBusinessStrategyAccountPlanPage" type="Boolean" default="false"/>
+    
+    <aura:attribute name="buttonCSSClass" type="String"/>
+    <aura:attribute name="SubmitButtonCSSClass" type="String"/>
+    <aura:attribute name="ClonebuttonCSSClass" type="String"/>
+    
+    <aura:attribute name="recordFieldObj" type="Object"/>
+    <aura:attribute name="recObjType" type="Object" />
+    <aura:attribute name="recordError" type="String" default="Could not fetch data!"/>
+    <force:recordData aura:id="recordLoader"
+                    recordId="{!v.recordId}"
+                    layoutType="FULL"                      
+                    targetRecord="{!v.recObjType}"                        
+                    targetFields="{!v.recordFieldObj}"    
+                    targetError="{!v.recordError}"
+                    recordUpdated ="{!c.doInit}"
+                    mode="VIEW"/>
+    <!--padding="horizontal-small"-->
+    <aura:if isTrue="{!v.isBusinessStrategyAccountPlanPage}">
+        <lightning:layout horizontalAlign="end">
+            <lightning:layoutItem>
+                <lightning:button class="{!v.buttonCSSClass}" variant="neutral" label="{!v.buttonLabel}" onclick="{!c.handleNewObjectClick}" />
+            </lightning:layoutItem>
+            <lightning:layoutItem>
+                <lightning:button class="{!v.ClonebuttonCSSClass}" variant="neutral" label="{!v.ClonebuttonLabel}" onclick="{!c.handleCloneButtonClick}" />
+            </lightning:layoutItem>
+            <lightning:layoutItem>
+                <c:CountryPlanSubmitConfirmation BusinessStrategyId="{!v.recordId}" SubmitbuttonLabel = "{!v.SubmitbuttonLabel}" SubmitButtonCSSClass = "{!v.SubmitButtonCSSClass}"/>
+            </lightning:layoutItem>
+        </lightning:layout>
+    </aura:if>
+</aura:component>

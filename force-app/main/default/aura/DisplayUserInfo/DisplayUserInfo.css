@@ -1,0 +1,9 @@
+.THIS.userStyle{
+    font-family: 'Precious Sans Light';
+    font-size: 24px; 
+    color: rgb(0, 148, 217);
+    text-align: center;
+    font-weight: bold;
+   	border: 1px solid rgb(0,147,217);
+    border-radius: 15px;
+}

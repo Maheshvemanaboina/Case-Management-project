@@ -1,0 +1,4 @@
+<aura:event type="COMPONENT" description="Event template">
+	<!--<aura:attribute name="RelatedEntityId" type="String" description="Used to store related record Id of KPI Record" />-->
+    <aura:attribute name="relatedKPI" type="Object" description="To store the related kpi record ids along with the comments entered and approval/rejection by sm" />
+</aura:event>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reason_On_Hold__c</fullName>
+    <description>(FCI) Field to indicate why a Case is on-hold at this moment</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Why was the Case put on-hold?</inlineHelpText>
+    <label>Reason On-Hold</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Outside Strategic Focus</fullName>
+                <default>false</default>
+                <label>Outside Strategic Focus</label>
+            </value>
+            <value>
+                <fullName>Not Relevant Anymore</fullName>
+                <default>false</default>
+                <label>Not Relevant Anymore</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Other_Applications__c</fullName>
+    <externalId>false</externalId>
+    <label>Other Applications</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <controllingField>Sub_Segment__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetName>Application</valueSetName>
+        <valueSettings>
+            <controllingFieldValue>Active Nutrition</controllingFieldValue>
+            <controllingFieldValue>Performance Nutrition</controllingFieldValue>
+            <valueName>Clear drinks</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Active Nutrition</controllingFieldValue>
+            <controllingFieldValue>Performance Nutrition</controllingFieldValue>
+            <valueName>DMV: RTDs</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Active Nutrition</controllingFieldValue>
+            <valueName>Snacks</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Active Nutrition</controllingFieldValue>
+            <valueName>Supplements</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Active Nutrition</controllingFieldValue>
+            <valueName>Yoghurt</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Food Ingredients</controllingFieldValue>
+            <valueName>DMV: Bakery</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Food Ingredients</controllingFieldValue>
+            <valueName>DMV: Blends</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Food Ingredients</controllingFieldValue>
+            <valueName>DMV: Cheese</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Food Ingredients</controllingFieldValue>
+            <valueName>DMV: Cream liquors</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Food Ingredients</controllingFieldValue>
+            <valueName>Kievit: Frozen Desserts</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Food Ingredients</controllingFieldValue>
+            <valueName>Kievit: Pastry &amp; Decoration</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Early Life Nutrition</controllingFieldValue>
+            <valueName>DOMO: IFT 2FL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Early Life Nutrition</controllingFieldValue>
+            <valueName>DOMO: IFT Basepowders</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Early Life Nutrition</controllingFieldValue>
+            <valueName>DOMO: IFT Bioactive Proteins</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Early Life Nutrition</controllingFieldValue>
+            <valueName>IMF Dairy Lipids</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Early Life Nutrition</controllingFieldValue>
+            <valueName>IMF Encaps</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Early Life Nutrition</controllingFieldValue>
+            <valueName>DOMO: IFT Finals</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Early Life Nutrition</controllingFieldValue>
+            <valueName>DOMO: IFT GOS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Early Life Nutrition</controllingFieldValue>
+            <valueName>DOMO: IFT Hydrolysates</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Early Life Nutrition</controllingFieldValue>
+            <valueName>IMF Intact Proteins</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Early Life Nutrition</controllingFieldValue>
+            <valueName>DOMO: IFT Lactose</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Early Life Nutrition</controllingFieldValue>
+            <valueName>IMF SMP</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Early Life Nutrition</controllingFieldValue>
+            <valueName>DOMO: IFT Whey Proteins</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Early Life Nutrition</controllingFieldValue>
+            <controllingFieldValue>Medical Nutrition</controllingFieldValue>
+            <valueName>Multiple</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Medical Nutrition</controllingFieldValue>
+            <valueName>Classic Sip Tube</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Medical Nutrition</controllingFieldValue>
+            <valueName>Clear</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Medical Nutrition</controllingFieldValue>
+            <valueName>Compact</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Medical Nutrition</controllingFieldValue>
+            <valueName>DOMO: Medical 2FL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Medical Nutrition</controllingFieldValue>
+            <valueName>DOMO: Medical Base Powders</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Medical Nutrition</controllingFieldValue>
+            <valueName>DOMO: Medical Bioactive Proteins</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Medical Nutrition</controllingFieldValue>
+            <valueName>DOMO: Medical Finals</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Medical Nutrition</controllingFieldValue>
+            <valueName>DOMO: Medical GOS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Medical Nutrition</controllingFieldValue>
+            <valueName>DOMO: Medical Hydrolysates</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Medical Nutrition</controllingFieldValue>
+            <valueName>DOMO: Medical Lactose</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Medical Nutrition</controllingFieldValue>
+            <valueName>DOMO: Medical Milk Powders</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Medical Nutrition</controllingFieldValue>
+            <valueName>DOMO: Medical Milk Proteins</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Medical Nutrition</controllingFieldValue>
+            <valueName>DOMO: Medical Single Ingredients</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Medical Nutrition</controllingFieldValue>
+            <valueName>DOMO: Medical Whey Proteins</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Medical Nutrition</controllingFieldValue>
+            <valueName>Other</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Medical Nutrition</controllingFieldValue>
+            <valueName>Powder</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Medical Nutrition</controllingFieldValue>
+            <valueName>Texturized</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Beverages</controllingFieldValue>
+            <valueName>Kievit: Coffee whiteners</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Beverages</controllingFieldValue>
+            <valueName>Kievit: Milk Tea Mixes</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Beverages</controllingFieldValue>
+            <controllingFieldValue>Other</controllingFieldValue>
+            <valueName>Kievit: Ready To Drink (coffee/tea)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cell Nutrition</controllingFieldValue>
+            <valueName>Cell Cultured Meat</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cell Nutrition</controllingFieldValue>
+            <valueName>DOMO: Cell Nutrition Biopharma</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cell Nutrition</controllingFieldValue>
+            <valueName>DOMO: Cell Nutrition Microbial Diagnostics</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Performance Nutrition</controllingFieldValue>
+            <valueName>DMV: Bars</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Performance Nutrition</controllingFieldValue>
+            <valueName>DMV: Shakes</valueName>
+        </valueSettings>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

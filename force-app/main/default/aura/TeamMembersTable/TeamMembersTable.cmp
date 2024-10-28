@@ -1,0 +1,76 @@
+<!--
+ - Created by KJM on 03/07/2019.
+ -->
+
+<aura:component description="TeamMembersTable">
+    <aura:attribute name="tableValues" type="Object" required="true"/>
+    <aura:attribute name="showChatterMessageButtonForComm" type="Boolean" required="true" />
+    
+    <aura:attribute name="renderSendMessageComponent" type="Boolean" default="false"/>
+    <aura:attribute name="messagePersonName" type="String" default=""/>
+    <aura:attribute name="tableUserNameIndex" type="Integer" default="1"/>
+    <aura:attribute name="tableUserAvatarIndex" type="Integer" default="0"/>
+    
+    <!--added-->
+    <aura:attribute name="OOO" type="String" default="action:close"/>
+    <aura:attribute name="notOOO" type="String" default="action:approval"/>
+    <aura:handler name="hideCompEvt" event="c:HideSendMessageModal" action="{!c.handleHideSendMessageModal}"/>
+    
+    <div class="slds-grid slds-grid_vertical">
+        <div class="slds-col slds-p-top_medium">
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_fixed-layout">
+                <thead>
+                    <tr class="slds-line-height_reset">
+                        <aura:iteration items="{!v.tableValues.headerValues}" var="valData" indexVar="index">
+                            <th class="" scope="col">
+                                <div aura:id="teamId" class="slds-truncate" title="{!valData}" data-id="{!index}" data-val="{!valData}" onclick="{!c.getclickeddata}"><p class="fleft">{!valData}</p>
+                                    <aura:if isTrue="{!index != v.tableUserAvatarIndex}">
+                                        <span class="slds-show fleft" data-sort-dir="desc">&nbsp;  &#9650;</span>
+                                        <span class="slds-hide fleft" data-sort-dir="asc">&nbsp;  &#9660;</span>
+                                    </aura:if>
+                                </div>
+                            </th>
+                        </aura:iteration>
+                    </tr>
+                </thead>
+                <tbody>
+                    <aura:iteration items="{!v.tableValues.bodyValues}" var="rowData">
+                        <tr class="slds-hint-parent">
+                            <aura:iteration items="{!rowData}" var="oneRowItem" indexVar="index">
+                                <aura:if isTrue="{!index == v.tableUserAvatarIndex}">
+                                    <th scope="row">
+                                        <lightning:avatar variant="circle" src="{!oneRowItem}" fallbackIconName="standard:person_account" class=""/>
+                                    </th>
+                                    <aura:set attribute="else">
+                                        <th scope="row">
+                                            <aura:if isTrue="{!and(v.OOO != oneRowItem,v.notOOO != oneRowItem)}">
+                                                <div class="slds-truncate slds-cell-wrap" title="{!oneRowItem}">{!oneRowItem}</div>
+                                                <aura:set attribute="else">
+                                                    <lightning:icon iconName="{!oneRowItem}" size="x-small" alternativeText="{!oneRowItem}"/>
+                                                </aura:set>
+                                            </aura:if>
+                                        </th>
+                                    </aura:set>
+                                </aura:if>
+                            </aura:iteration>
+                            <aura:if isTrue="{!v.showChatterMessageButtonForComm}" >
+                                <th scope="row">
+                                    <aura:iteration items="{!rowData}" var="oneRowItem" indexVar="index">
+                                        <aura:if isTrue="{!index == v.tableUserNameIndex}">
+                                            <button class="slds-button slds-button_neutral" data-personName="{!oneRowItem}" onclick="{! c.handleOpenSendMessageClick }">
+                                                Send Message
+                                            </button>
+                                        </aura:if>
+                                    </aura:iteration>
+                                </th>
+                            </aura:if>
+                        </tr>
+                    </aura:iteration>
+                </tbody>
+            </table>
+        </div>
+        <aura:if isTrue="{!v.renderSendMessageComponent}">
+            <c:SendChatterMessage personName="{!v.messagePersonName}"/>
+        </aura:if>
+    </div>
+</aura:component>

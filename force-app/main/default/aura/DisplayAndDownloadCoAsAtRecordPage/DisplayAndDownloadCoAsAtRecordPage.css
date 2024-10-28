@@ -1,0 +1,16 @@
+table#ab.THIS {
+    border-collapse: collapse; 
+    width: 100%;
+}
+.THIS th{
+    padding: 0.4rem;
+    text-align: left;
+    background-color: #1a8cff;
+    color: white;
+}
+.THIS tr:nth-child(even){
+    background-color: #f2f2f2
+}
+.THIS td{
+    padding: 1.5%;
+}

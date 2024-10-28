@@ -1,0 +1,233 @@
+<aura:component controller="DisplayAndDownloadCoAHandler" implements="force:appHostable,flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes" access="global" >
+
+<aura:attribute name="showSpinner" type="boolean" default="true"/>
+<aura:attribute name="spinnerText" type="String" default="please wait"/>
+
+<aura:attribute name="baseUrl" type="String"/>
+<aura:attribute name="typeOfUser" type="String" default=""/>
+<aura:attribute name="setDynamicName" type ="String" default=""/>
+<aura:attribute name="setTypeOfNumberValue" type ="List" default=""/>
+<aura:attribute name="enableShipToField" type="boolean" default="false"
+                description="Enable Ship To Field only for Batch Number and for internal user"/>
+
+<aura:attribute name="enteredInfo" type="Map" 
+                default="{'EnterdNumber':'','TypeOfNumber':'','ShipToNumber':'','IsUserUseSearchFunctionality':false}"/>
+<aura:attribute name="tileObject" type="Tile__c" 
+                default="{'sobjectType':'Tile__c','Name':'','Delivery_Number__c':'','Sales_Order_Number__c':'','Purchase_Order_Number__c':'','Batch_Number__c':'','ShipToParty__c':''}"/>
+
+<aura:attribute name="searchKey" type="String" default=""/>
+<aura:attribute name="searchShipTo" type="String" default=""/>   
+<aura:attribute name="setToggleStatus" type="boolean" default="true"/> 
+<aura:attribute name="setLookupFields" type="Map" 
+                default = "{'objectAPIName':'','fieldAPIName':'','metaFieldsAPI':[],'whereFieldAPIName':'','isEnteredNumberIsUnique':true,'typeOfNumber':''}"/>
+<aura:attribute name="setLookupForShipTo" type="Map" 
+                default = "{'objectAPIName':'','fieldAPIName':'','metaFieldsAPI':[],'whereFieldAPIName':'','isEnteredNumberIsUnique':true,'typeOfNumber':''}"/>
+
+<aura:attribute name="allCoAFilesRelated" type="List"/>
+<aura:attribute name="showManualUploadsCoA" type="boolean" default="false"/> 
+
+<aura:attribute name="tilesType" type="String" required="true" default = "ORDER AND DELIVERY" access="public"/>
+<aura:attribute name="firstTileName" type="String" required="true" default ="FCI Customer Order And Delivery Main Tile" access="public"/>
+
+
+<aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+<aura:handler name="CoASObjectLookupEvent" event="c:CoASObjectLookupSelectEvent" action="{! c.handleLookupSelectEvent }"/>
+<aura:handler name="CoASObjectNotifierEvent" event="c:CoASObjectLookupSelectEvent" action="{! c.handleNotifierEvent }"/>
+
+
+<!-- <lightning:navigation aura:id="navService"/>   -->
+
+<aura:html tag="style">.toastMessage.forceActionsText{white-space : pre-line !important;}</aura:html>
+
+
+
+<article class="slds-card slds-card_boundary headerBottomBorder mainArticle">
+    <div class="slds-grid slds-page-header pageHeaderDiv">
+        <div class="slds-media__body">
+            <h3 class="slds-card__header-title">
+                <lightning:icon class="resizeIcon" size="medium" iconName="doctype:folder" title="Certificate of Analysis"/>&nbsp;&nbsp;
+                <b><span>Certificate of Analysis(CoA)</span></b>&nbsp;
+            </h3>
+        </div>
+    </div>
+    
+    <aura:if isTrue ="{!v.showSpinner}">    
+        <div class="slds-spinner_container">
+            <div role="status" class="slds-spinner slds-spinner_medium slds-spinner_brand">
+                <span class="slds-assistive-text">Loading</span>
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+                    <p class="spinnerClass"> {!v.spinnerText} </p>
+            </div>
+        </div>
+    </aura:if>
+    
+    <div class="slds-grid slds-gutters" style="width:100%;">
+        <div class="slds-col" style="width:2%;"></div>
+        <div class="slds-col slds-size_1-of-2" style="width:57%;">
+            <fieldset class="slds-box">
+                <legend id="coasearch" class="slds-text-heading_small slds-p-vertical--medium"> 
+                    Search for CoAs
+                </legend>
+                <div class="slds-cell-wrap slds-text-align_center">
+                    
+                        <aura:if isTrue="{!or(v.typeOfUser == 'CUSTOMER_STANDARD',v.typeOfUser == 'CUSTOMER_MANAGER')}">
+                            <div>
+                                <h5 class="slds-text-body_small"><b>Search here for non-bulk CoA’s, for bulk CoA’s go to Archive</b></h5> 
+                                <b><lightning:button   label="CoA Archive" variant="Neutral" onclick="{!c.moveToManualCOA}"/></b>
+                            </div> <br></br>
+                        </aura:if>
+                    
+                    <div>
+                        <h5 class="slds-text-body_small"><b>If you can’t find the CoA, please raise a Case </b></h5>
+                        <b><lightning:button label="New Case" variant="Neutral" onclick="{!c.createMissingCoACase}"/></b>
+                    </div><br></br>
+
+                    <h5 class="slds-text-color_error  slds-text-body_small"><b>
+                        To retrieve CoAs online, please select type of number and enter that <br></br>Number in the Enter/Search input field</b><br></br><br/>
+                      </h5>
+                    
+                </div>
+               
+                <div class = "slds-grid slds-wrap slds-form-element">
+                    <div class="slds-col slds-size--1-of-4"></div>
+                    
+                    
+                    <div class="slds-col slds-size--2-of-4">
+                        <b><label class="slds-form-element__label">Select Type Of Number</label></b>
+                        
+                        <c:PopoverHelpText helpTextMessage ="Select Type Of Number"/>
+
+                        <b><lightning:combobox  aura:id="selectTypeOfNo" name="Typeof" label="Content Type"
+                                                variant="label-hidden"
+                                                placeholder="Select a Content Type"
+                                                value="{! v.enteredInfo.TypeOfNumber }"
+                                                onchange="{! c.setLookupAttributes }"
+                                                options="{! v.setTypeOfNumberValue }"
+                                                /></b>
+                    </div>
+                    
+                    <div class="slds-col slds-size--1-of-4"></div>
+                    <div class="slds-col slds-size--1-of-1"><br></br></div>
+                    <div class="slds-col slds-size--1-of-4"></div>
+                    
+                    <div class ="slds-col slds-size--2-of-4">
+                        <aura:if isTrue = "{!v.setToggleStatus}"><!-- v.enteredInfo.TypeOfNumber != 'Batch Number'-->
+                            <b><label class="slds-form-element__label">{!'Search' +' '+ (v.enteredInfo.TypeOfNumber)}</label></b>
+                            
+                           <c:PopoverHelpText helpTextMessage ="Search Your Number"/>
+                            
+                            <b><c:CoASObjectLookUp  fieldLabel ="" placeholder="{!v.enteredInfo.TypeOfNumber}" selectedRecordLabel="" 
+                                                    objectAPIName="{!v.setLookupFields.objectAPIName}" fieldAPIName="{!v.setLookupFields.fieldAPIName}" 
+                                                    SearchKeyWord="{!v.searchKey}" metaFieldsAPI="{!v.setLookupFields.metaFieldsAPI}" 
+                                                    recordLimit="5" whereFieldAPIName="{!v.setLookupFields.whereFieldAPIName}" 
+                                                    isUnique="{!v.setLookupFields.isEnteredNumberIsUnique}" typeOfNumberEntered="{!v.setLookupFields.typeOfNumber}"
+                                                    aura:id="SearchNumberInSF"></c:CoASObjectLookUp></b>                              
+                            <aura:set attribute="else">
+                                <b><label class="slds-form-element__label">{!'Enter' +' '+ (v.enteredInfo.TypeOfNumber)}</label></b>
+                                
+                                <c:PopoverHelpText helpTextMessage ="Enter Your Number"/>
+                                <b><lightning:input variant="label-hidden"  label="{!'Enter' +' '+ (v.enteredInfo.TypeOfNumber)}"   type="search" aura:id="SearchNumber" value="{!v.enteredInfo.EnterdNumber}"/></b>
+                            </aura:set>
+                        </aura:if>
+                    </div>
+                    
+                    <div class="slds-col slds-size--1-of-4">
+                        
+                        <c:PopoverHelpText helpTextMessage ="Toggle to Switch Between Search And Enter Number"/>
+                        <lightning:input type="toggle" aura:id="toggleToSwitch" name="ToggleToSwtichbwEnterAndSearch" messageToggleActive="ON" messageToggleInactive="OFF" checked="{!v.setToggleStatus}" onchange="{!c.getToggleStatus}"></lightning:input>
+                    </div> 
+
+                    <aura:if isTrue="{!v.enableShipToField}">
+                        <div class="slds-col slds-size--1-of-1"><br></br></div>    
+                        <div class="slds-col slds-size--1-of-4"></div>   
+                        <div class ="slds-col slds-size--2-of-4">
+                           <!-- <aura:if isTrue = "{!v.setToggleStatus}"> -->
+                                <b><label class="slds-form-element__label">Search ShipTo Number</label></b>
+                                
+                                <c:PopoverHelpText helpTextMessage ="Search ShipTo Number"/>
+                                
+                                <b><c:CoASObjectLookUp  fieldLabel ="" placeholder="Search Ship To" selectedRecordLabel="" 
+                                                        objectAPIName="{!v.setLookupForShipTo.objectAPIName}" 
+                                                        fieldAPIName="{!v.setLookupForShipTo.fieldAPIName}" SearchKeyWord="{!v.searchShipTo}"
+                                                        metaFieldsAPI="{!v.setLookupForShipTo.metaFieldsAPI}" recordLimit="5"
+                                                        whereFieldAPIName="{!v.setLookupForShipTo.whereFieldAPIName}" 
+                                                        isUnique="{!v.setLookupForShipTo.isEnteredNumberIsUnique}" typeOfNumberEntered="{!v.setLookupForShipTo.typeOfNumber}"></c:CoASObjectLookUp></b>
+                               <!-- <aura:set attribute="else">
+                                    <b><label class="slds-form-element__label">Enter ShipTo Number</label></b>
+                                    
+                                    <c:PopoverHelpText helpTextMessage ="Enter ShipTo Number"/>
+                                    <b><lightning:input variant="label-hidden" label="Enter ShipTo Number" value="{!v.enteredInfo.ShipToNumber}"  type="search" aura:id="SearchNumberShipTo"/></b>
+                                </aura:set> -->
+                           <!-- </aura:if> -->
+                        </div>
+                    </aura:if>    
+                                        
+                </div>
+                <br></br> <b><lightning:button class="slds-align_absolute-center"   label="Submit" variant="brand" onclick="{!c.checkEnteredNoAndFetchCoA}"/></b>
+                
+            </fieldset>
+        </div>
+        
+        
+        <div class="slds-col slds-size_1-of-2" style="width:41%;">
+            <fieldset class="slds-box">
+                <legend id="table" class="slds-text-heading--small slds-p-vertical--medium"> 
+                    All CoAs found  
+                </legend>
+                
+                <aura:if isTrue="{!v.allCoAFilesRelated.length > 0}">
+                    <b> <p>Number of Files Found: {!v.allCoAFilesRelated.length}</p></b><br></br> 
+                    <div class="slds-scrollable slds-p-left_x-small slds-p-top_x-small slds-p-right_x-small" style="height:17.1rem;">
+                        
+                        <table class="slds-table" id="ab">
+                            <tr>
+                                <th style="font-weight:bold">File</th>
+                                <th style="font-weight:bold">Preview</th>
+                                <th style="font-weight:bold">Download</th>
+                            </tr>
+                            <aura:iteration items="{!v.allCoAFilesRelated}" var="retrive">
+                                <tr>
+                                    <td>
+                                        <div class="slds-cell-wrap">
+                                            <ui:outputRichText value="{!retrive.fileName}"/>
+                                        </div>
+                                    </td>
+                                    <!--   <td> <lightning:fileCard  fileId="{!retrive.fileId}"></lightning:fileCard>&nbsp;&nbsp;&nbsp;&nbsp;</td>  -->
+                                    <td onclick="{!c.filePreview}" style="cursor: pointer;"  id="{!retrive.fileId}"><lightning:icon class="resizeIcon" size="small" iconName="action:preview" title="Preview"/></td> 
+                                    <td> <a href="{!retrive.downloadUrl}"><lightning:icon class="resizeIcon" size="small" iconName="action:download" title="Download"/></a><br/></td>
+                                </tr>
+                            </aura:iteration>
+                        </table>
+                    </div>
+                </aura:if>
+            </fieldset>
+        </div>
+    </div>  <br></br>
+</article>
+
+<aura:if isTrue="{!v.showManualUploadsCoA}">
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_medium">   
+        <div class="slds-modal__container">
+            <header class="slds-modal__header">
+                <lightning:buttonIcon iconName="utility:close"
+                                        onclick="{!c.closeManualUpload}"
+                                        alternativeText="close"
+                                        variant="bare-inverse"
+                                        class="slds-modal__close"
+                                        />
+                <h1>{!$Label.c.CoA_Tile_Page_Name}</h1>
+            </header>
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<c:TilesSearch rootTile="{!v.firstTileName}"/><br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<c:TileList firstTileName="{!v.firstTileName}" tilesType="{!v.tilesType}"/>
+            </div>  
+            <footer class="slds-modal__footer">
+                <lightning:button label="Cancel" name="cancel"   onclick="{!c.closeManualUpload}"></lightning:button>
+            </footer>
+        </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+</aura:if>        
+
+</aura:component>

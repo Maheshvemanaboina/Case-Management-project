@@ -1,0 +1,6 @@
+<design:component >
+    <design:attribute name="ObjectAPIName"  label="KPI Object API Name"  description="API Name of the KPI's object" required="true" />
+    <design:attribute name="masterBucketInitials" label="Master bucket initials"  description="Initials of the master bucket, if master bucket name is Commercial Activity - 2020, then initial is Commercial Activity" required="true"/>
+    <design:attribute name="relatedLocationKPIObjectLookupAPIName" label="Related Distributor Location - KPI object's Lookup API Name"  description="Lookup field API name on the Other Related locations object with the KPI object" required="true"/>
+    <design:attribute name="relatedLocationKPIObjectLookupRelationAPIName" label="Related Distributor Location - KPI object's Lookup relation API Name"  description="Lookup relationship API name on the Other Related locations object with the KPI object" required="true"/>
+</design:component>

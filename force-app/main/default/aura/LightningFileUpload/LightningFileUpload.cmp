@@ -1,0 +1,118 @@
+<aura:component controller="LightningFileUploadHandler" implements="flexipage:availableForAllPageTypes,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global" >
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>  
+    <aura:attribute name="files" type="ContentDocument[]"/>  
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="properRecordId" type="String" />
+    <aura:attribute name="acceptFileTypes" type="String" />
+    <aura:attribute name="showFileHeader" type="Boolean" default="true" />  
+    <aura:attribute name="fileHeaderText" type="String" default="Files" /> 
+    <aura:attribute name="uploadMultiple" type="Boolean" default="false"/>
+    <aura:attribute name="showSpinner" type="boolean" default="false"/>
+    <aura:attribute name="category" type="String"/>
+    <!-- Pankaj -->
+    <aura:attribute name="showModel" type="boolean" default="false"/>
+    <aura:attribute name="selectedCategory" type="String"/>
+    <aura:attribute name="contentVersionId" type="String"/>
+    <aura:attribute name="categoryOptions" type="LightningFileUploadHandler.SelectOptionWrapper[]" access="private" />
+    
+    <div class="slds-card slds-card_boundary">
+        <aura:if isTrue="{!not(empty(v.properRecordId))}">
+            <!-- show or hide header -->
+            <aura:if isTrue="{!v.showFileHeader}">
+                <div class="slds-page-header">{!v.fileHeaderText}</div>  
+            </aura:if>
+            
+            <div class="slds-align_absolute-center">
+                <lightning:select name="fileCategory" value="{!v.category}" aura:id="validatedField"
+                                  label="Select the category for the file:" required="true">
+                    <aura:iteration items="{!v.categoryOptions}" var="categoryOption">
+                        <option value="{!categoryOption.value}">{!categoryOption.label}</option>
+                    </aura:iteration>
+                </lightning:select>
+            </div>
+            
+            <div class="slds-align_absolute-center">  
+                <lightning:fileUpload multiple="false"
+                                      accept="{!v.acceptFileTypes}" 
+                                      recordId="{!v.properRecordId}"
+                                      onuploadfinished="{!c.uploadFinished}" />  
+            </div>  
+            <br/> 
+            <div class="slds-form--compound">
+                <table class="slds-table slds-table--bordered">  
+                    <!-- hide the table header if file is empty -->
+                    <aura:if isTrue="{!not(empty(v.files))}">
+                        <thead>  
+                            <tr>  
+                                <th>Title</th>  
+                                <th>File Type</th>
+                                <th>File Category</th>
+                                <th></th>
+                            </tr>
+                        </thead>  
+                    </aura:if>
+                    <tbody>
+                        <aura:iteration items="{!v.files}" var="f" indexVar="index">  
+                            <tr data-record="{!index}" >  
+                                <td data-record="{!index}">
+                                    <a href="javascript:void(0)" id="{!f.Id}" onclick="{!c.previewFile}">
+                                        {!f.Title}
+                                    </a>
+                                </td>  
+                                <td data-record="{!index}">{!f.FileType}</td>
+                                <td data-record="{!index}">{!f.ContentVersions[0].Category__c}</td>
+                                <td data-record="{!index}">
+                                    <a href="javascript:void(0)" id="{!f.Id}" onclick="{!c.deleteFile}">
+                                        <lightning:icon size="x-small" iconName="utility:delete" alternativeText="Delete"  title="Delete"/>
+                                    </a>
+                                </td>
+                                <td data-record="{!index}">
+                                    <a href="javascript:void(0)" id="{!f.ContentVersions[0]}" onclick="{!c.editCategory}" data-record="{!index}">
+                                        <lightning:icon size="x-small" iconName="utility:edit" alternativeText="Edit" title="Edit Category"  />
+                                    </a>
+                                </td>
+                            </tr>  
+                        </aura:iteration>  
+                    </tbody>  
+                </table>            
+                <!-- show spinner logo when needed -->
+                <aura:if isTrue="{!v.showSpinner}">
+                    <div class="slds-spinner_container">
+                        <div class="slds-spinner slds-spinner--medium" aria-hidden="false" role="alert">
+                            <div class="slds-spinner__dot-a"></div>
+                            <div class="slds-spinner__dot-b"></div>
+                        </div>
+                    </div>
+                </aura:if>
+                <aura:if isTrue="{!v.showModel}">
+                    <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_small" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1">
+                        <div class="slds-modal__container">
+                            <header class="slds-modal__header">
+                                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+                                    
+                                    <span class="slds-assistive-text">Close</span>
+                                </button>
+                                <h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Edit Category</h2>
+                            </header>
+                            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                                <div class="slds-align_absolute-center">
+                                    <lightning:select name="fileCategory" value="{!v.selectedCategory}" aura:id="validatedField"
+                                                      label="Select the Updated category for the file:" required="true">
+                                        <aura:iteration items="{!v.categoryOptions}" var="categoryOption">
+                                            <option value="{!categoryOption.value}" selected="{!categoryOption.value == v.selectedCategory}">{!categoryOption.label}</option>
+                                        </aura:iteration>
+                                    </lightning:select>
+                                </div>
+                            </div>
+                            <footer class="slds-modal__footer">
+                                <button class="slds-button slds-button_neutral" onclick="{!c.onCancle}">Cancel</button>
+                                <button class="slds-button slds-button_brand" onclick="{!c.saveCategory}">Save</button>
+                            </footer>
+                        </div>
+                    </section>
+                    <div class="slds-backdrop slds-backdrop_open"></div>
+                </aura:if>
+            </div>
+        </aura:if>
+    </div>  
+</aura:component>

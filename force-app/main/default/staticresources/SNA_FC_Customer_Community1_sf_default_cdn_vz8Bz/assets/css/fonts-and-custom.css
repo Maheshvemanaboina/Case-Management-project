@@ -1,0 +1,18 @@
+@font-face {
+    font-family: 'Precious Sans Light';
+    src: url('/sfsites/c/resource/preciousSansFont');
+}
+
+.forceCommunityThemeLogo .logoImage {width : 100px;}
+
+.comm-tile-menu__item-banner{
+	border: 1px solid rgb(0,147,217);
+    border-radius: 20px 20px 0px 0px;
+}
+.myAccount{
+  display:none;  
+}
+
+.slds-button.slds-button--neutral.not-selected.slds-not-selected {display:none}
+.slds-button.slds-button--neutral.is-selected.slds-is-selected {display:none}
+:root { --dxp-c-section-columns-max-width: 1170px; }

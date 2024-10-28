@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Case_Closer_Reason__c</fullName>
+    <externalId>false</externalId>
+    <label>Case Closure Reason</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>For Other Dept/Opco</fullName>
+                <default>false</default>
+                <label>For Other Dept/Opco</label>
+            </value>
+            <value>
+                <fullName>Duplicate Case</fullName>
+                <default>false</default>
+                <label>Duplicate Case</label>
+            </value>
+            <value>
+                <fullName>No Answer Available</fullName>
+                <default>false</default>
+                <label>No Answer Available</label>
+            </value>
+            <value>
+                <fullName>Not Enough Info</fullName>
+                <default>false</default>
+                <label>Not Enough Info</label>
+            </value>
+            <value>
+                <fullName>Following Customer Visit Request</fullName>
+                <default>false</default>
+                <label>Following Customer Visit Request</label>
+            </value>
+            <value>
+                <fullName>Case Resolved</fullName>
+                <default>false</default>
+                <label>Case Resolved</label>
+            </value>
+            <value>
+                <fullName>Customer Visit Complete</fullName>
+                <default>false</default>
+                <label>Customer Visit Complete</label>
+            </value>
+            <value>
+                <fullName>Duplicate</fullName>
+                <default>false</default>
+                <label>Duplicate</label>
+            </value>
+            <value>
+                <fullName>Defect</fullName>
+                <default>false</default>
+                <label>Defect</label>
+            </value>
+            <value>
+                <fullName>Change Request</fullName>
+                <default>false</default>
+                <label>Change Request</label>
+            </value>
+            <value>
+                <fullName>Change Request integration</fullName>
+                <default>false</default>
+                <label>Change Request integration</label>
+            </value>
+            <value>
+                <fullName>User Data Changes</fullName>
+                <default>false</default>
+                <label>User Data Changes</label>
+            </value>
+            <value>
+                <fullName>Administrator Data Changes</fullName>
+                <default>false</default>
+                <label>Administrator Data Changes</label>
+            </value>
+            <value>
+                <fullName>Integration Defect</fullName>
+                <default>false</default>
+                <label>Integration Defect</label>
+            </value>
+            <value>
+                <fullName>Training</fullName>
+                <default>false</default>
+                <label>Training</label>
+            </value>
+            <value>
+                <fullName>Not Justified</fullName>
+                <default>false</default>
+                <label>Not Justified</label>
+            </value>
+            <value>
+                <fullName>Justified</fullName>
+                <default>false</default>
+                <label>Justified</label>
+            </value>
+            <value>
+                <fullName>Initial</fullName>
+                <default>false</default>
+                <label>Initial</label>
+            </value>
+            <value>
+                <fullName>Forecast Change Completed</fullName>
+                <default>false</default>
+                <label>Forecast Change Completed</label>
+            </value>
+            <value>
+                <fullName>Forecast Change Request Closed - Additional Volume not available</fullName>
+                <default>false</default>
+                <label>Forecast Change Request Closed - Additional Volume not available</label>
+            </value>
+            <value>
+                <fullName>Not Reproducible</fullName>
+                <default>false</default>
+                <label>Not Reproducible</label>
+            </value>
+            <value>
+                <fullName>No Response from Customer</fullName>
+                <default>false</default>
+                <label>No Response from Customer</label>
+            </value>
+            <value>
+                <fullName>User Successfully Provisioned</fullName>
+                <default>false</default>
+                <label>User Successfully Provisioned</label>
+            </value>
+            <value>
+                <fullName>Question Resolved</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Question Resolved</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

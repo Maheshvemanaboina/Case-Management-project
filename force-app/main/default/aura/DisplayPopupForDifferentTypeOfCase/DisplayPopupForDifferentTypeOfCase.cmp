@@ -1,0 +1,24 @@
+<aura:component implements="force:hasRecordId,forceCommunity:availableForAllPageTypes,flexipage:availableForRecordHome">
+   
+    <aura:attribute name="caseRecord" type ="Object"/>
+    <aura:attribute name="caseFields" type ="Object"/>
+    <aura:attribute name="enablePopup" type="boolean" default="false"/>
+    <aura:attribute name="recordId" type="String" required="true" default ="recordId" access="public"/>
+    <aura:handler name="init" value="{!this}" action="{!c.checkUserOnInit}" />
+    <aura:html tag="style">.toastMessage.forceActionsText{white-space : pre-line !important;}</aura:html>
+   
+    <aura:if isTrue = "{!v.enablePopup}">
+        
+        <force:recordData
+                          aura:id="getCaseRecord"
+                          targetFields="{!v.caseFields}"
+                          recordId="{!v.recordId}" 
+                          fields="Type,CreatedDate"
+                          targetError="{!v.recordSaveError}"
+                          targetRecord="{!v.caseRecord}"
+                          mode="VIEW"
+                          recordUpdated="{!c.handleRecordUpdated}"/>
+    </aura:if>    
+    
+    
+</aura:component>

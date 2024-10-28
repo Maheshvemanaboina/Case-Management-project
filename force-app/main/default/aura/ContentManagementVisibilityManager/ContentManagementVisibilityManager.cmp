@@ -1,0 +1,227 @@
+<aura:component>
+
+    <aura:registerEvent name="DeleteLibraryRowEvt" type="c:DeleteRowEvent"/> 
+    <aura:registerEvent name="AddLibraryRowEvt" type="c:AddRowEvent"/>
+
+    <aura:registerEvent name="DeleteContentPathRowEvt" type="c:DeleteRowEvent"/> 
+    <aura:registerEvent name="AddContentPathRowEvt" type="c:AddRowEvent"/>
+
+    <!--Attributes passed from ContentManagement-->
+    <aura:attribute name="contentLibraryLocationObj" type="Object"/>
+    <aura:attribute name="contentPathLocationObj" type="Object"/>
+    <aura:attribute name="contentPathRowIndex" type="String"/>
+    <aura:attribute name="contentLibraryRowIndex" type="String"/>
+    <aura:attribute name="isLibraryContent" type="Boolean"/>
+    <aura:attribute name="contentTreeVM" type="List"/>
+    <aura:attribute name="libraryTreeVM" type="List"/>
+
+    <aura:attribute name="validContentMap" type="Map"/>
+    <aura:attribute name="validLibraryMap" type="Map"/>
+    <aura:attribute name="folderLibraryMap" type="Map"/>
+    <aura:attribute name="contentLibraryLocationList" type="List"/>
+    <aura:attribute name="contentPathLocationList" type="List"/>
+
+    <!--RelatedArticle variables-->
+    <aura:attribute name="isRelatedArticle" type="Boolean"/>
+
+    <aura:handler name="change" value="{! v.isRelatedArticle }" action="{! c.handleRelatedArticleChange }"/>
+    <aura:method name="setContentTreeforContentVM" action="{! c.setContentTree }">
+        <aura:attribute name="contentTree" type="List"/>
+        <aura:attribute name="validContMap" type="List"/> 
+    </aura:method>
+    
+    <li class="slds-accordion__list-item">
+        <aura:if isTrue="{! v.isLibraryContent }">
+            <section aura:id="libraryaccordianId" class="slds-accordion__section slds-is-close">
+                <div class="slds-accordion__summary">
+                    <h2 class="slds-accordion__summary-heading">
+                        <button class="slds-button slds-button_reset slds-accordion__summary-action" aria-controls="referenceId-21" aria-expanded="true" title="Accordion summary" onclick="{! c.toggleLibraryAccordianSection }">
+                            <lightning:icon iconName="utility:chevronright" alternativeText="Utility image" size="x-small" title="Image" />
+                            <span class="slds-accordion__summary-content">Library path {!v.contentLibraryRowIndex + 1}</span>
+                        </button>
+                    </h2>
+                    <div class="slds-dropdown-trigger slds-dropdown-trigger_click" onclick="{! c.preventDefaultSubmission }">
+                        <lightning:buttonMenu aura:id="Librarymenu" alternativeText="Show menu" iconName="utility:settings" menuAlignment="right" onselect="{! c.onLibraryMenuItemSelect }">
+                            <lightning:menuItem value="AddLibrary" label="Add Library" disabled="false" prefixIconName="utility:add"/>
+                            <lightning:menuItem value="DeleteLibrary" label="Delete Library" disabled="false" prefixIconName="utility:close"/>
+                        </lightning:buttonMenu>
+                    </div>
+                </div>
+                <div class="slds-accordion__content" id="referenceId-24">
+                    <div class="slds-grid slds-wrap slds-grid_align-center">
+                        
+                        <!-- <div class="slds-col slds-medium-size_1-of-1 slds-large-size_1-of-1 centerClass slds-border_left slds-border_right slds-border_top slds-border_bottom">
+                            <div class="slds-page-header">
+                                <h1 class="slds-page-header__title">Enter Library &amp; content path information</h1>
+                            </div>
+                        </div> -->
+                        <div class="slds-col slds-size_6-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-float_left slds-border_right slds-border_top" style="height: 200px;">
+                            <div class="slds-scrollable_y">
+                                <lightning:tree class="slds-text-heading_small" onselect="{! c.onLibraryTreeSelect }" selectedItem="{! v.contentLibraryLocationObj.SelectedLibraryFolder }" items="{! v.libraryTreeVM }" />
+                            </div>
+                        </div>
+                        <div class="slds-col slds-size_6-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-var-p-around_medium slds-border_top"> 
+    
+                            <aura:if isTrue="{! empty(v.contentLibraryLocationObj.LibraryStoragePath) }">
+                                <p class="slds-text-heading_medium slds-var-p-top_x-large slds-text-align_center">You have not selected a Library path/the Library path selected is invalid.</p>
+                                <aura:set attribute="else">
+                                    <p class="slds-text-heading_medium slds-var-p-top_x-large slds-text-align_center">Your content will be stored under the library <br/>"{! v.contentLibraryLocationObj.LibraryStoragePath }"</p>
+                                </aura:set>
+                            </aura:if>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <aura:set attribute="else">
+                <section aura:id="contentPathaccordianId" class="slds-accordion__section slds-is-close">
+                    <div class="slds-accordion__summary">
+                        <h2 class="slds-accordion__summary-heading">
+                            <button class="slds-button slds-button_reset slds-accordion__summary-action" aria-controls="referenceId-21" aria-expanded="true" title="Accordion summary" onclick="{! c.toggleContentPathAccordianSection }">
+                                <lightning:icon iconName="utility:chevronright" alternativeText="Utility image" size="x-small" title="Image" />
+                                <aura:if isTrue="{! v.isRelatedArticle }">
+                                    <span class="slds-accordion__summary-content">Content Location path information for the "Related Article"</span>
+                                    <aura:set attribute="else">
+                                        <span class="slds-accordion__summary-content">Content Location path {!v.contentPathRowIndex + 1}</span>
+                                    </aura:set>
+                                </aura:if>
+                            </button>
+                        </h2>
+                        <aura:if isTrue="{! not(v.isRelatedArticle) }">
+                            <div class="slds-dropdown-trigger slds-dropdown-trigger_click" onclick="{! c.preventDefaultSubmission }">
+                            <lightning:buttonMenu aura:id="menu" alternativeText="Show menu" iconName="utility:settings" menuAlignment="right" onselect="{! c.onContentPathMenuItemSelect }">
+                                    <lightning:menuItem value="AddContentPath" label="Add Content Path" disabled="false" prefixIconName="utility:add"/>
+                                    <lightning:menuItem value="DeleteContentPath" label="Delete Content Path" disabled="false" prefixIconName="utility:close"/>
+                                </lightning:buttonMenu>
+                            </div>
+                        </aura:if>
+                    </div>
+                    <div class="slds-accordion__content" id="referenceId-24">
+                        <div class="slds-grid slds-wrap">
+                            
+                            <div aura:id="contentTreeDiv" class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-float_left slds-border_right slds-border_top" style="height: 200px;">
+                                <div aura:id="treeId" class="slds-scrollable_y slds-show">
+                                    <lightning:tree class="slds-text-heading_small" onselect="{! c.ontileTreeSelect }" items="{! v.contentTreeVM }" selectedItem="{! v.contentPathLocationObj.SelectedTileId }"/>
+                                </div>
+                                <div aura:id="contentdisabledId" class="slds-hide contentDisabledText">Content path selection Disabled</div>
+                            </div>
+                            <div class="slds-col slds-size_6-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-var-p-around_medium slds-border_top"> 
+        
+                                <aura:if isTrue="{! v.contentPathLocationObj.isATreeSelected }">
+                                    <aura:if isTrue="{! v.contentPathLocationObj.isACorrectTreeSelected }">
+                                        <p class="slds-text-heading_medium slds-var-p-top_x-large slds-text-align_center">Your content will saved under<br/>"{! v.contentPathLocationObj.contentStoragePath }"</p>
+                                        <aura:set attribute="else">
+                                            <p class="slds-text-heading_medium slds-var-p-top_x-large slds-text-align_center">Your content cannot be stored under this, Please select the correct path</p>
+                                        </aura:set>
+                                    </aura:if>
+                                    <aura:set attribute="else">
+                                        <aura:if isTrue="{! not(v.isRelatedArticle) }">
+                                            <p class="slds-text-heading_medium slds-var-p-top_x-large slds-text-align_center">You have not selected any path yet. This content cannot be saved without a path selected</p>
+                                        </aura:if>
+                                    </aura:set>
+                                </aura:if>
+                                <aura:if isTrue="{! v.isRelatedArticle }">
+                                    <p class="slds-text-heading_medium slds-var-p-top_x-large slds-text-align_center">No path selection is required for "Related Article" creation</p>
+                                </aura:if>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </aura:set>
+        </aura:if>
+    </li>
+        
+
+    <!-- <lightning:accordionSection name="{! v.rowIndex + 1 }" label="{! 'Content sharing &amp; path information ' + (v.rowIndex + 1)}">
+        <aura:set attribute="actions">
+            <lightning:buttonMenu aura:id="menu" alternativeText="Show menu" iconName="utility:settings" menuAlignment="right" onselect="{! c.onMenuItemSelect }">
+                <lightning:menuItem value="Add" label="Add Section" disabled="false" prefixIconName="utility:add"/>
+                <lightning:menuItem value="Delete" label="Delete Section" disabled="false" prefixIconName="utility:close"/>
+            </lightning:buttonMenu>
+        </aura:set>
+        <aura:set attribute="body">
+            <div class="slds-grid slds-wrap slds-grid_align-center">
+                <div class="sslds-col slds-medium-size_1-of-1 slds-large-size_1-of-1 centerClass slds-border_left slds-border_right slds-border_top slds-border_bottom">
+                    <div class="slds-page-header">
+                        <h1 class="slds-page-header__title">Enter Business segment, Sub-segment &amp; Region information</h1>
+                    </div>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-border_right slds-p-around_small slds-align_absolute-center">
+                    <lightning:dualListbox name="languages"
+                                                fieldLevelHelp="Business segment users belonging to the selected business segments will only this content (If not selected, content will be visible to all Business Segments)"
+                                                label= "Business Segment"
+                                                sourceLabel="Available"
+                                                selectedLabel="Selected"
+                                                options="{! v.businessSegmentsVM }"
+                                                value="{! v.businessSegmentsSelected }"
+                                                disableReordering = "true"
+                                                disabled="false"
+                                                size = "4"
+                                                onchange="{! c.onBusinessSegmentChange }"/>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-border_right slds-p-around_small">
+                    <lightning:dualListbox name="languages"
+                                                fieldLevelHelp="Sub-segment users belonging to the selected sub-segments will only this content (If not selected, content will be visible to all Sub-Segments)"
+                                                label= "Sub Segment"
+                                                sourceLabel="Available"
+                                                selectedLabel="Selected"
+                                                options="{! v.subSegmentsVM }"
+                                                value="{! v.subSegmentsSelected }"
+                                                disableReordering = "true"
+                                                disabled="{! v.subSegmentDisabled }"
+                                                size = "4"
+                                                onchange="{! c.onSubSegmentChange }"/>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-p-around_small">
+                    <lightning:dualListbox name="languages"
+                                                fieldLevelHelp="Users belonging to the selected regions will only this content (If not selected, content will be visible to all regions)"
+                                                label= "Sales Region"
+                                                sourceLabel="Available"
+                                                selectedLabel="Selected"
+                                                options="{! v.salesRegionsVM }"
+                                                value="{! v.salesRegionsSelected }"
+                                                disableReordering = "true"
+                                                size = "4"
+                                                onchange="{! c.onSalesRegionChange }"/>
+                </div>
+                <div class="sslds-col slds-medium-size_1-of-1 slds-large-size_1-of-1 centerClass slds-border_left slds-border_right slds-border_top slds-border_bottom">
+                    <div class="slds-page-header">
+                        <h1 class="slds-page-header__title">Enter Library &amp; content path information</h1>
+                    </div>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-float_left slds-border_right" style="height: 280px;">
+                    <div class="slds-scrollable_y">
+                        <lightning:tree class="slds-text-heading_small" onselect="{! c.onLibraryTreeSelect }" items="{! v.libraryTreeVM }" />
+                    </div>
+                </div>
+                aura:id="contentTreeDiv"
+                aura:id="treeId"
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-float_left slds-border_right" style="height: 280px;">
+                    <div class="slds-scrollable_y slds-show">
+                        <lightning:tree class="slds-text-heading_small" onselect="{! c.ontileTreeSelect }" items="{! v.contentTreeVM }" />
+                    </div>
+                    <div class="slds-hide contentDisabledText">Content path selection Disabled</div>
+                    aura:id="contentdisabledId"
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-p-around_medium"> 
+
+                    <aura:if isTrue="{! v.isATreeSelected }">
+                        <aura:if isTrue="{! v.isACorrectTreeSelected }">
+                            <p class="slds-text-heading_medium slds-p-top_x-large slds-text-align_center">Your content will saved under<br/>"{! v.contentStoragePath }"</p>
+                            <aura:set attribute="else">
+                                <p class="slds-text-heading_medium slds-p-top_x-large slds-text-align_center">Your content cannot be stored under this, Please select the correct path</p>
+                            </aura:set>
+                        </aura:if>
+                        <aura:set attribute="else">
+                            <aura:if isTrue="{! not(v.isRelatedArticle) }">
+                                <p class="slds-text-heading_medium slds-p-top_x-large slds-text-align_center">You have not selected any path yet. This content cannot be saved without a path selected</p>
+                            </aura:if>
+                        </aura:set>
+                    </aura:if>
+                    <aura:if isTrue="{! v.isRelatedArticle }">
+                        <p class="slds-text-heading_medium slds-p-top_x-large slds-text-align_center">No path selection is required for "Related Article" creation</p>
+                    </aura:if>
+                </div>
+            </div>
+        </aura:set>
+    </lightning:accordionSection> -->
+</aura:component>

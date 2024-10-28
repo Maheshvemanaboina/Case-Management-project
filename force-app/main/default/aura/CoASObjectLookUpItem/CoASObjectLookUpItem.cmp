@@ -1,0 +1,54 @@
+<aura:component implements="flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes" access="global" >
+	 <!--Declare Attributes-->
+    <aura:attribute name="record" type="Object" required="true"
+                    description="Holds the single record instance"/>
+
+    <aura:attribute name="fieldAPIName" type="String" required="true"
+                    description="Holds the fieldAPIname to fetch the recordLabel from"/>
+    
+    <aura:attribute name="recordLabel" type="String"
+                    description="Used to display the record Label, based on the fieldAPIName given"/>
+     
+    <aura:attribute name="metaFieldsAPI" type="String[]"
+                    description="Holds the field API names to show as meta entity in list, Use this to pass values for meta values"/>
+     
+    <aura:attribute name="metaFieldValues" type="String"
+                    description="Used to construct the meta entity value. Do not use this to pass any values to this component"/>
+   
+    <aura:attribute name="setIsNumberIsUnique" type="boolean" default="true"
+                    description="Used to identified  type of Number entred by the user is unique in SF"/>
+     
+    <aura:attribute name="iconName" type="String" required="true"
+                    description="Lightning icon name to show with each record element"/>
+    
+    <aura:attribute name="typeOfNumberEntered" type="String" default=""
+                    description="Which type of Number need to search in SF"/>
+     
+    <!--Declare Events-->
+    <aura:registerEvent name="CoASObjectLookupEvent" type="c:CoASObjectLookupSelectEvent"
+                        description="Event used to send the selected record Id and Name(value from fieldAPIName) to Lookup component"/>
+     
+    <!--Declare Handlers-->
+    <aura:handler name="init" value="{!this}" action="{! c.getLabelMetaValues }"
+                  description="standard init event to prepare the sub heading mete entity value"/>
+    
+    <!-- <aura:handler name="change" value="{!v.record}" action="{!c.getLabelMetaValues}"/> -->
+     
+    <!--Component-->
+    <li role="presentation" class="slds-listbox__item" onclick="{! c.handleRecordSelect }">
+        <span class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+              role="option">
+            <span class="slds-media__figure">
+                <lightning:icon iconName="{! v.iconName }" size="small" alternativeText="{! v.recordLabel }"/>
+            </span>
+            <span class="slds-media__body">
+                <span class="slds-listbox__option-text slds-listbox__option-text_entity">
+                    {! v.recordLabel }
+                </span>
+                <span class="slds-listbox__option-meta slds-listbox__option-meta_entity">
+                    {! v.metaFieldValues }
+                </span>
+            </span>
+        </span>
+    </li>
+</aura:component>

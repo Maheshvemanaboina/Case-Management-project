@@ -1,0 +1,16 @@
+<!--
+ - Created by KJM on 27/05/2019.
+ -->
+
+<aura:component description="DECarousel" implements="forceCommunity:availableForAllPageTypes">
+    <lightning:carousel>
+        <lightning:carouselImage
+                src = "{!$Resource.DECarousel1}"
+                header = "{!$Label.c.DE_Carousel_1_header}"/>
+        <lightning:carouselImage
+                src = "{!$Resource.DECarousel2}"
+                header = "{!$Label.c.DE_Carousel_2_header}"
+                href = "{!$Label.c.DE_Carousel_2_href}"
+                description = "{!$Label.c.DE_Carousel_2_desc}"/>
+    </lightning:carousel>
+</aura:component>

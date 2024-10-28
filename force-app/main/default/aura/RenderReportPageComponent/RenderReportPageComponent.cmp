@@ -1,0 +1,40 @@
+<aura:component controller="StandardReportsController" implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+	<aura:attribute name="relativeReportUri" type="String" />
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="recordIdFilterName" type="String" />
+    <aura:attribute name="reportId" type="String" />
+    <aura:attribute name="reportTitle" type="String" />
+    <aura:attribute name="frameUrl" type="String" />
+    <!-- Handle component initialization in a client-side controller -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <!-- Handle loading events by displaying a spinner -->
+    <aura:handler event="aura:waiting" action="{!c.showSpinner}"/>
+    <aura:handler event="aura:doneWaiting" action="{!c.hideSpinner}"/>
+
+    <!-- Dynamically load the report rows -->
+    <aura:attribute name="reportResponse" type="Object"/>
+
+    <div data-role="page" data-theme="d" id="reportPage">
+        <div role="main">
+            <h1 class="report-component-header">{!v.reportTitle}</h1>
+
+            <div><center><ui:spinner aura:id="spinner"/></center></div>
+            <!-- Iterate over the list of report rows and display them -->
+            <!-- special case for the header row -->
+            <table data-role="table" class="table-stripe" data-mode="columntoggle" id="report-table">
+
+                <thead>
+                    <c:reportRowComponent row="{!v.reportResponse.reportFields}" isHeader="true"/>
+                </thead>
+                <tbody>
+                    <aura:iteration var="row" items="{!v.reportResponse.fieldDataList}">
+                        <c:reportRowComponent row="{!row}" isHeader="false"/>
+                    </aura:iteration>
+                </tbody>
+
+            </table>
+
+        </div>
+    </div>
+</aura:component>

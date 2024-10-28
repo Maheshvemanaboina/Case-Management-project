@@ -1,0 +1,51 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:appHostable"
+                controller="AdditionalCustomerLocationController" >
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+    <aura:attribute name="contactId" type="String" />
+    <aura:attribute name="custLocId" type="String" default=""/>
+    <aura:attribute name="accountId" type="String" />
+    <aura:attribute name="relatedCustLocation" type="Other_Related_Customer_Location__c"
+                    default="{'sobjectType': 'Other_Related_Customer_Location__c'}"/>
+    <aura:attribute name="contactRecord" type="Object"/>
+    <aura:attribute name="custLocLabel" type="String" />
+    <aura:attribute name="conAccIdObj" type="List" default="[]" />
+    <!--<aura:attribute name="disableSaveBtn" type="Boolean" default="true" />-->
+        
+    <aura:handler name="SObjectNotifierEvent" event="c:sObjectLookupSelectEvent" action="{! c.handleSObjectLookUpSelect }"
+                  description="Event handler to get the selected record Id and record Label from SObjectLookup component"/>
+    
+    <force:recordData aura:id="recordLoader"
+                      recordId="{!v.contactId}"
+                      fields="Name,AccountId"
+                      targetFields="{!v.contactRecord}"
+                      />
+    
+    <!--<lightning:recordEditForm aura:id="recordEditForm" recordId="{!v.custLocId}"
+                              objectApiName="Other_Related_Customer_Location__c"
+                              onload="{!c.hideSpinner}">
+        <lightning:spinner aura:id="mySpinner" alternativeText="Processing.." title="Processing.." variant="brand" size="small" class=""/>
+        <lightning:messages />
+        <lightning:inputField fieldName="Additional_Customer_Location__c" value="{!v.accountId}" />
+        <lightning:inputField fieldName="Related_Contact__c" value="{!v.contactId}" disabled="true" />
+        <lightning:button class="slds-m-top_small" variant="brand" label="Save" onclick="{!c.handleSave}" />
+        <lightning:button class="slds-m-top_small" label="Cancel" onclick="{!c.handleCloseModal}"/>
+    </lightning:recordEditForm>-->
+    <div class="slds-modal__content slds-var-p-around_medium " id="modal-content-id-1">
+        <lightning:spinner aura:id="mySpinner" alternativeText="Processing.." title="Processing.." variant="brand" size="small" class="slds-hide"/>
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col">
+                <lightning:input label="Related Contact" value="{!v.contactRecord.Name}" disabled="true" />
+            </div>
+            <div class="slds-col lookupResults">
+                <label>Additional Customer Location</label>
+                <c:SObjectLookUp aura:id="distLocLookup" objectAPIName="Account" iconName="standard:account" fieldAPIName = "Name" placeholder="Search H5 Location" metaFieldsAPI="Name" recordLimit="5" whereFieldAPIName="Name" recordTypeDeveloperNames = "['BGI_Customer_Location']" contactId="{!v.contactId}" />
+            </div>
+        </div>
+    </div>
+    <div class="slds-clearfix">
+        <div class="slds-float_right">
+            <lightning:button class="slds-m-top_small" label="Cancel" onclick="{!c.handleCloseModal}"/>
+            <lightning:button class="slds-m-top_small" variant="brand" label="Save" onclick="{!c.handleSave}" disabled="{! empty(v.accountId) }" />
+        </div>
+    </div>
+</aura:component>

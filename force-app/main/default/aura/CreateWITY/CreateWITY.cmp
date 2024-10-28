@@ -1,0 +1,208 @@
+<aura:component controller="CreateWITYService" implements="force:lightningQuickActionWithoutHeader,flexipage:availableForRecordHome,force:hasRecordId,lightning:actionOverride" access="global">
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="metaDatalist" type="Object" />
+    <aura:attribute name="keyAreaList" type="Object" />
+    <aura:attribute name="linesToDeleteList" type="Object" />
+    <aura:attribute name="importantToCustomerList" type="Object" />
+    <aura:attribute name="currentPerformanceList" type="Object" />
+    <aura:attribute name="enableRating" type="Boolean" default="true"/>
+    <aura:attribute name="isexpanded" type="Boolean" default="true"/>
+    <aura:attribute name="metaDataLength" type="Integer"/>
+    <!--B2B144-->
+    <aura:attribute name="recordTypeName" type="String" /> 
+    <aura:attribute name="searchTerm" type="String" />
+    <aura:attribute name="searchResults" type="List" />
+    <aura:attribute name="selectedAccountPlan" type="String" />
+    <aura:attribute name="selectedAccountPlanId" type="String" />
+    <!-- <aura:attribute name="accPlanMetaDatalist" type="Object" /> -->
+    <aura:attribute name="accPlanMetaDatalist" type="List" />
+    <!--B2B144-->
+    <!-- B2B173 -->
+    <aura:attribute name="oppStage" type="String" />
+    <aura:attribute name="oppStageMetaDatalist" type="List" />
+    <!-- B2B173 -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <!--Custom Styles for Modal Header and Footer--> 
+    <!-- <div class="slds-section slds-is-open popup"> -->
+    <div>
+        <div class="{! 'slds-section' + (v.isexpanded ? ' slds-is-open' : '')}">
+            <h3 class="slds-section__title">
+                <button aria-controls="expando-unique-id" aria-expanded="{!v.isexpanded}" onclick="{!c.changeState}" class="slds-button slds-section__title-action">
+                <lightning:icon aura:id="articleOne" iconName="utility:chevronright" size="x-small" alternativeText="switch"/>
+                <span class="slds-truncate" title="Section Title">WITY</span>
+                </button>
+            </h3>
+            <!--B2B144-->
+            <aura:if isTrue="{!v.recordTypeName == 'FCP - Value Based Selling' || v.recordTypeName == 'QSR Visit Report'}">
+                <div class="slds-size_6-of-12 slds-p-left_xx-small">
+                    <lightning:input type="search" label="Account Plan" value="{!v.searchTerm}" onkeyup="{!c.handleSearch}" placeholder="Search Account Plans" />
+                    <div aura:id="resultsContainer" class="results-container">
+                        <aura:iteration items="{!v.searchResults}" var="result">
+                            <div class="slds-p-top_xx-small background" onclick="{!c.selectAccountPlan}" data-id="{!result.Id}" data-name="{!result.Name}">
+                                <lightning:icon iconName="standard:people" alternativeText="Account Plan" size="small" class="slds-m-right_x-small"/>
+                                <span>{!result.Name}</span>
+                            </div>
+                        </aura:iteration>
+                    </div>
+                </div>
+            </aura:if>
+            <!--B2B144-->
+
+            <div class="slds-section__content" aria-hidden="{!!v.isexpanded}" id="expando-unique-id">
+                <aura:if isTrue="{!v.recordTypeName == 'FCP Account Plan'}"></aura:if>
+                <div class="section-container container">
+                    <aura:if isTrue="{!v.recordTypeName == 'FCP Account Plan' || v.recordTypeName == 'Field of Play' || v.recordTypeName == 'QSR Account Plan' }">
+                        <div class="slds-p-left_small padding1"><b>WITY - Related to this Account Plan</b></div>
+                    </aura:if>
+                    <div class="slds-scrollable_y" style="height:100%;">
+                        <table class="t_design table table-striped slds-table slds-table--bordered slds-table--cell-buffer  slds-table_resizable-cols slds-table_fixed-layout slds-max-medium-table_stacked-horizontal" >
+                            <thead>
+                                <tr>
+                                    <!-- <th width="10%" scope="col"><div class="slds-truncate slds-text-align_center"><lightning:input type="checkbox" label="" onchange="{!c.handleTopCheck}" style="margin-top:14px;margin-right:10px;" /></div></th> -->
+                                    <th width="20%" scope="col"><div class="slds-truncate slds-text-align_center">Key Areas</div></th>
+                                    <th width="15%" scope="col"><div class="slds-truncate slds-text-align_center">Important To Customer</div></th>
+                                    <th width="15%" scope="col"><div class="slds-truncate slds-text-align_center">FC Current Performance</div></th>
+									<!-- <th width="40%" scope="col"><div class="slds-truncate slds-text-align_center">Comments</div></th> --><!--B2B144-->
+                                    <th width="40%" scope="col"><div class="slds-truncate slds-text-align_center">{!v.recordTypeName == 'FCP - Value Based Selling' || v.recordTypeName == 'FCP Account Plan' || v.recordTypeName == 'Field of Play' || v.recordTypeName == 'FCP Opportunity' || v.recordTypeName == 'QSR Opportunity' || v.recordTypeName == 'QSR Visit Report' || v.recordTypeName == 'QSR Account Plan' ? '3 - D Outcome (Comments)' : 'Comments'}</div></th> <!--B2B144--><!-- B2B173 -->
+                                    <th width="10%" scope="col"><div class="slds-truncate slds-text-align_center"></div></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- B2B173 -->
+                                <aura:iteration items="{!v.oppStageMetaDatalist}" var="item" indexVar="index">
+                                    <tr>
+                                        <td> <div class="slds-truncate"> <input type="text" value="{!item.questionName}" disabled="true" class="slds-input"/> </div> </td>
+                                        <td> <div class="slds-truncate"> <input type="text" value="{!item.ratingOne}" disabled="true" class="slds-input"/> </div> </td>
+                                        <td> <div class="slds-truncate"> <input type="text" value="{!item.ratingTwo}" disabled="true" class="slds-input"/> </div> </td>
+                                        <td> <div class="slds-truncate"> <input type="text" value="{!item.comments}" disabled="true" class="slds-input"/> </div> </td>
+                                    </tr>
+                                </aura:iteration>
+                                <!-- B2B173 -->
+                                <!--<aura:if isTrue="{!and(v.testData !=null,v.subChildSampleType !='Re-Submission')}">-->
+                                <aura:iteration items="{!v.metaDatalist}" var="item" indexVar="index">
+                                    <tr>
+                                        
+                                        <!-- <td scope="row" data-label=""><lightning:input aura:id="checkId" type="checkbox" label="" name="{!index}" onchange="{!c.handleClick}"/></td> -->
+                                        <!-- <aura:if isTrue="{!and(v.metaDataLength > index,true)}"> -->
+                                            <!-- <td scope="row" data-label="Key Areas" style="white-space:normal"><div>{!item.quesName}</div></td> -->
+                                            <!-- <aura:set attribute="else"> -->
+                                                <td scope="row" data-label="Key Areas">
+                                                    <!-- <lightning:input type="text" variant = "label-hidden" value ="{!item.quesName}" disabled="false"/> -->
+                                                    <lightning:select aura:id="dataVal" name="key-area-select" class="label-hidden" variant="label-hidden" required="true" value ="{!item.quesName}" disabled="false">
+                                                        <aura:iteration items="{!v.keyAreaList}" var="item" indexVar="index">
+                                                            <option value="{!item.quesName}" text="{!item.quesName}"></option>
+                                                        </aura:iteration>
+                                                    </lightning:select>
+                                                </td>
+                                            <!-- </aura:set> -->
+                                        <!-- </aura:if> -->
+                                        <td scope="row" data-label="Important To Customer">
+                                            <!-- <lightning:input aura:id="dataVal" type="number" class="dataValClass" variant = "label-hidden" value="{!item.ratingone}" name="{!index}" disabled="{!item.readOnly}" min ="1"  max="5" required="true" messageWhenRangeUnderflow="Number should be greater than 0" messageWhenRangeOverflow="Number should be less than 6" /> -->
+                                            <lightning:select aura:id="dataVal" name="important-to-customer-select" class="label-hidden" variant="label-hidden" required="true" value="{!item.ratingone}" disabled="{!item.readOnly}">
+                                                <aura:iteration items="{!v.importantToCustomerList}" var="item" indexVar="index">
+                                                    <option value="{!item.value}" text="{!item.label}"></option>
+                                                </aura:iteration>
+                                            </lightning:select>
+                                        </td>
+                                        <td scope="row" data-label="FC Current Performance">
+                                            <!-- <lightning:input aura:id="dataVal" type="number" variant = "label-hidden" value="{!item.ratingtwo}" name="{!index}" disabled="{!item.readOnly}" min="1"  max="10" required ="true" messageWhenRangeUnderflow="Number should be greater than 0" messageWhenRangeOverflow="Number should be less than 11" /> -->
+                                            <lightning:select aura:id="dataVal" name="current-performance-select" class="label-hidden" variant="label-hidden" required="true" value="{!item.ratingtwo}" disabled="{!item.readOnly}">
+                                                <aura:iteration items="{!v.currentPerformanceList}" var="item" indexVar="index">
+                                                    <option value="{!item.value}" text="{!item.label}"></option>
+                                                </aura:iteration>
+                                            </lightning:select>
+                                        </td>
+                                        <td scope="row" data-label="Comments"><lightning:textarea aura:id="dataVal" name="{!index}" value ="{!item.comments}" disabled="false" variant = "label-hidden" maxlength="32700" />
+                                            <!-- <lightning:input aura:id="dataVal" name="{!index}" value ="{!item.comments}" type="text" variant = "label-hidden" disabled="false"/> -->
+                                        </td>
+                                        <td>
+                                            <aura:if isTrue = "{!and(index + 1 >= v.metaDataLength,true) }">
+                                                <a onclick="{!c.handleAddRow}">
+                                                    <lightning:icon iconName="utility:add" class="slds-icon slds-icon_small" size="small" alternativeText="add"/>
+                                                    <span class="slds-assistive-text">Add Icon</span>
+                                                </a>  
+                                                
+                                            </aura:if>
+                                            <!-- <aura:if isTrue = "{!and(index > 0,true) }"> -->
+                                                <a onclick="{!c.handleDeleteRow}" data-index="{!index}" data-itemid="{!item.recId}">
+                                                    <lightning:icon iconName="utility:delete" class="slds-icon slds-icon_small" size="small" alternativeText="delete"/>
+                                                    <span class="slds-assistive-text">Delete Icon</span>
+                                                </a>  
+                                                
+                                            <!-- </aura:if> -->
+                                        </td>
+                                    </tr>
+                                    
+                                </aura:iteration>
+                                
+                                <!-- <aura:iteration items="{!v.testParameterList}" var="test"  indexVar="indexVal">
+                                        <c:addTestComponent QCquestionsTestParam ="{!test}" rowIndex="{!indexVal}" countTestParamLength="{!v.countTestParamLength}" />   
+                                        </aura:iteration>-->
+                                <!--</aura:if> -->
+                                
+                            </tbody>
+                        </table>
+                        <div class="footerpopup">
+                            <!-- <lightning:button variant="Brand" class="slds-button" label="Cancel" onclick="{!c.handleClose}"/> -->
+                            <lightning:button variant="Brand" class="slds-button" label="Save" onclick="{!c.handleSubmit}"/>            
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <hr></hr>
+            <!--B2B144-->
+            <aura:if isTrue="{!v.recordTypeName == 'FCP Account Plan' || v.recordTypeName == 'Field of Play' || v.recordTypeName == 'QSR Account Plan'}">
+                <div class="slds-section__content padding2" aria-hidden="{!!v.isexpanded}" id="expando-unique-id">
+                    <div class="section-container" style="height:100%;">
+                        <div class="slds-truncate slds-p-left_small"><b>WITY - Related to Visit Reports</b></div>
+                        <div class="slds-scrollable_y" style="height:100%;">
+                            <aura:iteration items="{!v.accPlanMetaDatalist}" var="item" indexVar="index">
+                            <table class="t_design table table-striped slds-table slds-table--bordered slds-table--cell-buffer  slds-table_resizable-cols slds-table_fixed-layout slds-max-medium-table_stacked-horizontal" >
+                                    <!-- <tr class="slds-line-height_reset"> <th colspan="4"> <div class="slds-truncate"> Account Plan Related Visit Reports </div> </th> </tr> -->
+                                    <aura:if isTrue="{!item.VisitReportId}">
+                                    <thead>
+                                        <div class="padding"></div>
+                                        <tr>
+                                            <th colspan="4"> <b>Visit Report Name :</b> &nbsp;  
+                                                <a href="{!'/lightning/r/Visit_Report__c/' + item.VisitReportId1 + '/view'}" target="_blank">
+                                                    {!item.Visit_Report_Name}
+                                                </a>
+                                                <span style="margin-right: 40px;"></span> 
+                                                <b>Created Date :</b> &nbsp; {!item.Created_Date_Formatted}</th> 
+                                        </tr>
+                                    <tr>
+                                        <th width="30%" scope="col"><div class="slds-truncate slds-text-align_center">Key Areas</div></th>
+                                        <th width="15%" scope="col"><div class="slds-truncate slds-text-align_center">Important To Customer</div></th>
+                                        <th width="15%" scope="col"><div class="slds-truncate slds-text-align_center">FC Current Performance</div></th>
+                                        <th width="40%" scope="col"><div class="slds-truncate slds-text-align_center">3 - D Outcome (Comments)</div></th> <!--B2B144-->
+                                    </tr>
+                                </thead>
+                            </aura:if>
+                                <tbody>
+                                        <tr>
+                                            <td> <div class="slds-truncate"> <input type="text" value="{!item.Question_Name__c}" disabled="true" class="slds-input"/> </div> </td>
+                                            <td> <div class="slds-truncate"> <input type="text" value="{!item.Rating_One__c}" disabled="true" class="slds-input"/> </div> </td>
+                                            <td> <div class="slds-truncate"> <input type="text" value="{!item.Rating_Two__c}" disabled="true" class="slds-input"/> </div> </td>
+                                            <td> <div class="slds-truncate"> <input type="text" value="{!item.Comments__c}" disabled="true" class="slds-input"/> </div> </td>
+                                        </tr>
+                                </tbody>
+                            </table>
+                        </aura:iteration>
+                        </div>
+                    </div>
+                </div>
+            </aura:if>
+            <!--B2B144-->
+        </div>
+    </div>
+        <!-- <div class="popup_header">
+            <div class="slds-text-heading_medium slds-text-align_center" title="Section Title">Create WITY</div>
+        </div>
+        <div aria-hidden="false" class="slds-section__content">
+            
+        </div> -->
+    <!-- </div> -->
+    <!--End of Modal Footer-->
+</aura:component>

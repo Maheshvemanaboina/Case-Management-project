@@ -1,0 +1,56 @@
+<aura:component >
+    
+    <aura:registerEvent name="DeleteRowEvt" type="c:MyCountryPlanOtherPrincipalsDeleteRowEvent"/> 
+    <aura:registerEvent name="AddRowEvt" type="c:MyCountryPlanOtherPrincipalsAddNewRowEvent"/>
+    
+    <aura:attribute name="rowIndex" type="String" default="1"/>
+    <aura:attribute name="otherPrincipals" type="String"/>
+    <aura:attribute name="otherPrincipalsObj" type="Object"/>
+    <aura:attribute name="sObjectName" type="String" default="Account"/>
+    <aura:attribute name="IconNm" type="String" default="standard:account"/>
+    <aura:attribute name="allCompetitorsList" type="List"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <tr class="slds-text-title_caps">
+        <td class="centerClass"> 
+            {!v.rowIndex + 1}
+        </td>
+        <td>
+            <lightning:input variant="label-hidden" value="{! v.otherPrincipalsObj.recordName}" class="slds-truncate" name="input3" label="Name" placeholder="Enter Name"/>
+        </td>
+        <td>
+            <c:CountryPlanCompetitorLookUp allCompetitorsObjsList="{!v.allCompetitorsList}" objectAPIName="{!v.sObjectName}" IconName="{!v.IconNm}" competitorObj = "{!v.otherPrincipalsObj}" />
+        </td>
+        <td>
+            <lightning:select variant="label-hidden" class="slds-form_inline" aura:id="dirOrIndirId" name="select" label="Direct / Indirect?" onchange="{! c.dirOrIndirChange }">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+                <option value="Direct and Distributor">Direct and Distributor</option>
+            </lightning:select>
+        </td>
+        <td>
+            <lightning:input variant="label-hidden" value="{! v.otherPrincipalsObj.distributorNames}" class="slds-truncate" name="input3" label="Enter Distributor Names" placeholder="Enter Distributor Names"/>
+        </td>
+        <td>
+            <!-- conditionally Display Add or Delete Icons
+                 if rowIndex is 0 then show Add New Row Icon else show delete Icon-->
+            <div class="slds-align_absolute-center">
+                <!--<aura:if isTrue="{!v.rowIndex == 0}">
+                     <aura:set attribute="else">
+                    </aura:set>
+                </aura:if>-->
+                <a onclick="{!c.addNewRow}">
+                    <lightning:icon iconName="utility:add" class="slds-icon slds-icon_small" size="small" alternativeText="add"/>
+                    <span class="slds-assistive-text">Add Icon</span>
+                </a>    
+                
+                <a onclick="{!c.removeRow}">
+                    <lightning:icon variant="error" iconName="utility:delete" class="slds-icon slds-icon_small" size="small" alternativeText="icon"/>
+                    <span class="slds-assistive-text">Delete Icon</span>
+                </a>
+                
+            </div>
+        </td> 
+    </tr>
+</aura:component>

@@ -1,0 +1,149 @@
+<!--**************************************************************************************
+Author:         Lilith Van Biesen
+Company:        Waeg
+Description:    BoM View Lightning Component intended to display the Bill of Materials
+                Overview.
+**************************************************************************************-->
+
+<aura:component description="BoMView" 
+                controller="BoMViewController"
+                implements="flexipage:availableForAllPageTypes,lightning:availableForFlowScreens,forceCommunity:availableForAllPageTypes"
+                access="global">
+    
+    <!-- Input parameters -->
+    <aura:attribute name="quotelineId" type="String"/>
+    
+    <!-- Labels parameters -->
+    <aura:attribute name="ingredientsLBL" type="String"/>
+    <aura:attribute name="totalCostPricePerMtLBL" type="String"/>
+    <aura:attribute name="sgpLBL" type="String"/>
+    <aura:attribute name="mpLastTimeQuotedLBL" type="String"/>
+    <aura:attribute name="newMPLBL" type="String"/>
+    <aura:attribute name="costPriceMPLBL" type="String"/>
+    <aura:attribute name="mpCostPriceLastTimeQuotedLBL" type="String"/>
+    <aura:attribute name="ppCurrentQuoteLBL" type="String"/>
+    <aura:attribute name="costPricePPLBL" type="String"/>
+    <aura:attribute name="deltaIngredientPriceLBL" type="String"/>
+    <aura:attribute name="deltaWeightedIngrPriceLBL" type="String"/>
+    <aura:attribute name="isContractRateAppliedLBL" type="Boolean"/>
+   
+    <!-- Table parameters -->
+    <aura:attribute name="data" type="List"/>
+    <aura:attribute name="columns" type="List"/>
+    <aura:attribute name="parentQuoteLine" type="SBQQ__QuoteLine__c"/>
+    <aura:attribute name="showTable" type="Boolean"/>
+    
+    <!-- Handlers-->
+    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+    <aura:handler name="change" value="{!v.quotelineId}" action="{!c.handleIdChange}"/>
+    <aura:handler name="change" value="{!v.deltaWeightedIngrPriceLBL}" action="{!c.handleLabelChange}"/>
+    <aura:handler name="change" value="{!v.isContractRateAppliedLBL}" action="{!c.handleLabelChange}"/> 
+    
+    <!-- Body -->
+    <lightning:card class="slds-var-m-around_x-small slds-p-horizontal_small">
+        
+        <!-- Lightning card to display general information regarding the parent Quote Line.215px -->
+        <aura:set attribute="title">
+            <lightning:icon iconName="utility:table" size="small" class="slds-m-right_small"/>
+            {! v.parentQuoteLine.SBQQ__ProductName__c }
+        </aura:set>
+        
+        <!-- Lightning data table to display the child Quote Line records. -->
+        <aura:if isTrue="{!v.showTable}">
+            <aura:if isTrue="{!v.data.length == 0}">
+                <ui:message severity="warning"  closable="true">
+                    There is No BOM avaibale for this Material . 
+                </ui:message>
+                <aura:set attribute="else">
+                    <div style="height: 250px">
+                        <lightning:datatable
+                                             class=""
+                                             keyField="id"
+                                             data="{! v.data }"
+                                             columns="{! v.columns }"
+                                             hideCheckboxColumn="true"
+                                             resizeColumnDisabled="true" />
+                    </div> 
+                </aura:set>
+            </aura:if>
+        </aura:if>
+                    <!-- Lightning data table to display the parent Quote Line total fields 
+		(comments below indicate to which child column they correspond). -->
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_header-hidden slds-table--fixed-layout">
+            <tbody>
+            	<tr class="slds-hint-parent">
+                    
+                    <!-- Corresponds to the child column: 'Is Contract Rate Applied' (isContractRateApplied__c) -->
+                    <td data-label="{! v.totalCostPricePerMtLBL}" scope="row">
+                        <div class="slds-truncate" title="{! v.totalCostPricePerMtLBL}">
+                            <div class="slds-truncate" title="{! v.totalCostPricePerMtLBL}" style="font-weight: bold;">
+                                <lightning:formattedText style="font-weight: bold;" value="{! v.totalCostPricePerMtLBL }" />
+                            </div>
+                        </div>
+                    </td>
+                    <!-- Corresponds to the child column: 'Ingedrients'(SBQQ__ProductName__c) --> 
+            		<td class="align-to-datatable"> </td> 
+                    <!-- Corresponds to the child column: 'MP Last Time Quoted' (MP_Last_Time_Quoted__c) -->
+            		<td class="align-to-datatable"> </td>
+                    <!-- Corresponds to the child column: 'New MP' (New_MP__c) -->
+            		<td class="align-to-datatable"> </td>
+                    <!-- Corresponds to the child column: 'Delta Ingredient Price' (Delta_Ingredient_Price__c) -->
+                    <td class="align-to-datatable"> </td>
+                    <!-- Corresponds to the child column: 'Cost Price MP' (Cost_Price_MP__c) -->
+            		<td class="align-to-datatable">
+                        <lightning:formattedNumber value="{! v.parentQuoteLine.Total_COGS_MP__c }" style="currency" currencyCode="EUR"/><!--currencyCode="{!v.parentQuoteLine.SBQQ__Quote__r.CurrencyIsoCode}"-->
+                    </td>
+                    <!-- Corresponds to the child column: 'MP Cost Price Last Time Quoted' (MP_Cost_Price_Last_Time_Quoted__c) -->
+                    <td class="align-to-datatable">
+                        <lightning:formattedNumber value="{! v.parentQuoteLine.Total_COGS_MP_Last__c }" style="currency" currencyCode="EUR"/><!--currencyCode="{!v.parentQuoteLine.SBQQ__Quote__r.CurrencyIsoCode}"-->
+                    </td>
+                    <!-- Corresponds to the child column: 'PP Current Quote' (PP_Current_Quote__c) -->
+                    <td class="align-to-datatable"> </td>
+                    <!-- Corresponds to the child column: 'Delta Weighted Ingr Price' (Delta_Weighted_Ingr_Price__c) -->
+                    <td class="align-to-datatable"> </td>
+                    <!-- Corresponds to the child column: 'Cost Price PP' (Cost_Price_PP__c) -->
+                    <td class="align-to-datatable">
+                        <lightning:formattedNumber value="{! v.parentQuoteLine.Total_COGS_PP_Current__c }" style="currency" currencyCode="EUR"/><!--currencyCode="{!v.parentQuoteLine.SBQQ__Quote__r.CurrencyIsoCode}"-->
+                    </td>
+            	</tr>
+                 <!-- Corresponds to the child column: 'Is Contract Rate Applied' (isContractRateApplied__c) -->
+            	<tr class="slds-hint-parent">
+            		<td data-label="{! v.sgpLBL}" scope="row">
+                        <div class="slds-truncate" title="{! v.sgpLBL}">
+                            <div class="slds-truncate" title="{! v.sgpLBL}">
+                                <lightning:formattedText style="font-weight: bold;" value="{! v.sgpLBL}" />
+                            </div>
+                        </div>
+                    </td>
+                    <!-- Corresponds to the child column: 'Ingedrients'(SBQQ__ProductName__c) --> 
+            		<td class="align-to-datatable"> </td> 
+            		<!-- Corresponds to the child column: 'MP Last Time Quoted' (MP_Last_Time_Quoted__c) -->
+            		<td class="align-to-datatable"> </td>
+                    <!-- Corresponds to the child column: 'New MP' (New_MP__c) -->
+            		<td class="align-to-datatable"> </td>
+                    <!-- Corresponds to the child column: 'Delta Ingredient Price' (Delta_Ingredient_Price__c) -->
+                    <td class="align-to-datatable"> </td>
+                    <!-- Corresponds to the child column: 'Cost Price MP' (Cost_Price_MP__c) -->
+            		<td class="align-to-datatable">
+                        <lightning:formattedNumber value="{! v.parentQuoteLine.SGP_MP_Current__c }" style="currency" currencyCode="EUR"/><!--currencyCode="{!v.parentQuoteLine.SBQQ__Quote__r.CurrencyIsoCode}"-->
+                    </td>
+                    <!-- Corresponds to the child column: 'MP Cost Price Last Time Quoted' (MP_Cost_Price_Last_Time_Quoted__c) -->
+                    <td class="align-to-datatable">
+                        <lightning:formattedNumber value="{! v.parentQuoteLine.SGP_MP_Last__c }" style="currency" currencyCode="EUR"/><!--currencyCode="{!v.parentQuoteLine.SBQQ__Quote__r.CurrencyIsoCode}"-->
+                    </td>
+                    <!-- Corresponds to the child column: 'PP Current Quote' (PP_Current_Quote__c) -->
+                    <td class="align-to-datatable"> </td>
+                    <!-- Corresponds to the child column: 'Delta Weighted Ingr Price' (Delta_Weighted_Ingr_Price__c) -->
+                    <td class="align-to-datatable"> </td>
+                    <!-- Corresponds to the child column: 'Cost Price PP' (Cost_Price_PP__c) -->
+                    <td class="align-to-datatable">
+                        <lightning:formattedNumber value="{! v.parentQuoteLine.SGP_PP__c }" style="currency" currencyCode="EUR"/><!--currencyCode="{!v.parentQuoteLine.SBQQ__Quote__r.CurrencyIsoCode}"-->
+                    </td>
+            	</tr>
+            </tbody>
+        </table>
+        
+
+    </lightning:card>
+   
+</aura:component>

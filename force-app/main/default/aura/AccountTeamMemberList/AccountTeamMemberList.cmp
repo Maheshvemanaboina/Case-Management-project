@@ -1,0 +1,12 @@
+<!--
+ - Created by KJM on 17/04/2019.
+ -->
+
+<aura:component description="AccountTeamMemberList" controller="AccountTeamMemberListController" implements="forceCommunity:availableForAllPageTypes">
+    <aura:attribute name="locTableValues" type="Object" />
+    <aura:attribute name="locShowChatterMessageButtonForComm" type="Boolean" />
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <c:TeamMembersTable tableValues="{!v.locTableValues}" showChatterMessageButtonForComm="{!v.locShowChatterMessageButtonForComm}"/>
+</aura:component>

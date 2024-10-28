@@ -1,0 +1,3 @@
+<aura:event type="COMPONENT" description="This Event will clear all the child tile values if user removes one parent tile while uploading COA">
+        <aura:attribute name="removedRecord" type="String"/>
+</aura:event>

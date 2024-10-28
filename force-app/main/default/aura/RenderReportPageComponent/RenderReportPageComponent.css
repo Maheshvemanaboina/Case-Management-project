@@ -1,0 +1,9 @@
+.THIS .report-component-header {
+    width: 100%;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+    background: rgb(245, 245, 245);
+    border-bottom: 1px solid rgb(201, 201, 201)
+}

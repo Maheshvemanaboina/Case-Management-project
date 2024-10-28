@@ -1,0 +1,90 @@
+.THIS .audienceStyle {
+    height: 400px;
+}
+
+/*.THIS .slds-card__header {
+
+    display: none;
+}*/
+
+.THIS .slds-checkbox_faux{
+
+   width: 60px;
+}
+
+.THIS .togglepadding{
+    padding-top: 10px;
+}
+
+.THIS .greyClass{
+    background-color: rgb(236, 235, 234);
+}
+
+.THIS .contentDisabledText {
+    /* padding: 140px 0; */
+    text-align: center;
+    font-size: 1.5em;
+}
+
+.THIS .hideSegments{
+
+    position: fixed;
+    /* left    : 0; */
+    margin-left: 150%;
+    transition: 1s;
+    /* z-index: -1; */
+}
+
+.THIS .showSegments{
+    margin-left: 0rem;
+    transition: 1s;
+    z-index: 1;
+}
+
+.THIS .wordWrap{
+    
+    position: absolute;
+    word-wrap: break-word;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+}
+
+.THIS.slds-spinner_container {  
+    z-index: 1;
+    position: fixed;   
+}
+
+.THIS .centerClass {
+    text-align: center;
+}
+
+.THIS li::marker {
+    text-align: center;
+}
+
+.THIS .ownerFieldLabelStyle {
+    color: rgb(68, 68, 68) !important;
+}
+.THIS .small-checkbox {
+    width: 16px;
+    height: 16px;
+}
+.THIS .custom-cancel-button {
+    color: #0070d2; /* Blue color for text */
+    background-color: #ffffff; /* White background */
+    border: 1px solid #0070d2; /* Blue border */
+}
+
+.THIS .custom-save-button {
+    color: #ffffff; /* White text color */
+    background-color: #0070d2; /* Blue background */
+    border: none; /* Remove border */
+}
+
+.cContentManagement .slds-checkbox_faux{
+    width: 18px !important;
+}
+.THIS .slds-hide {
+    display: none;
+}

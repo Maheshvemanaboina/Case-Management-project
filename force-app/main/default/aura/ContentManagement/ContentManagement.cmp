@@ -1,0 +1,1172 @@
+<aura:component controller="ContentManagementController" implements="force:appHostable">
+    
+	<aura:handler event="c:OnChangeEvent" action="{!c.handleEvent1}" />
+    <aura:attribute name="onchange111" type="Boolean" default="false"/>
+    <!--Edit Article variables-->
+    <aura:attribute name="editRecordId" type="String"/>
+
+    <aura:attribute name="isKnowledgeUser" type="Boolean" default="false"/>
+    <aura:attribute name="isSelectionPage" type="Boolean" default="true"/>
+    <aura:attribute name="isUpdatePage" type="Boolean" default="false"/>
+    <aura:attribute name="isCreationPage" type="Boolean" default="false"/>
+    <aura:attribute name="isDeletePage" type="Boolean" default="false"/>
+    <aura:attribute name="originalValueEditForm" type="Map" default="{
+                                                                UI_Name__c : '',
+                                                                UI_Description__c : '',
+                                                                Review_End_Date__c : '',
+                                                                Business_Segment__c : '',
+                                                                Sub_Segment__c : '',
+                                                                Application__c : '',   
+                                                                Community_Name__c : '',
+                                                                Sales_Region__c : ''
+                                                            }"/>
+    <aura:attribute name="Spinner" type="boolean" default="false"/>
+    <aura:attribute name="contentWrapper" type="Object"/>
+    <aura:attribute name="knowledgeURL" type="String"/>
+    <aura:attribute name="knowledgeArticleName" type="String"/>
+    <aura:attribute name="knowledgeDescription" type="String"/>
+    <aura:attribute name="reviewOrEndDate" type="Date"/>
+    <aura:attribute name="fileName" type="String"/>
+    <!-- <aura:attribute name="contentStoragePath" type="String"/> -->
+    <aura:attribute name="showModal" type="Boolean" default="false"/>
+    <aura:attribute name="activeSections" type="List" />
+    <aura:attribute name="activeSegmentSections" type="List" />
+    
+    <!--Account Variables-->
+    <aura:attribute name="selectedH1" type="String"/>
+    <aura:attribute name="selectedH5" type="String"/>
+
+    <!--CommunityNames Variables-->
+    <aura:attribute name="communityNames" type="List"/>
+    <aura:attribute name="communityNameSelected" type="List"/>
+    <aura:attribute name="communityNameDisabled" type="Boolean" default="false"/>
+    
+    <!--ContentCategories Variables-->
+    <aura:attribute name="contentCategories" type="List"/>
+    <aura:attribute name="contentCategoriesObjList" type="List"/>
+    <aura:attribute name="existingContentCategories" type="List"/>
+    
+    <!--ContentManagementVisibilityManager-->
+    <aura:attribute name="contentLibraryLocationList" type="List"/>
+    <aura:attribute name="contentPathLocationList" type="List"/>
+    
+    <!--ContentTypes Variables-->
+    <aura:attribute name="contentTypes" type="List"/>
+    <aura:attribute name="contentTypeSelected" type="String" default="FCI Distributor Recipes Main Tile"/>
+    <aura:attribute name="contentTypesDisabled" type="Boolean" default="false"/>
+    
+    <!-- ContentDeletion List-->
+    <aura:attribute name="artilesToDelete" type="List"/>
+
+    <!-- Multi picklist attributes -->
+    <aura:attribute name="businessSegments" type="List"/>
+    <aura:attribute name="businessSegmentsSelected" type="List"/>
+    
+    <aura:attribute name="subSegments" type="List"/>
+    <aura:attribute name="subSegmentsSelected" type="List"/>
+    <aura:attribute name="subSegmentDisabled" type="Boolean" default="true"/>
+    
+    <aura:attribute name="salesRegions" type="List"/>
+    <aura:attribute name="salesRegionsSelected" type="List"/>
+    
+    <!--Content Tree Attribute-->
+    <aura:attribute name="contentTree" type="List"/>
+    <aura:attribute name="validContentMap" type="Map"/>
+    <aura:attribute name="existingTileIds" type="List"/>
+    
+    <!--RelatedArticle variables-->
+    <aura:attribute name="isRelatedArticle" type="Boolean" default="false"/>
+    <!--B2B-326-->
+    <aura:attribute name="isContentDisabled" type="Boolean" default="false" access="public"/>
+    <!--B2B-326-->
+    
+    <!--Review Library Tree Variables-->
+    <aura:attribute name="libraryTree" type="List"/>
+    <aura:attribute name="folderLibraryMap" type="Map"/>
+    <aura:attribute name="validLibraryMap" type="Map"/>
+    <aura:attribute name="existingFolderLibraryIds" type="List"/>
+    
+    <!-- Content Owner Variables -->
+    <aura:attribute name="selectedContentOwner" type="String" default="{!v.contentWrapper.contentOwnerId}"/>
+    <aura:attribute name="contentOwner" type="User" description="To hold the content owner record while updating the article" />
+    
+    <!-- B2B-325 MultipleAccountSelectionOnTile -->
+    <aura:attribute name="selectedH5AccountsNames" type="List" default="" />
+    <aura:attribute name="selectedH1AccountsNames" type="List" default="" />
+    <aura:attribute name="selectedH1Accounts" type="List" default="" />
+    <aura:attribute name="selectedH5Accounts" type="List" default="" />
+    <aura:attribute name="existingH1AccountsIds" type="List" />
+    <aura:attribute name="existingH5AccountsIds" type="List" />
+    <aura:attribute name="existingH5AccountsIdsOld" type="List" />
+    <aura:attribute name="existingH1AccountsIdsOld" type="List" />
+    <aura:attribute name="tileSelectedID" type="String"/>
+    <aura:attribute name="isSaveEnabled" type="boolean" default="false"/>
+	<!--B2B-326-->
+    <aura:attribute name="contentManagentCategryList" type="List"/>
+    <aura:handler name="SelectEvent" event="c:SelectEvent" action="{!c.handleArrayEvent}"/> 
+     <!--B2B-326-->
+    <!--Event Handlers-->
+    <aura:handler name="DeleteRowEvt" event="c:DeleteRowEvent" action="{! c.handleDeleteCategoryRow }"/>
+    <aura:handler name="AddRowEvt" event="c:AddRowEvent" action="{! c.handleAddNewCategoryRow }"/>
+    <aura:handler name="ReOrderRelatedContentsEvent" event="c:ReOrderListEvent" action="{! c.handleReOrderRelatedContents }"/>
+
+    <aura:handler name="SObjectNotifierEvent" event="c:sObjectLookupSelectEvent" action="{! c.handleSObjectLookUpSelect }"
+                  description="Event handler to get the selected record Id and record Label from SObjectLookup component"/>
+    
+    <!--Event Handlers for Content Visibility-->
+    <aura:handler name="DeleteLibraryRowEvt" event="c:DeleteRowEvent" action="{! c.handleDeleteLibrary }"/>
+    <aura:handler name="AddLibraryRowEvt" event="c:AddRowEvent" action="{! c.handleAddNewLibrary }"/>
+    
+    <aura:handler name="DeleteContentPathRowEvt" event="c:DeleteRowEvent" action="{! c.handleDeleteContentPath }"/>
+    <aura:handler name="AddContentPathRowEvt" event="c:AddRowEvent" action="{! c.handleAddNewContentPath }"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <!-- B2B-325 -->
+    <aura:Handler name="sendAccountEvt" event="c:sendSelectedAccount" action="{!c.handleEvtFromTileAccountSelection}"/>
+    
+    
+    <aura:if isTrue="{!v.Spinner}">
+        <div aura:id="spinnerId" class="slds-spinner_container">
+            <div class="slds-spinner--brand  slds-spinner slds-spinner--large slds-is-relative" role="alert">
+                <span class="slds-assistive-text">Loading</span>
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+            </div>
+        </div>
+    </aura:if>
+    <aura:if isTrue="{! v.isKnowledgeUser }">
+        
+        <aura:if isTrue="{! v.isSelectionPage }">
+            <lightning:card>
+                <div class="slds-text-heading_large slds-align_absolute-center">
+                    Update/Create/Delete an article?
+                </div>
+            </lightning:card>
+            <lightning:card>
+                <div class="slds-grid slds-wrap slds-align_absolute-center">
+                    <div data-visual-picker="Update" onclick="{! c.setUpdateOrCreate }" class="slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-border_right slds-align_absolute-center">
+                        <div class="slds-visual-picker slds-visual-picker_large">
+                            <input type="radio" id="visual-picker-001" value="visual-picker-001" name="options" />
+                            <label for="visual-picker-001">
+                                <span class="slds-visual-picker__figure slds-visual-picker__text slds-align_absolute-center">
+                                    <span>
+                                        <lightning:icon iconName="action:new_lead" size="large" alternativeText="Internal Icon"/>
+                                    </span>
+                                </span>
+                                <span class="slds-visual-picker__body">
+                                    <span class="slds-text-heading_medium">Update an article</span>
+                                    <span class="slds-text-title">Edit existing articles for communities</span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    <div data-visual-picker="Insert" onclick="{! c.setUpdateOrCreate }" class="slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-border_right slds-align_absolute-center">
+                        <div class="slds-visual-picker slds-visual-picker_large">
+                            <input type="radio" id="visual-picker-002" value="visual-picker-002" name="options" />
+                            <label for="visual-picker-002">
+                                <span class="slds-visual-picker__figure slds-visual-picker__text slds-align_absolute-center">
+                                    <span>
+                                        <lightning:icon iconName="action:new_group" size="large" alternativeText="Community Icon"/>
+                                    </span>
+                                </span>   
+                                <span class="slds-visual-picker__body">
+                                    <span class="slds-text-heading_medium">Create an article</span>
+                                    <span class="slds-text-title">Create new articles for communities</span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    <div data-visual-picker="Delete" onclick="{! c.setUpdateOrCreate }" class="slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-align_absolute-center">
+                        <div class="slds-visual-picker slds-visual-picker_large">
+                            <input type="radio" id="visual-picker-003" value="visual-picker-003" name="options" />
+                            <label for="visual-picker-003">
+                                <span class="slds-visual-picker__figure slds-visual-picker__text slds-align_absolute-center">
+                                    <span>
+                                        <lightning:icon iconName="action:close" size="large" alternativeText="Community Icon"/>
+                                    </span>
+                                </span>   
+                                <span class="slds-visual-picker__body">
+                                    <span class="slds-text-heading_medium">Delete an article</span>
+                                    <span class="slds-text-title">Delete existing articles for communities</span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </lightning:card>
+        </aura:if>
+        <aura:if isTrue="{! v.isUpdatePage }">
+
+            <lightning:card>
+                <div class="slds-text-heading_medium slds-border_bottom slds-align_absolute-center">
+                    <b>Edit your selected Article</b>
+                </div>
+                <div class="slds-grid slds-wrap slds-align_absolute-center">
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-border_right slds-var-p-around_medium slds-form-element">
+                        <c:SObjectLookUp aura:id="sObjectUpdateLookup" objectAPIName="Tile__c" iconName="standard:knowledge" fieldAPIName = "UI_Name__c" placeholder="Search Knowledge" metaFieldsAPI="UI_Description__c" recordLimit="10" whereFieldAPIName="UI_Name__c"  tilesFilter="Yes"/>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-var-p-around_medium slds-form-element">
+                        <lightning:button class="slds-button_stretch" onclick="{!c.handlePageBack}" label="Back"/>
+                    </div>
+                </div>
+            </lightning:card>
+            <aura:if isTrue="{! not(empty(v.editRecordId)) }">
+                <div aura:id="editForm" class="slds-var-p-vertical_x-small">
+                        <lightning:recordEditForm objectApiName="Tile__c"
+                                                density="comfy"
+                                                aura:id="tileForm"
+                                                onload="{! c.onEditLoad }"
+                                                onsubmit="{! c.handleUpdate }"
+                                                recordId="{! v.editRecordId }">
+                                                <!--handleSaveEditArticle-->
+                            <lightning:messages />
+                            <lightning:card>
+                                <div class="slds-grid slds-wrap">
+                                    <div class="slds-col slds-grid slds-wrap slds-size_4-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-border_right">
+                                        
+                                        <div class="slds-form-element slds-col slds-large-size_1-of-1 centerClass slds-border_bottom slds-border_top">
+                                            <div class="slds-page-header">
+                                                <h1 class="slds-page-header__title">Article Information</h1>
+                                            </div>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-var-p-around_medium">
+                                            <lightning:inputField aura:id="knowIdEdit" fieldName="UI_Name__c" onchange="{! c.onKnowledgeArticleNameChangeEdit }"/>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-var-p-around_medium slds-form-element">
+                                            <lightning:helptext content="In this field, we will display the URL of the article that you just have created, you can use this URL to find your article in Salesforce."/>
+                                            <label class="slds-form-element__label">Article URL</label>
+                                            <div class="slds-form-element__control">
+                                                <lightning:input variant="label-hidden" name="knowledgeArticleURL" disabled="true" value="{! v.knowledgeURL }" label="Article URL" />
+                                            </div>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-var-p-around_medium">
+                                            <lightning:inputField fieldName="UI_Description__c"/>
+                                        </div>
+                                        <!-- B2B-325 -->
+                                        <div class="slds-col slds-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 slds-var-p-around_small slds-form-element">
+                                            <lightning:helptext content="If the work location is specified - the Tile is displayed only to users from the specified work location."/>
+                                            <label class="slds-form-element__label">Work Location</label>
+                                            <div class="slds-form-element__control">
+                                                <lightning:textarea variant="label-hidden" name="Selected H5 Accounts" disabled="true" value="{!v.selectedH5AccountsNames}" label="Work Location" />
+                                            </div>
+                                            <div class="slds-var-m-top_small">
+                                            <c:TileAccountsSelector modelLabel="Edit H5 Account" 
+                                                                    isH5Account = "true"
+                                                                    selectedAccountsIds ="{!v.existingH5AccountsIds}"
+                                                                    sourceLabel = "Available H5 Accounts" 
+                                                                    selectedLabel="Selected H5 Account"/>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- B2B-325 -->
+                                        <div class="slds-col slds-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 slds-var-p-around_small slds-form-element">
+                                            <lightning:helptext content="If the Parent Account is specified - the Tile is displayed only to users from the specified Parent Account."/>
+                                            <label class="slds-form-element__label">Parent Account</label>
+                                            <div class="slds-form-element__control">
+                                                <lightning:textarea variant="label-hidden" name="Selected H1 Accounts" disabled="true" value="{!v.selectedH1AccountsNames}" label="Parent Account" />
+                                            </div>
+                                            <div class="slds-var-m-top_small">
+                                            <c:TileAccountsSelector modelLabel="Edit H1 Account" 
+                                                                    isH1Account = "true"
+                                                                    selectedAccountsIds="{!v.existingH1AccountsIds}"
+                                                                    sourceLabel = "Available H1 Accounts" 
+                                                                    selectedLabel="Selected H1 Account"/>
+                                            </div>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-var-p-around_medium">
+                                            <lightning:inputField required="true" fieldName="Review_End_Date__c"/>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-border_right slds-var-p-around_medium slds-form-element">
+                                            <label class="slds-text-body_small ownerFieldLabelStyle">Content Owner</label>
+                                            <c:SObjectLookUp aura:id="sObjectContentOwnerUpdateLookup" objectAPIName="User" iconName="utility:user" fieldAPIName = "Name" placeholder="Content Owner" metaFieldsAPI="UserRole.Name" recordLimit="10" whereFieldAPIName="Name" contentOwnerFilter="true" />
+                                        </div>                                        
+                                        <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-var-p-around_medium">
+                                            <lightning:input name="articleFile" 
+                                                            aura:id="fileId"
+                                                            fieldLevelHelp="Upload your article (Only one at a time)"
+                                                            type="file" 
+                                                            multiple="false" 
+                                                            accept=".pdf"
+                                                            label="Upload Article" 
+                                                            onchange="{! c.handleFilesChange }"/>
+                                            <div class="slds-text-body_small slds-text-color_error"> {! v.fileName } </div>
+                                        </div>
+                                        <!-- The below 3 fields are hidden but included so that the value can fetched and be sent to backend -->
+                                        <div class="slds-hide slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-border_right slds-var-p-around_medium">
+                                            <lightning:inputField fieldName="Article_Name__c"/>
+                                        </div>
+                                        <div class="slds-hide slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-border_right slds-var-p-around_medium">
+                                            <lightning:inputField fieldName="File_ContentDocumentId__c"/>
+                                        </div>
+                                        <!-- ENH-4370 -->
+                                        <div class="slds-hide slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-border_right slds-var-p-around_medium">
+                                            <lightning:inputField fieldName="OwnerId"/>
+                                        </div>
+                                    </div>
+                                    <div aura:id="relatedInfogrid" class="slds-col slds-grid slds-wrap slds-size_8-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 slds-border_top">     
+                                        <!-- <div aura:id="relatedArticleInfo" class="slds-form-element slds-large-size_1-of-1 slds-scrollable_y centerClass slds-show" style="height:320px;">
+                                            <div class="slds-page-header slds-border_bottom">
+                                                <h1 class="slds-page-header__title">Enter Related Article Information</h1>
+                                            </div>
+                                            <div class="slds-page-header">
+                                                <p style="text-align:center; font-size:20px; background-color: rgb(1,118,221); color:white; border-radius: 15px;"><b>Order of the articles will determine the order in community</b></p>
+                                            </div>
+                                            <table class="slds-table slds-table_bordered slds-table_cell-buffer"> 
+                                                <thead>
+                                                    <tr class="slds-text-title_caps">
+                                                        <th scope="col">
+                                                            <div class="slds-truncate centerClass">S.No</div>
+                                                        </th>
+                                                        <th scope="col">
+                                                            <div class="slds-truncate centerClass" title="Category"><lightning:helptext style="display: inline-flex;" content="The category to which this article will be related to"/>Category</div>
+                                                        </th>
+                                                        <th scope="col">
+                                                            <div class="slds-truncate centerClass" title="Competitor"><lightning:helptext style="display: inline-flex;" content="Related articles to the above article selected"/>Related Article</div>
+                                                        </th>
+                                                        <th scope="col">
+                                                            <div class="slds-truncate centerClass" title="Actions">Actions</div>
+                                                        </th>
+                                                        <th scope="col">
+                                                            <div class="slds-truncate centerClass" title="Sort">Sort</div>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+										</div> -->
+                                        <!--B2B-326-->
+                                        <aura:if isTrue="{! v.isContentDisabled }">
+                                            <div aura:id="relatedArticleInfoDisabled" class="contentDisabledText slds-align_absolute-center slds-show" style="height:320px;">
+                                                Related Article cannot be associated for Content Type "Related Article"
+                                            </div>
+                                        </aura:if>
+                      
+                                        <aura:if isTrue="{! not(v.isContentDisabled) }">
+                                            <div aura:id="relatedArticleInfo" class="slds-form-element slds-large-size_1-of-1 slds-scrollable_y centerClass slds-show" style="height:320px;">
+                                                <c:ContentManagementCategories 
+                                                                               rowIndex="0" 
+                                                                               contentCategoryObj="{!v.contentCategoriesObjList[0]}" 
+                                                                               contentCategories="{!v.contentCategories}" 
+                                                                               contentCategoriesObjList="{!v.contentCategoriesObjList}" />
+                                            </div>
+                                        </aura:if>
+                                       <!-- <div aura:id="noRelatedArticleInfo" class="contentDisabledText slds-align_absolute-center slds-hide" style="height:320px;"> "Related Article"</div>-->
+                                    </div>
+                                </div>
+
+                                <!--<div class="slds-grid slds-wrap">
+                                        <div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-border_right slds-border_bottom slds-var-p-around_medium">
+                                            <lightning:inputField aura:id="knowIdEdit" fieldName="UI_Name__c" onchange="{! c.onKnowledgeArticleNameChangeEdit }"/>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-border_right slds-border_bottom slds-var-p-around_medium">
+                                            <lightning:inputField fieldName="UI_Description__c"/>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-var-p-around_medium slds-form-element">
+                                            <lightning:helptext content="In this field, we will display the URL of the article that you just have created, you can use this URL to find your article in Salesforce."/>
+                                            <label class="slds-form-element__label">Article URL</label>
+                                            <div class="slds-form-element__control">
+                                                <lightning:input variant="label-hidden" name="knowledgeArticleURL" disabled="true" value="{! v.knowledgeURL }" label="Article URL" />
+                                            </div>
+                                        </div>
+
+                                        <div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-border_right slds-border_bottom slds-var-p-around_medium">
+                                            <lightning:inputField fieldName="Work_Location__c"/>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-border_right slds-border_bottom slds-var-p-around_medium">
+                                            <lightning:inputField fieldName="Parent_Account__c"/>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-border_bottom slds-border_top slds-var-p-around_medium">
+                                            <lightning:inputField required="true" fieldName="Review_End_Date__c"/>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-border_right slds-border_bottom slds-var-p-around_medium">
+                                            <lightning:inputField fieldName="Business_Segment__c"/>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-border_right slds-border_bottom slds-var-p-around_medium">
+                                            <lightning:inputField fieldName="Sub_Segment__c"/>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-border_right slds-var-p-around_medium">
+                                            <lightning:inputField fieldName="Community_Name__c"/>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-border_right slds-var-p-around_medium">
+                                            <lightning:inputField fieldName="Sales_Region__c"/>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-var-p-around_medium">
+                                            <lightning:input name="articleFile" 
+                                                            aura:id="fileId"
+                                                            fieldLevelHelp="Upload your article (Only one at a time)"
+                                                            type="file" 
+                                                            multiple="false" 
+                                                            accept=".pdf"
+                                                            label="Upload Article" 
+                                                            onchange="{! c.handleFilesChange }"/>
+                                            <div class="slds-text-body_small slds-text-color_error"> {! v.fileName } </div>
+                                        </div>
+                                        <div class="slds-hide slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-border_right slds-var-p-around_medium">
+                                            <lightning:inputField fieldName="Article_Name__c"/>
+                                        </div>
+                                        <div class="slds-hide slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-border_right slds-var-p-around_medium">
+                                            <lightning:inputField fieldName="File_ContentDocumentId__c"/>
+                                        </div>
+                                        <div class="slds-col slds-grid slds-wrap slds-size_6-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-var-p-right_medium">
+                            
+                                            <div class="slds-box slds-theme_default slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-var-p-around_medium slds-align_absolute-center">
+                                                <div class="slds-text-heading_medium slds-align_absolute-center">
+                                                    <b>Enter Content location informations</b>
+                                                </div>
+                                            </div>
+                                            <div class="slds-box slds-theme_default slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-var-p-around_medium slds-align_absolute-center">
+                                                <div class="slds-card">
+                                                    <ul class="slds-accordion">
+                                                        <aura:iteration items="{! v.contentPathLocationList }" var="item" indexVar="index">
+                                                            <c:ContentManagementVisibilityManager aura:id="contentLocationId" 
+                                                                                                contentPathRowIndex = "{!index}" 
+                                                                                                isLibraryContent = "false"
+                                                                                                contentPathLocationObj = "{!item}" 
+                                                                                                contentTreeVM = "{# v.contentTree }"
+                                                                                                validContentMap = "{# v.validContentMap }"
+                                                                                                validLibraryMap = "{# v.validLibraryMap }"
+                                                                                                isRelatedArticle = "{! v.isRelatedArticle }"
+                                                                                                libraryTreeVM = "{# v.libraryTree }"
+                                                                                                folderLibraryMap = "{# v.folderLibraryMap }"
+                                                                                                contentPathLocationList = "{! v.contentPathLocationList }"/>
+                                                        </aura:iteration>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="slds-col slds-grid slds-wrap slds-size_6-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-var-p-right_medium">
+                            
+                                            <div class="slds-box slds-theme_default slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-var-p-around_medium slds-align_absolute-center">
+                                                <div class="slds-text-heading_medium slds-align_absolute-center">
+                                                    <b>Enter salesforce library paths</b>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="slds-box slds-theme_default slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-var-p-around_medium slds-align_absolute-center">
+                                                <div class="slds-card">
+                                                    <ul class="slds-accordion">
+                                                        <aura:iteration items="{! v.contentLibraryLocationList }" var="item" indexVar="index">
+                                                            <c:ContentManagementVisibilityManager aura:id="contentLibraryIdEdit" 
+                                                                contentLibraryRowIndex = "{!index}" 
+                                                                isLibraryContent = "true"
+                                                                contentLibraryLocationObj = "{!item}" 
+                                                                contentTreeVM = "{# v.contentTree }"
+                                                                validContentMap = "{# v.validContentMap }"
+                                                                validLibraryMap = "{# v.validLibraryMap }"
+                                                                isRelatedArticle = "{! v.isRelatedArticle }"
+                                                                libraryTreeVM = "{# v.libraryTree }"
+                                                                folderLibraryMap = "{# v.folderLibraryMap }"
+                                                                contentLibraryLocationList = "{! v.contentLibraryLocationList }"/>
+                                                        </aura:iteration>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-var-p-around_medium">
+                                        <lightning:button class="slds-button_stretch" type="submit" variant="brand" label="Save"/>
+                                    </div>
+                                </div>-->
+                            </lightning:card>
+                            <lightning:card>
+                                <div class="slds-grid slds-wrap slds-grid_align-center">
+                                    
+                                    <div class="slds-form-element slds-col slds-large-size_1-of-1 centerClass slds-border_bottom slds-border_top">
+                                        <div class="slds-page-header">
+                                            <h1 class="slds-page-header__title">Article sharing information</h1>
+                                        </div>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_3-of-12 slds-large-size_3-of-12 slds-border_right slds-border_bottom slds-var-p-around_medium slds-align_absolute-center">
+                                        <lightning:inputField fieldName="Business_Segment__c"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_3-of-12 slds-large-size_3-of-12 slds-border_right slds-border_bottom slds-var-p-around_medium slds-align_absolute-center">
+                                        <lightning:inputField fieldName="Sub_Segment__c"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_3-of-12 slds-large-size_3-of-12 slds-border_right slds-border_bottom slds-var-p-around_medium slds-align_absolute-center">
+                                        <lightning:inputField fieldName="Sales_Region__c"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_3-of-12 slds-large-size_3-of-12 slds-border_right slds-border_bottom slds-var-p-around_medium slds-align_absolute-center">
+                                        <lightning:inputField fieldName="Community_Name__c"/>
+                                    </div>
+
+                                </div>
+                            </lightning:card>
+
+                            <div class="slds-grid slds-wrap slds-var-m-top_medium">
+                                <div class="slds-col slds-grid slds-wrap slds-size_6-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-var-p-right_medium">
+                                    
+                                    <div class="slds-box slds-theme_default slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-var-p-around_small slds-align_absolute-center">
+                                        <div class="slds-text-heading_medium slds-align_absolute-center">
+                                            <b>Enter salesforce library paths</b>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="slds-box slds-theme_default slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-var-p-around_small slds-align_absolute-center">
+                                        <div class="slds-card">
+                                            <ul class="slds-accordion">
+                                                <aura:iteration items="{! v.contentLibraryLocationList }" var="item" indexVar="index">
+                                                    <c:ContentManagementVisibilityManager aura:id="contentLibraryIdEdit" 
+                                                                                        contentLibraryRowIndex = "{!index}" 
+                                                                                        isLibraryContent = "true"
+                                                                                        contentLibraryLocationObj = "{!item}" 
+                                                                                        contentTreeVM = "{# v.contentTree }"
+                                                                                        validContentMap = "{# v.validContentMap }"
+                                                                                        validLibraryMap = "{# v.validLibraryMap }"
+                                                                                        isRelatedArticle = "{! v.isRelatedArticle }"
+                                                                                        libraryTreeVM = "{# v.libraryTree }"
+                                                                                        folderLibraryMap = "{# v.folderLibraryMap }"
+                                                                                        contentLibraryLocationList = "{! v.contentLibraryLocationList }"/>
+                                                </aura:iteration>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-grid slds-wrap slds-size_6-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                    
+                                    <div class="slds-box slds-theme_default slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-var-p-around_small slds-align_absolute-center">
+                                        <div class="slds-text-heading_medium slds-align_absolute-center">
+                                            <b>Enter Content location informations</b>
+                                        </div>
+                                    </div>
+                                    <div class="slds-box slds-theme_default slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-var-p-around_small slds-align_absolute-center">
+                                        <div class="slds-card">
+                                            <ul class="slds-accordion">
+                                                <aura:iteration items="{! v.contentPathLocationList }" var="item" indexVar="index">
+                                                    <c:ContentManagementVisibilityManager aura:id="contentLocationId" 
+                                                                                        contentPathRowIndex = "{!index}" 
+                                                                                        isLibraryContent = "false"
+                                                                                        contentPathLocationObj = "{!item}" 
+                                                                                        contentTreeVM = "{# v.contentTree }"
+                                                                                        validContentMap = "{# v.validContentMap }"
+                                                                                        validLibraryMap = "{# v.validLibraryMap }"
+                                                                                        isRelatedArticle = "{! v.isRelatedArticle }"
+                                                                                        libraryTreeVM = "{# v.libraryTree }"
+                                                                                        folderLibraryMap = "{# v.folderLibraryMap }"
+                                                                                        contentPathLocationList = "{! v.contentPathLocationList }"/>
+                                                </aura:iteration>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-var-p-around_medium">
+                                <lightning:button class="slds-button_stretch" type="submit" variant="brand" label="Save"/>
+                            </div>
+                        </lightning:recordEditForm>
+                    <!--</lightning:card>-->
+                </div>
+            </aura:if>
+            <!--<div class="slds-m-around_x-large">   
+                <aura:if isTrue="{! v.showEditModal }">
+                    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_small">
+                        <div class="slds-modal__container">
+                            <header class="slds-modal__header">
+                                <lightning:buttonIcon iconName="utility:close"
+                                                        onclick="{! c.handleEditModal }"
+                                                        alternativeText="close"
+                                                        variant="bare-inverse"
+                                                        class="slds-modal__close"/>
+                                <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Review your content data before saving</h2>
+                            </header>
+                            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                                
+                            <footer class="slds-modal__footer">
+                                <lightning:button variant="neutral" 
+                                                    label="Cancel"
+                                                    title="Cancel"
+                                                    onclick="{! c.handleEditModal }"/>
+                                <lightning:button variant="brand" 
+                                                    label="Save"
+                                                    title="Like and Close"
+                                                    onclick="{! c.saveEditArticle }"/>
+                            </footer>
+                        </div>
+                    </section>
+                    <div class="slds-backdrop slds-backdrop_open"></div>
+                </aura:if>
+            </div> -->
+        </aura:if>
+        <aura:if isTrue="{! v.isCreationPage }">
+            <lightning:card>
+                <div class="slds-text-heading_medium slds-border_bottom slds-align_absolute-center">
+                    <b>Select Community Details</b>
+                </div>
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-grid slds-wrap slds-size_1-of-2 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-border_right">
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-var-p-around_small slds-form-element">
+                            <div class="slds-form-element__control">
+                                <lightning:dualListbox name="languages"
+                                       fieldLevelHelp="Select the community in which you would like to publish your content/articles &amp; make it available for the users."
+                                       label= "Select Community"
+                                       sourceLabel="Available"
+                                       selectedLabel="Selected"
+                                       options="{! v.communityNames }"
+                                       value="{! v.communityNameSelected }"
+                                       disableReordering = "true"
+                                       disabled="false"
+                                       size = "2"
+                                       onchange="{! c.onCommunityNameChange }"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-grid slds-wrap slds-size_1-of-2 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-grid_vertical slds-grid_align-center">     
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-var-p-around_small slds-form-element">
+                            <lightning:helptext content="Content Type"/>
+                            <label class="slds-form-element__label">Content Type</label>
+                            <div class="slds-form-element__control">
+                                <lightning:combobox aura:id="contentType" name="ContentType" label="Content Type"
+                                                    variant="label-hidden"
+                                                    placeholder="Select a Content Type"
+                                                    value="{! v.contentTypeSelected }"
+                                                    disabled="{! v.contentTypesDisabled }"
+                                                    onchange="{! c.onContentTypeChange }"
+                                                    options="{! v.contentTypes }"/>
+                            </div>			
+                        </div>
+                        <!--<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-var-p-around_small slds-form-element">
+                            <lightning:input name="contentOwner" disabled="true" value="{! v.contentWrapper.contentOwnerName }" label="Content Owner" />
+                        </div>-->
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-var-p-around_small slds-form-element">
+                            <label class="slds-text-body_small ownerFieldLabelStyle">Content Owner</label>
+                            <c:SObjectLookUp aura:id="sobjectContentOwnerCreateLookup" objectAPIName="User" iconName="utility:user" fieldAPIName = "Name" placeholder="Content Owner" metaFieldsAPI="UserRole.Name" recordLimit="10" whereFieldAPIName="Name" contentOwnerFilter="true" />
+                        </div>                     
+                    </div>
+                </div>
+            </lightning:card>
+            <lightning:card>
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-grid slds-wrap slds-size_4-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-border_right">
+                        <!-- <div class="slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-var-p-around_small slds-border_bottom centerClass">
+                        <div class="slds-page-header">
+                            <h1 class="slds-page-header__title">Enter Article Information</h1>
+                        </div>
+                        </div> -->
+                        <div class="slds-form-element slds-col slds-large-size_1-of-1 centerClass slds-border_bottom slds-border_top">
+                            <div class="slds-page-header">
+                                <h1 class="slds-page-header__title">Enter Article Information</h1>
+                            </div>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-var-p-around_small slds-form-element">
+                            <lightning:helptext content="In this field you need to enter your article name, please ensure you create a meaningful customer centric name, easy for users to understand and find. Be aware that your article is exposed externally"/>
+                            <label class="slds-form-element__label">Article Name (Display Name)</label>
+                            <div class="slds-form-element__control">
+                                <lightning:input variant="label-hidden" aura:id="knowledgeArtName" name="knowledgeArticleName" value="{! v.knowledgeArticleName }" label="Article Name (Display Name)" onchange="{! c.onKnowledgeArticleNameChange }" disabled="{! empty(v.communityNameSelected)}" />
+                            </div>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-var-p-around_small slds-form-element">
+                            <lightning:helptext content="In this field, we will display the URL of the article that you just have created, you can use this URL to find your article in Salesforce."/>
+                            <label class="slds-form-element__label">Article URL</label>
+                            <div class="slds-form-element__control">
+                                <lightning:input variant="label-hidden" name="knowledgeArticleURL" disabled="true" value="{! v.knowledgeURL }" label="Article URL" />
+                            </div>
+                        </div>
+                        <div class="slds-col slds-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 slds-var-p-around_small slds-form-element">
+                            <lightning:helptext content="Please describe crisp &amp; in a customer centric manner what this article is about. The article description will be posted under each article in the community, so that te community users can see at a glance what this article is about."/>
+                            <label class="slds-form-element__label">Article Description</label>
+                            <div class="slds-form-element__control">
+                                <lightning:textarea variant="label-hidden" name="knowledgedescription" value="{! v.knowledgeDescription }" label="Article Description" placeholder="Little information about the article." disabled="{! empty(v.communityNameSelected)}" maxlength="255" messageWhenTooLong="Description cannot go beyond 255 characters"/>
+                            </div>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-var-p-around_small slds-form-element">
+                            <lightning:helptext content="It is critical that content published in the community is up to date, your content needs to be reviewed at least once per year. Enter the review/end date of your article &amp; salesforce will send you a reminder to review your article a few month in advance so that you have time to keep you content up to date &amp; relevant."/>
+                            <label class="slds-form-element__label">Review/End Date</label>
+                            <div class="slds-form-element__control">
+                                <lightning:input variant="label-hidden" type="date" name="reviewOrEndDate" label="Review/End Date" required="true" value="{! v.reviewOrEndDate }" disabled="{! empty(v.communityNameSelected)}" />
+                            </div>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-var-p-around_small">
+                            <lightning:input name="articleFile" 
+                                            aura:id="fileId"
+                                            fieldLevelHelp="Upload your article (Only one at a time)"
+                                            type="file" 
+                                            multiple="false" 
+                                            accept=".pdf"
+                                            label="Upload Article" 
+                                            onchange="{! c.handleFilesChange }"
+                                            disabled="{! empty(v.communityNameSelected)}"/>
+                            <div class="slds-text-body_small slds-text-color_error"> {! v.fileName } </div>
+                        </div>
+
+                        <!-- B2B-325 -->
+                        <div class="slds-col slds-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 slds-var-p-around_small slds-form-element">
+                            <lightning:helptext content="The content will be only be available to the selected H5 (if selected) &amp; Open for all H5(if not selected)"/>
+                            <label class="slds-form-element__label">Customer Location (H5)</label>
+                            <div class="slds-form-element__control">
+                                <lightning:textarea variant="label-hidden" name="Selected H5 Accounts" disabled="true" value="{!v.selectedH5AccountsNames}" label="Customer Location (H5)" />
+                            </div>
+                            <div class="slds-var-m-top_small">
+                            <c:TileAccountsSelector modelLabel="Select H5 Account" 
+                                                    isH5Account = "true"
+                                                    selectedAccounts="v.selectedH5Accounts"
+                                                    sourceLabel = "Available H5 Accounts" 
+                                                    selectedLabel="Selected H5 Account"/>
+                            </div>
+                        </div>
+                        <!-- B2B-325 -->
+                        <div class="slds-col slds-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 slds-var-p-around_small slds-form-element">
+                            <lightning:helptext content="The content will be only be available to the selected H5 (if selected) &amp; Open for all H5(if not selected)"/>
+                            <label class="slds-form-element__label">Parent Account (H1)</label>
+                            <div class="slds-form-element__control">
+                                <lightning:textarea variant="label-hidden" name="Selected H1 Accounts" disabled="true" value="{!v.selectedH1AccountsNames}" label="Parent Account (H1)" />
+                            </div>
+                            <div class="slds-var-m-top_small">
+                            <c:TileAccountsSelector modelLabel="Select H1 Account" 
+                                                    isH1Account = "true"
+                                                    selectedAccounts="v.selectedH1Accounts"
+                                                    sourceLabel = "Available H1 Accounts" 
+                                                    selectedLabel="Selected H1 Account"/> 
+                            </div>
+                        </div>
+                    </div>
+                    <div aura:id="relatedInfogrid" class="slds-col slds-grid slds-wrap slds-size_8-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12 slds-border_top slds-show">     
+                        <div aura:id="relatedArticleInfo" class="slds-form-element slds-large-size_1-of-1 slds-scrollable_y centerClass slds-show" style="height:320px;">                           
+                        	<aura:iteration items="{!v.contentCategoriesObjList}" var="item" indexVar="index">
+                                <!--B2B-326  -->
+                            <aura:if isTrue="{!index == 0}">
+                                    <c:ContentManagementCategories 
+                                                                   rowIndex="{!index}" 
+                                                                   contentCategoryObj="{!item}" 
+                                                                   contentCategories="{!v.contentCategories}" 
+                                                                   contentCategoriesObjList="{!v.contentCategoriesObjList}" 
+                                                                   />
+                                </aura:if>
+                                <!-- B2B-326 -->
+                            </aura:iteration>
+                            
+                            <!-- <div class="slds-page-header slds-border_bottom">
+                                <h1 class="slds-page-header__title">Enter Related Article Information 1</h1>             
+							</div>
+                            <div class="slds-page-header">
+                                <p style="text-align:center; font-size:20px; background-color: rgb(1,118,221); color:white; border-radius: 15px;"><b>Order of the articles will determine the order in community</b></p>
+                            </div>
+                            <div class="slds-text-align_right slds-m-top_medium">
+                                <lightning:button variant="neutral" label="Delete" onclick="{!c.handleDelete}" class="slds-m-right_small"/>
+                                <lightning:button variant="brand" label="Add Relation" onclick="{!c.handleAddRelation}"/>
+                            </div>    -->
+                            <!-- <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                                    <thead>
+                                    <tr class="slds-text-title_caps">
+                                        <th scope="col">
+                                            <div class="slds-truncate centerClass">S.No</div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="slds-truncate centerClass" title="Category"><lightning:helptext style="display: inline-flex;" content="The category to which this article will be related to"/>Category</div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="slds-truncate centerClass" title="Competitor"><lightning:helptext style="display: inline-flex;" content="Related articles to the above article selected"/>Related Article</div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="slds-truncate centerClass" title="Actions">Actions</div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="slds-truncate centerClass" title="Sort">Sort</div>
+                                        </th>
+                                    </tr>
+                                </thead>   
+                                <tbody>
+                                    
+                                    <aura:iteration items="{!v.contentCategoriesObjList}" var="item" indexVar="index">
+                                        <c:ContentManagementCategories rowIndex = "{!index}" contentCategoryObj = "{!item}" contentCategories = "{! v.contentCategories }" contentCategoriesObjList = "{! v.contentCategoriesObjList }" />
+                                    </aura:iteration>
+                                    
+                                </tbody>
+                            </table> -->
+						</div>
+                        <!--<div aura:id="noRelatedArticleInfo" class="contentDisabledText slds-align_absolute-center slds-hide" style="height:320px;">Related Article cannot be associated for Content Type "Related Article"</div>-->
+                        <!-- B2B-154 start -->
+                        <div aura:id="noRelatedArticleInfo" class="slds-form-element slds-large-size_1-of-1 slds-scrollable_y slds-hide">
+                            <!-- Render the child component with only the first item from contentCategoriesObjList -->
+                             <aura:if isTrue="{!not(empty(v.contentCategoriesObjList))}">
+                                <c:ContentManagementCategories  
+                                                               rowIndex="0" 
+                                                               contentCategoryObj="{!v.contentCategoriesObjList[0]}" 
+                                                               contentCategories="{!v.contentCategories}" 
+                                                               contentCategoriesObjList="{!v.contentCategoriesObjList}" />
+                             </aura:if>
+                        </div>
+						<!-- B2B-154 End -->                    
+						</div>                
+					</div>
+            </lightning:card>
+            <lightning:card>
+                <div class="slds-text-heading_medium slds-align_absolute-center">
+                    <b>Enter Segments &amp; Region information</b>
+                </div>
+            </lightning:card>
+            <lightning:accordion
+                                 allowMultipleSectionsOpen="true"
+                                 class="slds-card">
+                
+                <lightning:accordionSection name="B" label="Enter Segment &amp; Region Information">
+                    <div class="slds-grid slds-wrap slds-grid_align-center">
+                        
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-border_right slds-border_top slds-var-p-around_small slds-align_absolute-center">
+                            <lightning:dualListbox name="languages"
+                                                   fieldLevelHelp="Business segment users belonging to the selected business segments will only this content (If not selected, content will be visible to all Business Segments)"
+                                                   label= "Business Segment"
+                                                   sourceLabel="Available"
+                                                   selectedLabel="Selected"
+                                                   options="{! v.businessSegments }"
+                                                   value="{! v.businessSegmentsSelected }"
+                                                   disableReordering = "true"
+                                                   disabled="{! empty(v.communityNameSelected)}"
+                                                   size = "4"
+                                                   onchange="{! c.onBusinessSegmentChange }"/>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-border_right slds-border_top slds-var-p-around_small">
+                            <lightning:dualListbox name="languages"
+                                                   fieldLevelHelp="Sub-segment users belonging to the selected sub-segments will only this content (If not selected, content will be visible to all Sub-Segments)"
+                                                   label= "Sub Segment"
+                                                   sourceLabel="Available"
+                                                   selectedLabel="Selected"
+                                                   options="{! v.subSegments }"
+                                                   value="{! v.subSegmentsSelected }"
+                                                   disableReordering = "true"
+                                                   disabled="{! or(v.subSegmentDisabled, empty(v.communityNameSelected)) }"
+                                                   size = "4"/>
+                            <!-- onchange="{! c.onSubSegmentChange }" -->
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-var-p-around_small slds-border_top">
+                            <lightning:dualListbox name="languages"
+                                                   fieldLevelHelp="Users belonging to the selected regions will only this content (If not selected, content will be visible to all regions)"
+                                                   label= "Sales Region"
+                                                   sourceLabel="Available"
+                                                   selectedLabel="Selected"
+                                                   options="{! v.salesRegions }"
+                                                   value="{! v.salesRegionsSelected }"
+                                                   disableReordering = "true"
+                                                   size = "4"
+                                                   disabled="{! empty(v.communityNameSelected)}"/>
+                            <!-- onchange="{! c.onSalesRegionChange }" -->
+                        </div>
+                    </div>
+                </lightning:accordionSection>
+            </lightning:accordion>
+            
+            
+            <div class="slds-grid slds-wrap slds-var-m-top_medium">
+                <div class="slds-col slds-grid slds-wrap slds-size_6-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-var-p-right_medium">
+                    
+                    <div class="slds-box slds-theme_default slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-var-p-around_small slds-align_absolute-center">
+                        <div class="slds-text-heading_medium slds-align_absolute-center">
+                            <b>Enter salesforce library paths</b>
+                        </div>
+                    </div>
+                    
+                    <div class="slds-box slds-theme_default slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-var-p-around_small slds-align_absolute-center">
+                        <div class="slds-card">
+                            <ul class="slds-accordion">
+                                <aura:iteration items="{! v.contentLibraryLocationList }" var="item" indexVar="index">
+                                    <c:ContentManagementVisibilityManager aura:id="contentLibraryId" 
+                                                                          contentLibraryRowIndex = "{!index}" 
+                                                                          isLibraryContent = "true"
+                                                                          contentLibraryLocationObj = "{!item}" 
+                                                                          contentTreeVM = "{# v.contentTree }"
+                                                                          validContentMap = "{# v.validContentMap }"
+                                                                          validLibraryMap = "{# v.validLibraryMap }"
+                                                                          isRelatedArticle = "{! v.isRelatedArticle }"
+                                                                          libraryTreeVM = "{# v.libraryTree }"
+                                                                          folderLibraryMap = "{# v.folderLibraryMap }"
+                                                                          contentLibraryLocationList = "{! v.contentLibraryLocationList }"/>
+                                </aura:iteration>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-col slds-grid slds-wrap slds-size_6-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                    
+                    <div class="slds-box slds-theme_default slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-var-p-around_small slds-align_absolute-center">
+                        <div class="slds-text-heading_medium slds-align_absolute-center">
+                            <b>Enter Content location informations</b>
+                        </div>
+                    </div>
+                    <div class="slds-box slds-theme_default slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-var-p-around_small slds-align_absolute-center">
+                        <div class="slds-card">
+                            <ul class="slds-accordion">
+                                <aura:iteration items="{! v.contentPathLocationList }" var="item" indexVar="index">
+                                    <c:ContentManagementVisibilityManager aura:id="contentLocationId" 
+                                                                          contentPathRowIndex = "{!index}" 
+                                                                          isLibraryContent = "false"
+                                                                          contentPathLocationObj = "{!item}" 
+                                                                          contentTreeVM = "{# v.contentTree }"
+                                                                          validContentMap = "{# v.validContentMap }"
+                                                                          validLibraryMap = "{# v.validLibraryMap }"
+                                                                          isRelatedArticle = "{! v.isRelatedArticle }"
+                                                                          libraryTreeVM = "{# v.libraryTree }"
+                                                                          folderLibraryMap = "{# v.folderLibraryMap }"
+                                                                          contentPathLocationList = "{! v.contentPathLocationList }"/>
+                                </aura:iteration>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <!--<div class="slds-m-top_x-small">
+                <lightning:button class="slds-button_stretch" variant="brand" onclick="{! c.openReviewContent }" label="Review Content"/> 
+                <lightning:button class="slds-button_stretch" variant="brand" onclick="{! c.openReviewContent }" label="Back"/> 
+            </div>-->
+            <div class="slds-grid slds-wrap slds-var-m-top_medium">
+                <div class="slds-col slds-grid slds-wrap slds-size_6-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-var-p-right_medium">
+                    <lightning:button class="slds-button_stretch" onclick="{!c.handlePageBack}" label="Back"/>
+                </div>
+                <div class="slds-col slds-grid slds-wrap slds-size_6-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                    <lightning:button class="slds-button_stretch" variant="brand" onclick="{!c.openReviewContent}" label="Review Content"/>
+                </div>
+            </div>
+            <!-- <div class="slds-align_absolute-center slds-var-m-around_xx-small">
+                <lightning:button class="slds-button_stretch" onclick="{!c.handleCancel}" label="Cancel"/>
+                <lightning:button class="slds-button_stretch" variant="brand" onclick="{!c.handleSave}" label="Save"/>          
+            </div> -->
+        </aura:if>
+        <aura:if isTrue="{! v.isDeletePage }">
+            <lightning:card>
+                <div class="slds-text-heading_medium slds-border_bottom slds-align_absolute-center">
+                    <b>Select Article to delete</b>
+                </div>
+                <div class="slds-grid slds-wrap slds-align_absolute-center">
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3 slds-large-size_1-of-3 slds-border_right slds-var-p-around_small slds-form-element">
+                        <c:SObjectLookUp aura:id="sobjectDeleteLookup" objectAPIName="Tile__c" iconName="standard:knowledge" fieldAPIName = "UI_Name__c" placeholder="Search Knowledge" metaFieldsAPI="UI_Description__c" recordLimit="10" whereFieldAPIName="UI_Name__c" tilesFilter="Yes"/>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3 slds-large-size_1-of-3 slds-var-p-around_small slds-form-element">
+                        <lightning:button variant="brand" disabled="{! empty(v.artilesToDelete) }" class="slds-button_stretch" onclick="{! c.handleDelete }" label="Delete Articles"/>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3 slds-large-size_1-of-3 slds-border_right slds-var-p-around_small slds-form-element">
+                        <lightning:button class="slds-button_stretch" onclick="{!c.handlePageBack}" label="Back"/>
+                    </div>
+                </div>
+            </lightning:card>
+            <div class="slds-grid slds-wrap">
+                <aura:iteration items="{! v.artilesToDelete }" var="item" indexVar="index">                     
+                    <div data-delete-index="{!index}" class="slds-col slds-size_1-of-3 slds-medium-size_1-of-3 slds-large-size_1-of-3 slds-var-p-around_xx-small">
+                        <lightning:card>
+                            <aura:set attribute="title">
+                                <lightning:icon iconName="standard:knowledge" size="small"/>&nbsp;&nbsp;
+                                {!item.UI_Name__c}
+                            </aura:set>
+                            <aura:set attribute="actions">
+                                <lightning:button onclick="{! c.handleDeselect }" label="Deselect"/>
+                            </aura:set>
+                            <aura:set attribute="footer">
+                                <lightning:badge label="{! 'Review/End Date : ' + item.Article_Name__r.Review_Exp_Date__c }"/>
+                            </aura:set>
+                            <p class="slds-var-p-horizontal_small slds-line-clamp_x-small">
+                                Article Description : {!item.UI_Description__c}
+                            </p>
+                        </lightning:card>
+                    </div>
+                </aura:iteration>
+            </div>
+        </aura:if>
+        <!-- Review Modal starts here-->
+        <div class="slds-var-m-around_x-large">   
+            <aura:if isTrue="{!v.showModal}">
+                <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_large">
+                    <div class="slds-modal__container">
+                        <header class="slds-modal__header">
+                            <lightning:buttonIcon iconName="utility:close"
+                                                  onclick="{! c.closeModal }"
+                                                  alternativeText="close"
+                                                  variant="bare-inverse"
+                                                  class="slds-modal__close"/>
+                            <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Review your content data before saving</h2>
+                        </header>
+                        <div class="slds-modal__content slds-var-p-around_medium" id="modal-content-id-1">
+                            <div class="slds-grid slds-wrap">
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                                    
+                                    <table class="slds-table slds-table_bordered slds-table_cell-buffer slds-table_col-bordered"> 
+                                        <thead>
+                                            <tr class="slds-text-title_caps">
+                                                <!-- <th scope="col">
+                                                <div class="slds-truncate centerClass" title="Section Name"><lightning:helptext style="display: inline-flex;" content="The main &amp; the sharing section names"/>Section Name</div>
+                                            </th> -->
+                                                <th scope="col">
+                                                    <div class="slds-truncate centerClass" title="Category"><lightning:helptext style="display: inline-flex;" content="The field for which the current sharing is defined"/>Field Name</div>
+                                                </th>
+                                                <th scope="col">
+                                                    <div class="slds-truncate centerClass" title="Competitor"><lightning:helptext style="display: inline-flex;" content="This gives a detail sharing description corresponding to the field Name beside this"/>Sharing Description</div>
+                                                </th>
+                                            </tr>
+                                        </thead>   
+                                        <tbody>
+                                            
+                                            <tr class="slds-hint-parent">
+                                                <!-- <td rowspan="2" data-label="Main Article Info">
+                                                <div class="slds-truncate centerClass" title="Main Article Info"><b>Main Article Info</b></div>
+                                            </td> -->
+                                                <th data-label="Community Sharing" scope="row">
+                                                    <div class="slds-truncate slds-var-p-around_small" title="Community Sharing">
+                                                        Community Sharing
+                                                    </div>
+                                                </th>
+                                                <td data-label="{! v.communityNameSelected }">
+                                                    <div class="slds-truncate centerClass" title="{! v.communityNameSelected }">This article will be shared with 
+                                                    <aura:iteration items="{! v.communityNameSelected }" var="eachCommName" indexVar="index">
+                                                        <b>
+                                                            {!eachCommName}
+                                                            <aura:if isTrue="{! and(v.communityNameSelected.length > 1, index == 0) }">
+                                                                &amp;
+                                                            </aura:if>
+                                                        </b>
+                                                    </aura:iteration> users</div>
+                                                </td>
+                                            </tr>
+                                            <tr class="slds-hint-parent">
+                                                <th data-label="Review/Expire Date" scope="row">
+                                                    <div class="slds-truncate slds-var-p-around_small" title="Review/Expire Date">
+                                                        Review/Expire Date
+                                                    </div>
+                                                </th>
+                                                <td data-label="{! v.reviewOrEndDate }">
+                                                    <div class="slds-truncate centerClass" title="{! v.reviewOrEndDate }">This article will expire on <b>"{! v.reviewOrEndDate }"</b></div>
+                                                </td>
+                                            </tr>
+                                            <tr class="slds-hint-parent">
+                                                <th data-label="Business Segment" scope="row">
+                                                    <div class="slds-truncate slds-var-p-around_small" title="Business Segment">
+                                                        Business Segment
+                                                    </div>
+                                                </th>
+                                                <td data-label="{! v.businessSegmentsSelected }">
+                                                    <aura:if isTrue="{! empty(v.businessSegmentsSelected)}">
+                                                        <div class="slds-truncate" style="padding-left: 15%" title="No Business Segment restriction">This article's visibility will not be restricted by any Business Segment</div>
+                                                        <aura:set attribute="else">
+                                                            <div class="slds-truncate" style="padding-left: 15%" title="Business Segment restriction">This article will be shared to the community users having atleast one of the following business segments:<br/></div>
+                                                            <ol style="padding-left: 15%" class="slds-list_ordered">
+                                                                <aura:iteration items="{! v.businessSegmentsSelected }" var="eachBusinessSeg">
+                                                                    <li><b>{!eachBusinessSeg}</b></li>
+                                                                </aura:iteration>
+                                                            </ol>
+                                                        </aura:set>
+                                                    </aura:if>
+                                                </td>
+                                            </tr>
+                                            <tr class="slds-hint-parent">
+                                                <th data-label="Sub Segment" scope="row">
+                                                    <div class="slds-truncate slds-var-p-around_small" title="Sub Segment">
+                                                        Sub Segment
+                                                    </div>
+                                                </th>
+                                                <td data-label="{! v.subSegmentsSelected }">
+                                                    <aura:if isTrue="{! empty(v.subSegmentsSelected)}">
+                                                        <div class="slds-truncate" style="padding-left: 15%" title="No Sub Segment restriction">This article's visibility will not be restricted by any Sub-Segment</div>
+                                                        <aura:set attribute="else">
+                                                            <div class="slds-truncate" style="padding-left: 15%" title="Sub Segment restriction">This article will be shared to the community users having atleast one of the following sub-segments:<br/></div>
+                                                            <ol style="padding-left: 15%" class="slds-list_ordered">
+                                                                <aura:iteration items="{! v.subSegmentsSelected }" var="eachSubSeg">
+                                                                    <li><b>{!eachSubSeg}</b></li>
+                                                                </aura:iteration>
+                                                            </ol>
+                                                        </aura:set>
+                                                    </aura:if>
+                                                </td>
+                                            </tr>
+                                            <tr class="slds-hint-parent">
+                                                <th data-label="Sales Region" scope="row">
+                                                    <div class="slds-truncate slds-var-p-around_small" title="Sales Region">
+                                                        Sales Region
+                                                    </div>
+                                                </th>
+                                                <td data-label="{! v.salesRegionsSelected }">
+                                                    <aura:if isTrue="{! empty(v.salesRegionsSelected)}">
+                                                        <div class="slds-truncate" style="padding-left: 15%" title="No Sales Region restriction">This article's visibility will not be restricted by any Sales Region</div>
+                                                        <aura:set attribute="else">
+                                                            <div class="slds-truncate" style="padding-left: 15%" title="Sales Region restriction">This article will be shared to the community users having atleast one of the following Sales Regions:<br/></div>
+                                                            <ol style="padding-left: 15%" class="slds-list_ordered">
+                                                                <aura:iteration items="{! v.salesRegionsSelected }" var="eachSalesRegion">
+                                                                    <li><b>{!eachSalesRegion}</b></li>
+                                                                </aura:iteration>
+                                                            </ol>
+                                                        </aura:set>
+                                                    </aura:if>
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr class="slds-hint-parent">
+                                                <th data-label="Library Location" class="slds-border_left" scope="row">
+                                                    <div class="slds-truncate slds-var-p-around_small" title="Library Location">
+                                                        Library Location
+                                                    </div>
+                                                </th>
+                                                <td data-label="Library Storage Path">
+                                                    <div class="slds-truncate" style="padding-left: 15%" title="Library Storage path">This article will be stored in the following Library Locations:<br/></div>
+                                                    <ol style="padding-left: 15%" class="slds-list_ordered">
+                                                        <aura:iteration items="{! v.contentLibraryLocationList }" var="item" indexVar="index">
+                                                            <li><b>{! item.LibraryStoragePath }</b></li>
+                                                        </aura:iteration>
+                                                    </ol>
+                                                </td>
+                                            </tr>
+                                            <aura:if isTrue="{! not(v.isRelatedArticle) }">
+                                                <tr class="slds-hint-parent">
+                                                    <th data-label="Content Location" class="slds-border_left" scope="row">
+                                                        <div class="slds-truncate slds-var-p-around_small" title="Content Location">
+                                                            Content Location
+                                                        </div>
+                                                    </th>
+                                                    <td data-label="Content Location">
+                                                        <div class="slds-truncate" style="padding-left: 15%" title="Content Location">This article will be stored in the following Content Locations:<br/></div>
+                                                        <ol style="padding-left: 15%" class="slds-list_ordered">
+                                                            <aura:iteration items="{! v.contentPathLocationList }" var="item" indexVar="index">
+                                                                <li><b>{! item.contentStoragePath }</b></li>
+                                                            </aura:iteration>
+                                                        </ol>
+                                                    </td>
+                                                </tr>
+                                            </aura:if>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!--###### MODAL BOX FOOTER Part Start ######-->
+                        <footer class="slds-modal__footer">
+                            <lightning:button variant="neutral" 
+                                              label="Nopes, I want to make few changes"
+                                              title="Nopes, I want to make few changes"
+                                              onclick="{! c.closeModal }"/>
+                            <lightning:button variant="brand" 
+                                              label="Yeah, Go Ahead &amp; Save"
+                                              title="Like and Close"
+                                              onclick="{! c.handleCreate }"/>
+                        </footer>
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+                <!--###### MODAL BOX Part END Here ######-->
+                <!-- </div> -->
+            </aura:if>
+        </div>
+        <aura:set attribute="else">
+                <article class="slds-card">
+                    <div class="slds-card__header slds-grid">
+                        <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                            <div class="slds-media__figure">
+                                <lightning:icon class="slds-input__icon slds-show" iconName="utility:search" size="x-small" alternativeText="search"/> 
+                            </div>
+                            <div class="slds-media__body">
+                                <h2 class="slds-card__header-title">
+                                    <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" title="Tasks">
+
+                                    </a>
+                                </h2>
+                            </div>
+                        </header>
+                    </div>
+                    <div class="slds-card__body slds-card__body_inner">
+                        <div class="slds-illustration slds-illustration_small">
+                            <div class="slds-text-longform">
+                                <h3 class="slds-text-heading_large">No permission to create content</h3>
+                                <p class="slds-text-body_regular">Oops Sorry, We regret to inform you that you dont have access to the create content. You need knowledge access to perform this operation</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </aura:set>
+    </aura:if>
+</aura:component>

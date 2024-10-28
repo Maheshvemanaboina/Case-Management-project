@@ -1,0 +1,47 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+    <aura:attribute name="baseUrl" type="String"/>
+    <aura:attribute name="breadCrumbs" type="Object"/>
+    <aura:attribute name="displayFileIFrame" type="Boolean" default="false"/>
+    <aura:attribute name="iFrameSrc" type="String"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <div class="slds-grid slds-p-top_medium slds-grid_vertical slds-breadcrumb__item" >
+        <div class="slds-col">
+            <lightning:breadcrumbs class="bread_css">
+                <lightning:breadcrumb label="HOME" onclick="{!c.handleBreadCrumbHomeClick}" name="HOME"/>
+                <aura:iteration items="{! v.breadCrumbs }" var="crumbs">
+                    <lightning:breadcrumb label="{!crumbs.label}" onclick="{!c.handleBreadCrumbClick}" name="{!crumbs.name}"/>
+                </aura:iteration>
+            </lightning:breadcrumbs>
+        </div>
+        
+        <div class="slds-col">
+            
+            <aura:if isTrue="{!v.displayFileIFrame == false}">
+                <div class="slds-grid_vertical slds-wrap slds-p-top_small listDisplay">
+                    <ul class="list_css" style="list-style-type:square;">
+                        <li><div class="slds-col navTileLink" onclick="{!c.handleFCIClick}" data-val="FrieslandCampina Introduction"><b>FrieslandCampina Introduction</b></div></li>
+                        <li><div class="slds-col navTileLink" onclick="{!c.handleFCIClick}" data-val="FrieslandCampina Ingredients Introduction"><b>FrieslandCampina Ingredients Introduction</b></div></li>
+                        <li><div class="slds-col navTileLink" onclick="{!c.handleFCIClick}" data-val="FCI Early Life Nutrition"><b>FCI Early Life Nutrition</b></div></li>
+                        <li><div class="slds-col navTileLink" onclick="{!c.handleFCIClick}" data-val="FCI Adult Nutrition"><b>FCI Adult Nutrition</b></div></li>
+                        <li><div class="slds-col navTileLink" onclick="{!c.handleFCIClick}" data-val="FCI Food &amp; Beverages and Animal Nutrition"><b>FCI Food &amp; Beverages and Animal Nutrition</b></div></li>
+                        <li><div class="slds-col navTileLink" onclick="{!c.handleFCIClick}" data-val="Lead with sustainaibility"><b>Lead with sustainaibility</b></div></li>
+                        <a class="slds-col navTileLink" href="https://www.frieslandcampina.com/en/" target="_blank"><b>Read More...</b></a>
+                    </ul> 
+                </div>
+                
+            </aura:if>
+            <aura:if isTrue="{!v.displayFileIFrame == true}">
+                <div class="slds-col slds-m-top--medium">
+                    <iframe src="{!v.iFrameSrc}"
+                            width="100%"
+                            height="500px"/>
+                </div>
+            </aura:if>
+        </div>
+        
+    </div>
+    
+</aura:component>

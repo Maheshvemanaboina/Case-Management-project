@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexTestSuite xmlns="http://soap.sforce.com/2006/04/metadata">
+    <testClassName>UploadAccountControllerTest</testClassName>
+    <testClassName>UploadAccountFromCSVTest</testClassName>
+    <testClassName>UploadAccountOpportunityControllerTest</testClassName>
+    <testClassName>UploadObjectControllerTest</testClassName>
+    <testClassName>UploadOpportunityControllerTest</testClassName>
+    <testClassName>UploadOpportunityFromCSVTest</testClassName>
+    <testClassName>UploadProductFromCSVTest</testClassName>
+</ApexTestSuite>

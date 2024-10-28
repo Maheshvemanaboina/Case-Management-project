@@ -1,0 +1,48 @@
+.THIS {
+}
+.THIS .slds-truncate {
+    white-space:normal!important;
+}
+.THIS .slds-p-around_medium {
+    padding:0px!important;
+}
+.THIS .slds-p-around--medium {
+    padding:0px!important;
+}
+.THIS .popup_header {
+    border-bottom:1px solid #cacaca;
+    padding-bottom:13px;
+    padding-top:13px;
+}
+
+.THIS .popup_header {
+      position: fixed;
+    top: 48px;
+    left: 0;
+    width: 100%;
+    background: #ffffff;
+    z-index:9;
+}
+.THIS .slds-section__content {
+    margin-top:48px;
+    margin-bottom:48px;
+}
+.THIS .footerpopup {
+       position: fixed;
+    bottom: 48px;
+    left: 0;
+    width: 100%;
+    background: #ffffff;
+    z-index: 9;
+    padding: 10px;
+    text-align: right;
+}
+.THIS th {
+    padding-left:5px;
+    padding-right:5px;
+    font-size:12px;
+    font-weight:bold!important;
+}
+.THIS td {
+    font-size:12px;
+}

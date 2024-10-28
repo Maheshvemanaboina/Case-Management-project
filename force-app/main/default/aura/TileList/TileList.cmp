@@ -1,0 +1,102 @@
+<!--
+ - Created by KJM on 01/04/2019.
+ -->
+
+<aura:component description="TileList" controller="TileListController" implements="forceCommunity:availableForAllPageTypes">
+    <aura:attribute name="tilesType" type="String" required="true" access="public"/>
+    <aura:attribute name="firstTileName" type="String" required="true" access="public"/>
+
+    <aura:attribute name="baseUrl" type="String"/>
+    <aura:attribute name="imageBaseUrl" type="String"/>
+
+    <aura:attribute name="itemsInOnePaginationSplit" type="Integer" default="10"/>
+    <aura:attribute name="currentPageNumber" type="Integer" />
+    <aura:attribute name="paginationPages" type="List"/>
+    <aura:attribute name="totalPaginationPages" type="Integer"/>
+    <aura:attribute name="currentPaginationList" type="List" />
+
+    <aura:attribute name="tilesWrapper" type="Object"/>
+    <aura:attribute name="breadCrumbs" type="Object"/>
+
+    <aura:attribute name="displayFileIFrame" type="Boolean" default="false"/>
+    <aura:attribute name="iFrameSrc" type="String"/>    
+     <aura:attribute name="noContentMessage" type="Boolean" default="false"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <div class="slds-grid slds-p-top_medium slds-grid_vertical slds-breadcrumb__item" >
+        <div class="slds-col">
+            <lightning:breadcrumbs>
+                <lightning:breadcrumb label="HOME" onclick="{!c.handleBreadCrumbHomeClick}" name="HOME"/>
+                <aura:iteration items="{! v.breadCrumbs }" var="crumbs">
+                    <lightning:breadcrumb label="{!crumbs.label}" onclick="{!c.handleBreadCrumbClick}" name="{!crumbs.name}"/>
+                </aura:iteration>
+            </lightning:breadcrumbs>
+        </div>
+
+        <div class="slds-col">
+            <aura:if isTrue="{!and(v.displayFileIFrame == false, v.tilesWrapper.DisplayOption == 'Tiles')}">
+                <div class="slds-grid slds-wrap">
+                    <aura:iteration items="{!v.tilesWrapper.TilesAsTiles}" var="tile">
+                        <div class="slds-size_1-of-1 slds-small-size_1-of-2 slds-medium-size_1-of-3 slds-large-size_1-of-4">
+                            <div class="slds-box slds-box_x-small slds-text-align_center slds-m-around_x-small slds-box-cust" data-tlName="{!tile.TlName}" data-uiName="{!tile.UIName}" data-recId="{!tile.Id}" onclick="{!c.handleTileTileClick}">
+                                <div class="slds-image slds-image-cust">
+                                    <div class="navTileLink">
+                                        <div class="tileLabel tileHeading">{!tile.UIName}</div>
+                                        <div class="slds-align--absolute-center tileImage" style="{! 'background-image:url(' + (v.imageBaseUrl + tile.ImageVersionId + '&amp;contentId=' + tile.ImageContentId) + ')'}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </aura:iteration>
+                </div>
+            </aura:if>
+            <aura:if isTrue="{! and(v.displayFileIFrame == false, v.tilesWrapper.DisplayOption == 'Nested')}">
+                <div class="slds-grid_vertical slds-wrap slds-p-top_small listDisplay">
+                    <div class="slds-col">
+                        <lightning:tree class="lghtree" onselect="{!c.handleTileTreeClick}" items="{!v.currentPaginationList}" />
+                    </div>
+                </div>
+            </aura:if>
+            <aura:if isTrue="{!and(v.displayFileIFrame == false, v.tilesWrapper.DisplayOption == 'List')}">
+                <div class="slds-grid_vertical slds-wrap slds-p-top_small listDisplay">
+                    <div class="slds-col">
+                        <lightning:tree class="lghtree" onselect="{!c.handleTileTreeClick}" items="{!v.currentPaginationList}" />
+                    </div>
+                    <div class="slds-col slds-p-top_medium slds-p-bottom--small slds-p-left--small slds-p-left--small">
+                        <lightning:button iconName="utility:chevronleft" iconPosition="left" onclick="{!c.handlePreviousPaginationPageClick}" disabled="{!v.currentPageNumber == 1}"/>
+                        <aura:iteration items="{!v.paginationPages}" var="item">
+                                <span class="slds-p-horizontal_x-small">
+                                    <a name="{!item}" class="{! (v.currentPageNumber == item) ? 'selected' : ''}" onclick="{!c.handlePaginationPageClick}">{!item}</a>
+                                </span>
+                        </aura:iteration>
+                        <lightning:button iconName="utility:chevronright" iconPosition="right" onclick="{!c.handleNextPaginationPageClick}" disabled="{! v.currentPageNumber == v.totalPaginationPages}"/>
+                    </div>
+                </div>
+            </aura:if>
+            <aura:if isTrue="{!v.displayFileIFrame == true}">
+                <div class="slds-col slds-m-top--medium">
+                    <iframe src="{!v.iFrameSrc}"
+                            width="100%"
+                            height="500px"/>
+                </div>
+            </aura:if>
+            
+            <aura:if isTrue="{!v.noContentMessage == true}">    
+                <div class="slds-scoped-notification slds-media slds-media_center slds-scoped-notification_light _medium slds-card slds-m-vertical_xx-large" role="status">
+                <div class="slds-media__figure">
+                    <span class="slds-icon_container slds-icon-utility-info" title="information">
+                        <lightning:icon iconName='utility:info_alt' alternativeText='info_alt' variant='warning' size='small' title='info_alt'></lightning:icon>
+                    </span>
+                </div>
+                <div class="slds-text_large">
+                    <p>Content not available</p>
+                </div>
+              </div>
+            </aura:if>
+
+        </div>
+    </div>
+
+</aura:component>

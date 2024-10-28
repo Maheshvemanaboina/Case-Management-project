@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Format__c</fullName>
+    <externalId>false</externalId>
+    <label>Format</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Bar</fullName>
+                <default>false</default>
+                <label>Bar</label>
+            </value>
+            <value>
+                <fullName>Capsules</fullName>
+                <default>false</default>
+                <label>Capsules</label>
+            </value>
+            <value>
+                <fullName>Complete Nutrition Drink</fullName>
+                <default>false</default>
+                <label>Complete Nutrition Drink</label>
+            </value>
+            <value>
+                <fullName>Gummie</fullName>
+                <default>false</default>
+                <label>Gummie</label>
+            </value>
+            <value>
+                <fullName>Protein shot</fullName>
+                <default>false</default>
+                <label>Protein shot</label>
+            </value>
+            <value>
+                <fullName>RTD</fullName>
+                <default>false</default>
+                <label>RTD</label>
+            </value>
+            <value>
+                <fullName>Shake</fullName>
+                <default>false</default>
+                <label>Shake</label>
+            </value>
+            <value>
+                <fullName>Snack</fullName>
+                <default>false</default>
+                <label>Snack</label>
+            </value>
+            <value>
+                <fullName>Tablet</fullName>
+                <default>false</default>
+                <label>Tablet</label>
+            </value>
+            <value>
+                <fullName>Yogurt</fullName>
+                <default>false</default>
+                <label>Yogurt</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Health_Benefit_Areas__c</fullName>
+    <externalId>false</externalId>
+    <label>Health Benefit Areas</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <controllingField>Sub_Segment__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetName>Health_Benefit_Areas</valueSetName>
+        <valueSettings>
+            <controllingFieldValue>Biotis</controllingFieldValue>
+            <valueName>Gut Heath</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Biotis</controllingFieldValue>
+            <valueName>Brain Health (Sleep and Stress)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Biotis</controllingFieldValue>
+            <valueName>Immune Health</valueName>
+        </valueSettings>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

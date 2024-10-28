@@ -1,0 +1,11 @@
+Red flag used in  Case
+
+very_sad,_face sad, poker_face, happy_face, very_happy_face icons are used for data quality score on all objects
+
+position_1, position_2, position_3, position_4, position_5 icons are used for Key Buying Factors
+
+little_important, somewhat_important, unimportant, very_important and important icons are used for Market Trend
+
+up_arrow, down_arrow, equal_to, are used of Share of wallet.
+
+

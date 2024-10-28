@@ -1,0 +1,18 @@
+<!--
+ - Created by KJM on 05/06/2019.
+ -->
+
+<aura:component description="CaseListViewButtons"  controller="CaseListViewButtonsController" implements="forceCommunity:availableForAllPageTypes">
+    <aura:attribute name="recordTypeOptions" type="List"/>
+    <aura:attribute name="objectName" type="String" default="Case" />
+    <aura:attribute name="objectNamePlural" type="String" default="Cases" />
+    <aura:attribute name="defaultFields" type="String" default=""/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <lightning:layout horizontalAlign="end">
+        <lightning:layoutItem padding="horizontal-small">
+            <c:CreateObjectButton recordTypeOptions = "{!v.recordTypeOptions}" objectLabel = "{!v.objectName}" objectName = "{!v.objectName}" defaultFieldValues = "{!v.defaultFields}"/>
+        </lightning:layoutItem>
+    </lightning:layout>
+</aura:component>

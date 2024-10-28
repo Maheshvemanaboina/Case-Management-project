@@ -1,0 +1,4 @@
+<aura:event type="COMPONENT" description="Fire notification to for each item in a list to sort and the type of event (like moveup or movedown)">
+    <aura:attribute name="itemIndex" type="Integer" description="index of the item to be be moved" />
+    <aura:attribute name="eventType" type="String" description="Type of event, mainly (MoveUp, MoveDown)" />
+</aura:event>

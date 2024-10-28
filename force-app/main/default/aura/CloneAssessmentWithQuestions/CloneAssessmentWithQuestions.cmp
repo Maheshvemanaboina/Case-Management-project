@@ -1,0 +1,48 @@
+<aura:component implements="force:lightningQuickActionWithoutHeader,force:hasRecordId" controller="AssessmentControler">
+    <aura:attribute name="isOpen" type="boolean" default="true"/>
+    <aura:attribute name="isLoading" type="boolean" default="false"/>
+    <aura:attribute name="recordId" type="String" />
+
+    <!--Custom Styles for Modal Header and Footer-->
+    <aura:html tag="style">
+        .cuf-content {
+        padding: 0 0rem !important;
+        }
+        .slds-p-around--medium {
+        padding: 0rem !important;
+        }
+        .slds-modal__content{
+        overflow-y:hidden !important;
+        height:unset !important;
+        max-height:unset !important;
+        }
+    </aura:html>
+
+    <!--Modal Header-->
+    <div class="modal-header slds-modal__header slds-size_1-of-1">
+        <h4 class="title slds-text-heading--medium">{!$Label.c.SRM_Clone_Assessment}</h4>
+    </div>
+    <!--End Modal Header-->
+
+    <!--Modal Body-->
+    <div class="slds-modal__content slds-p-around--x-small slds-align_absolute-center slds-size_1-of-1 slds-is-relative">
+        <form class="slds-form--stacked">
+            <p>{!$Label.c.SRM_Clone_Assessment_ModalMsg}</p>
+            <div class="slds-text-body_small">{!$Label.c.SRM_Clone_Assessment_ModalInfo}</div>
+        </form>
+    </div>
+    <!--End of Modal Body-->
+
+    <!--Modal Footer-->
+    <div class="modal-footer slds-modal__footer slds-size_1-of-1">
+        <lightning:button variant="Brand" class="slds-button" label="{!$Label.c.SRM_Clone}" onclick="{!c.handleClone}"/>
+        <lightning:button variant="Neutral" class="slds-button" label="{!$Label.c.SRM_Cancel}" onclick="{!c.handleCloseModal}"/>
+    </div>
+    <!--End of Modal Footer-->
+    <!-- Loading wheel -->
+    <div class="loading_wheel">
+        <aura:if isTrue="{! v.isLoading }">
+            <lightning:spinner alternativeText="Loading" size="large" variant="brand"/>
+        </aura:if>
+    </div>
+</aura:component>

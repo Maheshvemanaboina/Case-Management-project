@@ -1,0 +1,76 @@
+<aura:component controller="SCAFCreationController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="hasNextInfo" type="boolean" default="false"/>
+    <aura:attribute name="ScafMessage" type="String" default=""/>
+    <aura:attribute name="LSDInPlace" type="String" default=""/>
+    <aura:attribute name="AgreementWith" type="String" default=""/>
+    <aura:attribute name="templateDeviation" type="String" default="" />
+    <aura:attribute name="DeviationRFC" type="String" default="" />
+    <aura:attribute name="StatusValue" type="String" default="" />
+    <aura:attribute name="extensionType" type="String" default="" />
+    
+    <aura:attribute name="TotalNetSales" type="Decimal" default="" />
+    <aura:attribute name="InitialTermsLSD" type="Decimal" default="" />
+    <aura:attribute name="TerminationPeriod" type="Decimal" default="" />
+    <aura:attribute name="ScafApproveStatus" type="Decimal" default="" />
+    
+    <aura:attribute name="alert" type="object"/>
+    
+    <aura:attribute name="SCAFCount" type="String" default="" />
+    <!--  <aura:attribute name="FileCount" type="Decimal" default="" />
+<aura:handler name="change" value="{!v.FileCount}" action="{!c.doInit}"/>-->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.templateDeviation}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.StatusValue}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.extensionType}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.SCAFCount}" action="{!c.doInit}"/>
+    
+    <!--<aura:handler name="change" value="{!v.TotalNetSales}" action="{!c.showToastMessage}"/>
+    <aura:handler name="change" value="{!v.InitialTermsLSD}" action="{!c.showToastMessage}"/>
+    <aura:handler name="change" value="{!v.TerminationPeriod}" action="{!c.showToastMessage}"/>
+    <aura:handler name="change" value="{!v.ScafApproveStatus}" action="{!c.showToastMessage}"/>-->
+    
+    <lightning:recordEditForm onsubmit="{!c.handleSubmit}"
+                              onsuccess="{!c.handleSuccess}"
+                              onload="{!c.handleLoad}"
+                              recordId="{!v.recordId}"
+                              objectApiName="Legal_Sales_Document__c">
+        
+
+        <div class="slds-hide">
+            <lightning:inputField fieldName="Status_of_LSD__c" />
+            <lightning:inputField fieldName="Deviations_from_RFC_LSD_Template__c" />
+            <lightning:inputField fieldName="Extension_Type_of_LSD__c" />
+            <lightning:inputField fieldName="Type_of_LSD__c" />
+            <lightning:inputField fieldName="SCAF_Count__c" />
+        </div>
+    </lightning:recordEditForm>
+    <aura:if isTrue="{!v.hasNextInfo}">
+      <aura:iteration items="{!v.alert}" var="item">
+        <lightning:card title="">
+            <div class="recordSaveError1 colred" >
+                <ui:message title="{!item.StatusValue}"  severity="info" closable="false">
+                    {!item.TemplateDeviationMSG}
+                </ui:message>
+            </div>
+            <!--div class="recordSaveError2">
+                <ui:message title="Info" severity="info" closable="false">
+                    {!v.LSDInPlace}
+                </ui:message>
+            </div>
+            <div class="recordSaveError3">
+                <ui:message title="Info" severity="info" closable="false">
+                    {!v.AgreementWith}
+                </ui:message>
+            </div>
+            <div class="recordSaveError4">
+                <ui:message title="The LSD requires internal approval(s)!" severity="info" closable="false">
+                    {!v.templateDeviation}
+                </ui:message>
+            </div-->
+        </lightning:card>
+        </aura:iteration>
+        <aura:set attribute="else">
+            <div></div>
+        </aura:set>
+    </aura:if>
+</aura:component>

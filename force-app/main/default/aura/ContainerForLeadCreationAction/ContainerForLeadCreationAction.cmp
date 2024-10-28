@@ -1,0 +1,3 @@
+<aura:component implements="force:appHostable,force:lightningQuickAction,lightning:actionOverride" access="global">
+    <c:childLeadCreation></c:childLeadCreation>
+</aura:component>

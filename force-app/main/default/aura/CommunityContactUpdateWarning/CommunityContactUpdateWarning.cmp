@@ -1,0 +1,16 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	<aura:html tag="style">.toastMessage.forceActionsText{white-space : pre-line !important;}</aura:html>
+
+    <aura:attribute name="contact" type="Object"/>
+    <aura:attribute name="contactRecord" type="Object"/>
+    <aura:attribute name="recordSaveError" type="String"/>
+     
+    <force:recordData aura:id="conRec"
+                      targetFields="{!v.contactRecord}"
+                      recordId="{!v.recordId}" 
+                      fields="Business_Segment__c,Sub_Segment__c,Application__c,Additional_Country_Responsibility__c,Additional_Region_Responsibility__c"
+                      targetError="{!v.recordSaveError}"
+                      targetRecord="{!v.contact}"
+                      mode="EDIT"
+                      recordUpdated="{!c.handleRecordUpdated}"/>
+</aura:component>

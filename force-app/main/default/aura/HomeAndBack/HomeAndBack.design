@@ -1,0 +1,4 @@
+<design:component>
+    <design:attribute name="LinkNm" label="Label" description="Link Label Name" />
+    <design:attribute name="HomeBut" label="Redirect to the home page" description="" />
+</design:component>

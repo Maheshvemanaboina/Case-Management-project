@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Application_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Application Type</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Sub_Segment__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Bars</fullName>
+                <default>false</default>
+                <label>Bars</label>
+            </value>
+            <value>
+                <fullName>Gels</fullName>
+                <default>false</default>
+                <label>Gels</label>
+            </value>
+            <value>
+                <fullName>Protein Shots</fullName>
+                <default>false</default>
+                <label>Protein Shots</label>
+            </value>
+            <value>
+                <fullName>Ready to Drink</fullName>
+                <default>false</default>
+                <label>Ready to Drink</label>
+            </value>
+            <value>
+                <fullName>Shakes</fullName>
+                <default>false</default>
+                <label>Shakes</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Active Nutrition</controllingFieldValue>
+            <controllingFieldValue>Medical Nutrition</controllingFieldValue>
+            <controllingFieldValue>Performance Nutrition</controllingFieldValue>
+            <valueName>Bars</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Active Nutrition</controllingFieldValue>
+            <controllingFieldValue>Medical Nutrition</controllingFieldValue>
+            <controllingFieldValue>Performance Nutrition</controllingFieldValue>
+            <valueName>Gels</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Active Nutrition</controllingFieldValue>
+            <controllingFieldValue>Medical Nutrition</controllingFieldValue>
+            <controllingFieldValue>Performance Nutrition</controllingFieldValue>
+            <valueName>Protein Shots</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Active Nutrition</controllingFieldValue>
+            <controllingFieldValue>Medical Nutrition</controllingFieldValue>
+            <controllingFieldValue>Performance Nutrition</controllingFieldValue>
+            <valueName>Ready to Drink</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Active Nutrition</controllingFieldValue>
+            <controllingFieldValue>Medical Nutrition</controllingFieldValue>
+            <controllingFieldValue>Performance Nutrition</controllingFieldValue>
+            <valueName>Shakes</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

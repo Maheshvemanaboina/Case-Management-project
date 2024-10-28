@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Relevance_Required_End_Date__c</fullName>
+    <description>(BGI) This field will be to Cases related list so that cases can be sorted in the descending order of this field. This will show ope cases with fast approaching required end date at the top.</description>
+    <externalId>false</externalId>
+    <formula>IF(   ISPICKVAL(Status, &apos;Notification Completed&apos;), &apos;Closed &apos; + TEXT( Due_Date__c ) , &apos;Open &apos; + TEXT( Due_Date__c ))</formula>
+    <label>Relevance (Required End Date)</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,17 @@
+.THIS {
+}
+.THIS .navTileLink {
+     box-sizing: border-box;
+     cursor: pointer;
+     color: rgb(0, 95, 178);
+     text-decoration: none;
+     transition: color 0.1s linear 0s;
+     background-color: transparent;
+ }
+.THIS .list_css {
+        font-size: 17px;
+    padding-left: 92px;
+}
+.THIS .bread_css [lightning-breadcrumb_breadcrumb-host] {
+    font-size:18px;
+}

@@ -1,0 +1,27 @@
+<aura:component controller="CommunityBreadCrumbsController" implements="forceCommunity:availableForAllPageTypes,force:hasRecordId">
+
+    <aura:attribute name="recordId" type="String" default="{!recordId}"/>
+    <aura:attribute name="designAttributeName" type="String"/>
+    <aura:attribute name="communityFullName" type="String"/>
+
+    <aura:attribute name="BreadCrumbsWrapper" type="Object"/>
+    <lightning:navigation aura:id="navigateService" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <lightning:breadcrumbs>
+        <aura:iteration items="{! v.BreadCrumbsWrapper }" var="eachBreadCrumb">
+                <lightning:breadcrumb label="{! eachBreadCrumb.UIName }" onclick="{! c.gotoURL }" name="{! eachBreadCrumb.pageInfo }"/>
+        </aura:iteration>
+    </lightning:breadcrumbs>
+
+    <!--<nav role="navigation" aria-label="Breadcrumbs">
+        <ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+            <aura:iteration items="{! v.BreadCrumbsWrapper }" var="eachBreadCrumb">
+                <li class="slds-breadcrumb__item">
+                    <a data-rel="{! eachBreadCrumb.relativeURL }" onclick="{! c.gotoURL }">{! eachBreadCrumb.UIName }</a>
+                </li>
+            </aura:iteration>
+        </ol>
+    </nav>-->
+
+</aura:component>

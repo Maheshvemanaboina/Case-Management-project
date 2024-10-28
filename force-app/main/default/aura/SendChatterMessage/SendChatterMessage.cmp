@@ -1,0 +1,58 @@
+<!--
+ - Created by KJM on 27/06/2019.
+ -->
+
+<aura:component description="SendChatterMessage" controller="SendChatterMessageController">
+    <aura:attribute name="personName" type="String" description="User person name" required="true" />
+    <aura:attribute name="errorMessage" type="String" description="Error message" default=""/>
+    <aura:attribute name="userChatterAvailable" type="Boolean" description="userAvailable" default="true" />
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <aura:registerEvent name="hideCompEvt" type="c:HideSendMessageModal" />
+
+    <div aura:id="modalContainer" class="">
+        <div role="dialog" tabindex="-1" aria-labelledby="modalTitle" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open" >
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon onclick="{!c.handleCloseModalClick}" iconName="utility:close" alternativeText="Close" class="slds-modal__close" variant="bare-inverse" size="large"/>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">{! 'Send Message: ' + v.personName}</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <div>
+                        <aura:if isTrue="{!not(empty(v.errorMessage))}">
+                            <div class="recordSaveError">
+                                <ui:message title="Error" severity="error" closable="false">
+                                    {!v.errorMessage}
+                                </ui:message>
+                            </div>
+                        </aura:if>
+                    </div>
+                    <div>
+                        <aura:if isTrue="{!empty(v.errorMessage)}">
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label" for="subjectTA">Subject</label>
+                                <div class="slds-form-element__control">
+                                    <ui:inputtextarea  aura:id="subjectTA" rows="1" class="slds-textarea" value="" placeholder="Subject..."/>
+                                </div>
+                            </div>
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label" for="messageTA">Message</label>
+                                <div class="slds-form-element__control">
+                                    <ui:inputtextarea aura:id="messageTA" rows="5" class="slds-textarea" value="" placeholder="Message..."/>
+                                </div>
+                            </div>
+                        </aura:if>
+                    </div>
+                </div>
+                <div class="slds-modal__footer">
+                    <aura:if isTrue="{!empty(v.errorMessage)}">
+                        <lightning:button class="Neutral" onclick="{!c.handleCloseModalClick}" label="Cancel"/>
+                        <lightning:button variant="brand" onclick="{!c.handleSendMessageClick}" label="Send"/>
+                    </aura:if>
+                </div>
+            </div>
+        </div>
+        <div class="slds-backdrop slds-backdrop--open"></div>
+    </div>
+</aura:component>

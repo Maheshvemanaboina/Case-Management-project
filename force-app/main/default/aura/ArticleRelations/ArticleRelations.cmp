@@ -1,0 +1,24 @@
+<!--
+ - Created by KJM on 17/05/2019.
+ -->
+<!-- <aura:component description="ArticleRelations" controller="ArticleRelationsController" implements="force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global">
+
+    <aura:attribute name="relations" type="List" />
+    <aura:attribute name="items" type="Object"/>
+    <aura:attribute name="treeItems" type="List"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <aura:if isTrue="{!not(empty(v.treeItems))}">
+        <lightning:tree items="{!v.treeItems}" />
+    </aura:if>
+    <aura:if isTrue="{!(empty(v.treeItems))}">
+        <lightning:tree items="{!v.items}"/>
+    </aura:if>
+</aura:component> -->
+<aura:component description="ArticleRelations" controller="ArticleRelationsController" implements="force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global">
+    <aura:attribute name="relations" type="List" />
+    <aura:attribute name="items" type="Object"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>   
+    <lightning:tree items="{!v.items}"/>
+</aura:component>

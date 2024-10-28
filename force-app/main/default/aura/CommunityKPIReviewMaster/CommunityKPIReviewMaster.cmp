@@ -1,0 +1,66 @@
+<aura:component controller="CommunityKPIReviewController" implements="force:lightningQuickActionWithoutHeader,flexipage:availableForRecordHome,force:hasRecordId,lightning:actionOverride" access="global">
+    
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="Spinner" type="boolean" default="false"/>
+    <aura:attribute name="tableValues" type="Object"/>
+    <aura:attribute name="tableValueList" type="List"/>
+    <aura:attribute name="accId" type="String" default="Id"/>
+    <!--<aura:attribute name="arrayValues" type="String[]"/>
+    <aura:attribute name="SMComment" type="String"/>-->
+    <aura:attribute name="kpiMap" type="Map" default="{}" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:handler name="commEvent" event="c:CommunityKPIReviewEvent" action="{!c.pushOrPopOperation}"/>
+    
+    <aura:html tag="style">
+        .slds-modal__container{
+        max-width: 80rem !important;
+        width:80% !important;
+        }
+    </aura:html>
+    
+    
+    <div>
+        
+        
+        <div class="slds-page-header">
+            <h1 class="slds-page-header__title">Review {!v.tableValues.CommunityKPIType}</h1>
+            <!--<p class="slds-text-body_small slds-line-height_reset">Submitted By ME</p>-->
+        </div>
+        
+        <!--Table Part-->           
+        <table class="slds-table slds-table_bordered  slds-table_edit slds-table_fixed-layout slds-table_resizable-cols"> 
+            <aura:if isTrue="{!v.Spinner}">
+                <div aura:id="spinnerId" class="slds-spinner_container">
+                    <div class="slds-spinner--brand  slds-spinner slds-spinner--large slds-is-relative" role="alert">
+                        <span class="slds-assistive-text">Loading</span>
+                        <div class="slds-spinner__dot-a"></div>
+                        <div class="slds-spinner__dot-b"></div>
+                    </div>
+                </div>
+            </aura:if>
+            <thead>
+                <tr class="slds-text-title_caps">
+                    <aura:iteration items="{!v.tableValues.headerValues}" var="eachHeaderVal" indexVar="index">
+                        <th scope="col">{!eachHeaderVal}</th>
+                    </aura:iteration>
+                    <th scope="col">Confirmed?</th>
+                    <!--<th scope="col">
+                        <div class="slds-truncate">S.No</div>
+                    </th>-->
+                </tr>
+            </thead>   
+            <tbody>
+                <aura:iteration items="{!v.tableValues.bodyValue}" var="eachtableData" indexVar="tablerow">
+                    <c:CommunityKPIReviewGeneric rowData="{!eachtableData}" />
+                </aura:iteration>
+            </tbody>
+        </table>
+        <!--<lightning:textarea name="SMComments" required="true" label="Your Comments" placeholder="Please type your comments here" value="{!v.SMComment}"/>-->
+        <br/>
+        <!--Save Button which is call Save js function on click --> 
+        <div class="slds-align_absolute-center">
+            <lightning:button class="slds-button_stretch" variant="brand" onclick="{!c.SaveRec}" label="Save"/> 
+            <lightning:button class="slds-button_stretch" onclick="{!c.closeModal}" label="Cancel"/>      
+        </div>
+    </div>
+</aura:component>

@@ -1,0 +1,25 @@
+<aura:component implements="flexipage:availableForRecordHome,flexipage:availableForAllPageTypes,force:hasRecordId" access="global" >
+    <div class="slds-grid slds-gutters">
+        <div class="slds-col">
+            <span>
+                <lightning:card >
+                    <a class="slds-button slds-align_absolute-center slds-text-heading_medium slds-text-title_bold" href="https://frieslandcampinaconnect.lightning.force.com/lightning/app/c__SRM_Risk_Management">SRM Risk Management</a>
+                </lightning:card>
+            </span>
+        </div>
+        <div class="slds-col">
+            <span>
+            	<lightning:card >
+                    <a class="slds-button slds-align_absolute-center slds-text-heading_medium slds-text-title_bold" href="https://frieslandcampinaconnect.lightning.force.com/lightning/app/c__SRM_Performance_Management">SRM Performance Management</a>
+                </lightning:card>
+            </span>
+        </div>
+        <div class="slds-col">
+            <span>
+            	<lightning:card >
+                    <a class="slds-button slds-align_absolute-center slds-text-heading_medium slds-text-title_bold" href="https://frieslandcampinaconnect.lightning.force.com/lightning/app/c__SRM_Relationship_Management">SRM Relationship Management</a>
+                </lightning:card>
+            </span>
+        </div>
+    </div>
+</aura:component>

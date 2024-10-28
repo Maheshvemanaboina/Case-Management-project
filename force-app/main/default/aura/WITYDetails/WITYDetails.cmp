@@ -1,0 +1,32 @@
+<aura:component controller="CreateWITYService" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="data" type="Object"/>
+    <aura:attribute name="columns" type="List"/>
+    <aura:attribute name="title" type="String" default="Visit Report Name"/>
+    <aura:attribute name="visitURL" type="String"/>
+    <aura:attribute name="visitName" type="String"/>
+    <aura:attribute name="visitDate" type="String"/>
+    <!-- handlers-->
+    <aura:handler name="init" value="{! this }" action="{! c.doinit }"/>
+    <lightning:card>
+        <!--<div style="height: 300px">-->
+      
+            <aura:set attribute="title">
+                  <div style="padding:10px 0px 10px 15px;font-size: .8125rem;">
+                <!--<lightning:icon iconName="utility:connected_apps" size="small"/>-->
+                {! v.title } <a href="{!v.visitURL}" style="margin-left:15px">{!v.visitName}</a>
+            		 </div>
+                </aura:set>
+           
+        <aura:set attribute="actions">
+            <div style="padding:10px 15px 10px 0px;font-size: .8125rem;">
+            Visit Date <span style="margin-left:15px"> {!v.visitDate}</span>
+            </div>
+        </aura:set>
+            <lightning:datatable
+                                 keyField="id"
+                                 data="{! v.data }"
+                                 columns="{! v.columns }"
+                                 hideCheckboxColumn="true"/>
+        <!-- </div>-->
+    </lightning:card>
+</aura:component>

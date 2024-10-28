@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FC_Role__c</fullName>
+    <externalId>false</externalId>
+    <label>FC Role</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Branding and Communication Manager</fullName>
+                <default>false</default>
+                <label>Branding and Communication Manager</label>
+            </value>
+            <value>
+                <fullName>CFO</fullName>
+                <default>false</default>
+                <label>CFO</label>
+            </value>
+            <value>
+                <fullName>CKA Director</fullName>
+                <default>false</default>
+                <label>CKA Director</label>
+            </value>
+            <value>
+                <fullName>CKA Manager</fullName>
+                <default>false</default>
+                <label>CKA Manager</label>
+            </value>
+            <value>
+                <fullName>CMO</fullName>
+                <default>false</default>
+                <label>CMO</label>
+            </value>
+            <value>
+                <fullName>Commercial Controller</fullName>
+                <default>false</default>
+                <label>Commercial Controller</label>
+            </value>
+            <value>
+                <fullName>Commercial Excellence Director</fullName>
+                <default>false</default>
+                <label>Commercial Excellence Director</label>
+            </value>
+            <value>
+                <fullName>Demand Manager</fullName>
+                <default>false</default>
+                <label>Demand Manager</label>
+            </value>
+            <value>
+                <fullName>Demand Planner</fullName>
+                <default>false</default>
+                <label>Demand Planner</label>
+            </value>
+            <value>
+                <fullName>Director FInance FCI</fullName>
+                <default>false</default>
+                <label>Director FInance FCI</label>
+            </value>
+            <value>
+                <fullName>Director R&amp;D FCI</fullName>
+                <default>false</default>
+                <label>Director R&amp;D FCI</label>
+            </value>
+            <value>
+                <fullName>Finance</fullName>
+                <default>false</default>
+                <label>Finance</label>
+            </value>
+            <value>
+                <fullName>Legal Director</fullName>
+                <default>false</default>
+                <label>Legal Director</label>
+            </value>
+            <value>
+                <fullName>Managing Director</fullName>
+                <default>false</default>
+                <label>Managing Director</label>
+            </value>
+            <value>
+                <fullName>Marketing</fullName>
+                <default>false</default>
+                <label>Marketing</label>
+            </value>
+            <value>
+                <fullName>OFO</fullName>
+                <default>false</default>
+                <label>OFO</label>
+            </value>
+            <value>
+                <fullName>President FCI</fullName>
+                <default>false</default>
+                <label>President FCI</label>
+            </value>
+            <value>
+                <fullName>Pricing Manager</fullName>
+                <default>false</default>
+                <label>Pricing Manager</label>
+            </value>
+            <value>
+                <fullName>Product Developer</fullName>
+                <default>false</default>
+                <label>Product Developer</label>
+            </value>
+            <value>
+                <fullName>Product Group Manager</fullName>
+                <default>false</default>
+                <label>Product Group Manager</label>
+            </value>
+            <value>
+                <fullName>Product Manager</fullName>
+                <default>false</default>
+                <label>Product Manager</label>
+            </value>
+            <value>
+                <fullName>QA Sales</fullName>
+                <default>false</default>
+                <label>QA Sales</label>
+            </value>
+            <value>
+                <fullName>Quality Associate</fullName>
+                <default>false</default>
+                <label>Quality Associate</label>
+            </value>
+            <value>
+                <fullName>Quality Manager</fullName>
+                <default>false</default>
+                <label>Quality Manager</label>
+            </value>
+            <value>
+                <fullName>R&amp;D</fullName>
+                <default>false</default>
+                <label>R&amp;D</label>
+            </value>
+            <value>
+                <fullName>Sales Director</fullName>
+                <default>false</default>
+                <label>Sales Director</label>
+            </value>
+            <value>
+                <fullName>Sales Manager</fullName>
+                <default>false</default>
+                <label>Sales Manager</label>
+            </value>
+            <value>
+                <fullName>Supply Chain</fullName>
+                <default>false</default>
+                <label>Supply Chain</label>
+            </value>
+            <value>
+                <fullName>Technical Sales Support</fullName>
+                <default>false</default>
+                <label>Technical Sales Support</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+            <value>
+                <fullName>HR</fullName>
+                <default>false</default>
+                <label>HR</label>
+            </value>
+            <value>
+                <fullName>ICT</fullName>
+                <default>false</default>
+                <label>ICT</label>
+            </value>
+            <value>
+                <fullName>Procurement</fullName>
+                <default>false</default>
+                <label>Procurement</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,36 @@
+<aura:component  implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction,lightning:actionOverride" access="global" >
+    <!--Component Start-->
+     <aura:attribute name="loading" type="Boolean" default="false" />
+    <aura:attribute name="isLoading" type="Boolean" default="False" />
+    <aura:attribute name="reloadForm" type="boolean" default="true" />
+   <aura:attribute name="campaign" 
+                    type="Campaign" 
+                    default="{ 'sobjectType': 'Campaign'}"/>
+    <div class="slds-grid slds-grid_align-center">
+        <div class="slds-m-around_xx-small" style="width:50%;height:50%;" >
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                <lightning:recordEditForm objectApiName="Lead" aura:id="accForm" onsuccess="{!c.handleSuccess}" onerror="{!c.handleError}">
+                    <lightning:messages aura:id="OppMessage" />
+                    
+                        <lightning:inputField fieldName="Name"/>
+                        <lightning:inputField fieldName="Company"/>
+                        <lightning:inputField fieldName="Phone"/>
+                        <lightning:inputField fieldName="Email" aura:id="requiredField"/>
+                        <lightning:inputField fieldName="Campaign_Name__c" required="true" aura:id="requiredField"  class="slds-form-element_stacked requiredField"/>
+                        
+                </lightning:recordEditForm>
+                <lightning:navigation aura:id="navService"/>
+                <div class="slds-float_right">
+                    <lightning:button variant="brand" type="button" name="Save" label="Save"  onclick="{!c.handleCreatelead}" />
+                    <lightning:button variant="brand-outline" name="Cancel" label="Cancel"  onclick="{!c.cancelModel}" />
+                </div>
+                <aura:if isTrue="{!v.isLoading}">
+                    <div class="exampleHolder">
+                        <lightning:spinner alternativeText="Loading" size="medium" />
+                    </div>
+                </aura:if>
+            </div>
+        </div>
+    </div>
+    <!--Component End-->
+</aura:component>

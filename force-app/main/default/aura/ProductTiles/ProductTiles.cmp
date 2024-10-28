@@ -1,0 +1,7 @@
+<!--
+ - Created by KJM on 21/05/2019.
+ -->
+
+<aura:component description="ProductTiles" implements="forceCommunity:availableForAllPageTypes">
+    <c:TileList tilesType="Product"/>
+</aura:component>

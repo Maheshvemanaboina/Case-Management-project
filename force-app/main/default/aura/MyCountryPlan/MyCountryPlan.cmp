@@ -1,0 +1,574 @@
+<aura:component controller="CountryPlanController" implements="force:appHostable,lightning:isUrlAddressable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction,lightning:actionOverride" access="global">
+    
+    <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="businessStrategyId" type="String"/>
+    <aura:attribute name="isCloned" type="Boolean" default="false"/>
+    <aura:attribute name="Spinner" type= "Boolean" default="false"/>
+    <aura:attribute name="CountryWrapper" type="Object"/>
+    <aura:attribute name="isButtonActive" type="Boolean" default="false" />
+
+    <!--Multi Picklist Attributes-->
+    <aura:attribute name="OtherPrincipalOptions" type="List" />
+    <aura:attribute name="OtherPrincipalOptionsSelected" type="List"/>
+    <aura:attribute name="OtherPrincipalOptionsSelectedUI" type="List"/>
+
+    <aura:attribute name="FiscalYear" type="String"/>
+    <aura:attribute name="FiscalYearList" type="List"/>
+
+    <aura:attribute name="AllSubSegments" type="List"/>
+    <aura:attribute name="AllSubSegmentsSelected" type="List"/>
+    <aura:attribute name="AllSubSegmentsSelectedUI" type="List"/>
+
+    <aura:attribute name="AllAdditionalCountries" type="List"/>
+    <aura:attribute name="AllAdditionalCountriesSelected" type="List"/>
+    <aura:attribute name="AllAdditionalCountriesSelectedUI" type="List"/>
+
+    <aura:attribute name="AllMarketTrends" type="List"/>
+    <aura:attribute name="AllMarketTrendsSelected" type="List"/>
+    <aura:attribute name="AllMarketTrendsSelectedUI" type="List"/>
+
+    <!--Single Picklist Attributes -->
+    <aura:attribute name="BusinessStrategyOptions" type="List"/>
+    <aura:attribute name="BusinessSegmentOptions" type="List"/>
+
+    <aura:attribute name="addtionalCountrySearchKey" type="String"/>
+    <aura:attribute name="IconName" type="String" default="custom:custom66"/>
+    <aura:attribute name="otherPrincpalsList" type="List"/>
+    <aura:attribute name="otherPrincpalsRemoved" type="List"/>
+    <aura:attribute name="ShareOfWalletVolume" type="Decimal" default="0"/>
+    <aura:attribute name="disableComments" type="Boolean" default="true"/>
+    
+    <!--Attributes for Customer Locations lookup and Pill Container-->
+    <aura:attribute name="customerLocSearchKey" type="String"/>
+    <aura:attribute name="customerLocationRecords" type="List"/>
+    <aura:attribute name="objectAPIName" type="String" default="Account"/>
+    <aura:attribute name="customerLocPillItems" type="List"/>
+    <aura:attribute name="customerLocPillItemsRemoved" type="List"/>
+    
+    <aura:handler name="DeleteRowEvt" event="c:MyCountryPlanOtherPrincipalsDeleteRowEvent" action="{!c.removeDeletedRow}"/>
+    <aura:handler name="AddRowEvt" event="c:MyCountryPlanOtherPrincipalsAddNewRowEvent" action="{!c.addNewRow}"/>
+    <aura:handler name="selectedCustLocationEvent" event="c:CustomerLocationSelectionEvent" action="{!c.handleCustomerLocEvent}"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <aura:if isTrue="{!v.Spinner}">
+        <div aura:id="spinnerId" class="slds-spinner_container">
+            <div class="slds-spinner__brand  slds-spinner slds-spinner__large slds-is-relative" role="alert">
+                <span class="slds-assistive-text">Loading</span>
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+            </div>
+        </div>
+    </aura:if>
+    
+    <lightning:card class="slds-var-m-around_xx-small slds-theme_shade">
+        <div class="centerClass">
+            <div class="slds-page-header__row">
+                <div class="slds-page-header__col-title">
+                    <div class="slds-media">
+                        <div class="slds-media__body">
+                            <div class="slds-page-header__name">
+                                <div class="slds-page-header__name-title">
+                                    <h1>
+                                        <span class="slds-page-header__title slds-truncate" title="Recently Viewed">My Account Plan</span>
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </lightning:card>
+    <lightning:card class="slds-var-m-around_xx-small slds-theme_shade">
+        <div class="slds-section slds-is-close" aura:id="showGenericInfo">
+            <h3 class="slds-section__title">
+                <button aria-controls="expando-unique-id" class="slds-button slds-section__title-action" onclick="{!c.genericInfoExpand}">
+                    <lightning:icon class="slds-section__title-action-icon slds-button__icon slds-button__icon_left" iconName="utility:chevrondown" alternativeText="Connected" size="x-small" title="x-small size" />
+                    <span class="slds-truncate" title="Generic Information">Generic Information</span>
+                </button>
+            </h3>
+            <div class="slds-section__content slds-border_top slds-border_bottom" aura:id="showGenericInfoContent" id="expando-unique-id">
+                <!--<div class="slds-form slds-form_stacked">-->
+                    <div class="slds-grid slds-wrap">
+                        <!---->
+                        <div class="slds-form-element slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-large-size_4-of-12 centerClass slds-border_right slds-p-bottom_medium">
+                            
+                            <aura:if isTrue="{!not(v.isCloned)}">
+                                <label class="slds-form-element__label" for="input-id-01">Fiscal Year</label>
+                                <div class="slds-p-horizontal_medium">
+                                    <lightning:formattedText value="{!v.FiscalYear}" class="formattedRegion" />
+                                </div>
+                                <aura:set attribute="else">
+                                    <lightning:select class="slds-p-horizontal_medium" name="select" label="Fiscal Year" aura:id="fiscalYearId" onchange="{! c.onFiscalYearChange }">
+                                        <aura:iteration items="{!v.FiscalYearList}" var="option">
+                                            <option text="{!option.value}" value="{!option.value}"/>
+                                        </aura:iteration>
+                                    </lightning:select>
+                                </aura:set>
+                            </aura:if>
+                        </div>
+                        <div class="slds-form-element slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-large-size_4-of-12 centerClass slds-border_right">
+                            <label class="slds-form-element__label" for="input-id-01">Region</label>
+                            <div class="{!v.isCloned ? 'slds-p-horizontal_medium' : 'slds-p-horizontal_medium slds-p-bottom_medium'}">
+                                <lightning:formattedText value="{!v.CountryWrapper.userRegion}" class="formattedRegion" />
+                            </div>
+                        </div>
+                        <div class="slds-form-element slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-large-size_4-of-12 centerClass slds-p-bottom_medium">
+                            <label class="slds-form-element__label" for="input-id-01">Country</label>
+                            <div class="slds-p-horizontal_medium">
+                                <lightning:formattedText value="{!v.CountryWrapper.userCountry}" class="formattedRegion" />
+                            </div>
+                        </div>
+                        <div class="slds-grid slds-border_top slds-wrap slds-grid_vertical slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 centerClass slds-border_right">
+                            
+                            <div class="slds-col slds-p-horizontal_medium slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-form-element">
+                                <!-- <lightning:helptext content="Select your strategy for the upcoming year in relation to FCI business for this specific (sub) segment."/> -->
+                                <label class="slds-form-element__label">Business Segment</label>
+                                <div style="position:relative;display:inline;">
+                                    <button onmouseover="{!c.handleMouseOver}" data-tooltipId = "businessSegmentTooltip" onmouseout="{!c.handleMouseOut}" class="slds-button slds-button_icon slds-button slds-button_icon" aria-describedby="help" aria-disabled="true" title="Help">
+                                        <lightning:icon class="slds-button__icon" size="xx-small" iconName="utility:info" alternativeText="Approved" title="Approved" />
+                                        <span class="slds-assistive-text">Help</span>
+                                    </button>
+                                    <div aura:id="businessSegmentTooltip" class="slds-popover slds-popover_tooltip slds-nubbin_bottom-left slds-fall-into-ground" role="tooltip" id="help" style="position:absolute;bottom:27px;left:-15px">
+                                        <div class="slds-popover__body" style="width:160px;">Choose the  business segment for which you create this plan. You can only choose 1 segment.</div>
+                                    </div>
+                                </div>
+                                <lightning:select variant="label-hidden" name="select" label="Business Segment" aura:id="businessSegmentsId" onchange="{! c.onBusinessSegmentChange }">
+                                    <aura:iteration items="{!v.BusinessSegmentOptions}" var="option">
+                                        <option text="{!option.value}" value="{!option.value}" selected="{!option.selected}"/>
+                                    </aura:iteration>
+                                </lightning:select>
+                            </div>
+
+                            <div class="slds-col slds-p-vertical_x-small slds-p-horizontal_medium slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-form-element">
+                                <label class="slds-form-element__label">Sub Segment</label>
+                                <div style="position:relative;display:inline;">
+                                    <button onmouseover="{!c.handleMouseOver}" data-tooltipId = "subSegmentTooltip" onmouseout="{!c.handleMouseOut}" class="slds-button slds-button_icon slds-button slds-button_icon" aria-describedby="help" aria-disabled="true" title="Help">
+                                        <lightning:icon class="slds-button__icon" size="xx-small" iconName="utility:info" alternativeText="Approved" title="Approved" />
+                                        <span class="slds-assistive-text">Help</span>
+                                    </button>
+                                    <div aura:id="subSegmentTooltip" class="slds-popover slds-popover_tooltip slds-nubbin_bottom-left slds-fall-into-ground" role="tooltip" id="help" style="position:absolute;bottom:27px;left:-15px">
+                                        <div class="slds-popover__body" style="width:160px;">Choose the  business sub-segments for which you create this plan. You can choose multiple sub- segments.</div>
+                                    </div>
+                                </div>
+                                <lightning:dualListbox name="languages"
+                                                    variant="label-hidden"
+                                                    label= "Sub Segment"
+                                                    sourceLabel="Available"
+                                                    selectedLabel="Selected"
+                                                    options="{!v.AllSubSegments}"
+                                                    value="{!v.AllSubSegmentsSelected}"
+                                                    disableReordering = "true"
+                                                    size = "4"
+                                                    onchange="{! c.onSubSegmentChange }"/>
+                            </div>
+                        </div>
+                        <div class="slds-grid slds-border_top slds-grid_align-center slds-grid_vertical-align-center slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                            <div class="slds-col slds-p-vertical_x-small slds-p-horizontal_medium slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-form-element">
+                                <label class="slds-form-element__label">Addtional Countries</label>
+                                <div style="position:relative;display:inline;">
+                                    <button onmouseover="{!c.handleMouseOver}" data-tooltipId = "addtionalCountrytooltip" onmouseout="{!c.handleMouseOut}" class="slds-button slds-button_icon slds-button slds-button_icon" aria-describedby="help" aria-disabled="true" title="Help">
+                                        <lightning:icon class="slds-button__icon" size="xx-small" iconName="utility:info" alternativeText="Approved" title="Approved" />
+                                        <span class="slds-assistive-text">Help</span>
+                                    </button>
+                                    <div aura:id="addtionalCountrytooltip" class="slds-popover slds-popover_tooltip slds-nubbin_bottom-left slds-fall-into-ground" role="tooltip" id="help" style="position:absolute;bottom:27px;left:-15px">
+                                        <div class="slds-popover__body" style="width:160px;">If your plan includes countries in which you actively selling FC products and you don’t have a sales offices in these countries, please include these countries in your plan through this field.</div>
+                                    </div>
+                                </div>
+                                <lightning:dualListbox name="languages"
+                                                    variant="label-hidden"
+                                                    label= "Addtional Countries"
+                                                    sourceLabel="Available"
+                                                    selectedLabel="Selected"   
+                                                    options="{!v.AllAdditionalCountries}"
+                                                    value="{!v.AllAdditionalCountriesSelected}"
+                                                    disableReordering = "true"
+                                                    size = "4"
+                                                    onchange="{! c.onAdditionalCountryChange }"/>
+                            </div>
+                        </div>
+                        
+                    </div>
+                <!--</div> fieldLevelHelp="Select your Additional Countries"-->
+            </div>
+        </div>
+    </lightning:card>
+    <lightning:card class="slds-var-m-around_xx-small slds-theme_shade">
+        <div class="slds-section slds-is-close" aura:id="relatedCustLocation">
+            <h3 class="slds-section__title">
+                <button aria-controls="expando-unique-id" class="slds-button slds-section__title-action" onclick="{!c.relatedCustLocExpand}">
+                    <lightning:icon class="slds-section__title-action-icon slds-button__icon slds-button__icon_left" iconName="utility:chevrondown" alternativeText="Connected" size="x-small" title="x-small size" />
+                    <span class="slds-truncate" title="Related Customer Locations">Related Distributor Locations</span>
+                </button>
+            </h3>
+            <div class="slds-section__content slds-border_top slds-border_bottom" id="expando-unique-id">
+                <!--<div class="slds-form slds-form_stacked">-->
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-grid slds-wrap slds-grid_vertical slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 centerClass slds-border_right">
+                            <div class="slds-form-element slds-col slds-p-horizontal_medium slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-p-bottom_small" style="padding-top:12px;">
+                                <label class="slds-form-element__label" for="input-id-01">Select Distributor Locationss</label>
+
+                                <div style="position:relative;display:inline;">
+                                    <button onmouseover="{!c.handleMouseOver}" data-tooltipId = "SelectDistiMsgId" onmouseout="{!c.handleMouseOut}" class="slds-button slds-button_icon slds-button slds-button_icon" aria-describedby="help" aria-disabled="true" title="Help">
+                                        <lightning:icon class="slds-button__icon" size="xx-small" iconName="utility:info" alternativeText="Approved" title="Approved" />
+                                        <span class="slds-assistive-text">Help</span>
+                                    </button>
+                                    <div aura:id="SelectDistiMsgId" class="slds-popover slds-popover_tooltip slds-nubbin_bottom-left slds-fall-into-ground" role="tooltip" id="help" style="position:absolute;bottom:27px;left:-15px">
+                                        <div class="slds-popover__body" style="width:160px;"> If your plan includes countries in which you actively selling FC products and you have a sales offices in these countries, please include these sales offices in your plan through this field.</div>
+                                    </div>
+                                </div>
+                                
+                                <div onmouseleave="{!c.handleOnBlurCustLoc}" aura:id="searchRes" class="slds-form-element slds-lookup slds-is-close rel" data-select="single">
+                                    
+                                    <div class="slds-form-element__control">
+                                        
+                                        <div class="slds-input-has-icon slds-input-has-icon--right">
+                                            
+                                            <lightning:icon class="slds-input__icon slds-show" iconName="utility:search" size="x-small" alternativeText="search"/> 
+                                            <div aura:id="lookupField" class="slds-show">
+                                                <span class="slds-icon_container  slds-combobox__input-entity-icon" title="record">
+                                                    <lightning:icon class="slds-icon slds-icon slds-icon_small slds-icon-text-default" iconName="{!v.IconName}" size="x-small" alternativeText="icon"/>
+                                                    <span class="slds-assistive-text"></span>
+                                                </span>
+                                                <ui:inputText click="{!c.handleOnfocusCustLoc}" updateOn="keyup" keyup="{!c.handleCustLockeyPress}" class="slds-lookup__search-input slds-input paddingleft" value="{!v.customerLocSearchKey}" placeholder="Please Enter three characters.."/>
+                                            </div>   
+                                        </div>
+                                    </div>
+                                    <!--This part is for Display typehead lookup result List-->  
+                                    <ul style="min-height:40px;margin-top:0px !important;" class="slds-listbox slds-listbox_vertical slds-dropdown slds-dropdown_fluid slds-lookup__menu slds abs" role="listbox">
+                                        <lightning:spinner class="slds-hide" variant="brand" size="small" aura:id="mySpinner"/>
+                                        <center> {!v.Message}</center>
+                                        <aura:iteration items="{!v.customerLocationRecords}" var="singleRec">
+                                            <c:CountryPlanCompetitorLookUpResults objectName="CustomerLocationEvent" oRecord="{!singleRec}" IconName="{!v.IconName}"/>
+                                        </aura:iteration>
+                                    </ul>
+                                </div>
+                                
+                            </div>
+                            
+                        </div>
+                        <div class="slds-grid slds-wrap slds-grid_vertical-align-start slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 centerClass slds-align_absolute-center">    
+                            <!--Header Part--> 
+                            <div class="slds-form-element slds-col slds-p-horizontal_medium slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                                <label class="slds-form-element__label" for="input-id-01">Selected Distributor Locations</label>
+                                <lightning:pillContainer items="{!v.customerLocPillItems}" onitemremove="{!c.handlePillRemoval}"></lightning:pillContainer>
+                            </div>
+                        </div>
+                    </div>
+                <!--</div>-->
+            </div>
+        </div>
+    </lightning:card>
+    <lightning:card class="slds-var-m-around_xx-small slds-theme_shade">
+        <div class="slds-section slds-is-close" aura:id="shareOfWallet">
+            <h3 class="slds-section__title">
+                <button aria-controls="expando-unique-id" class="slds-button slds-section__title-action" onclick="{!c.shareOfWalletExpand}" >
+                    <lightning:icon class="slds-section__title-action-icon slds-button__icon slds-button__icon_left" iconName="utility:chevrondown" alternativeText="Connected" size="x-small" title="x-small size" />
+                    <span class="slds-truncate" title="FCI Share of Wallet at distributor">FCI Share of Wallet at distributor</span>
+                </button>
+            </h3>
+            <div class="slds-section__content slds-border_top slds-border_bottom" id="expando-unique-id" >
+                <!--div class="slds-form slds-form_stacked">-->
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-grid slds-wrap slds-grid_vertical slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 centerClass slds-border_right">
+                            <div class="slds-form-element slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1" style="padding-top:27px;">
+                                <label class="slds-form-element__label" for="input-id-01">Distributor Volume(MT)</label>
+                                
+                                <!--onmouseover="{!c.handleMouseOver}"  onmouseout="{!c.handleMouseOut}"-->
+                                <div style="position:relative;display:inline;">
+                                    <button onmouseover="{!c.handleMouseOver}" data-tooltipId = "DistiVolMsgId" onmouseout="{!c.handleMouseOut}" class="slds-button slds-button_icon slds-button slds-button_icon" aria-describedby="help" aria-disabled="true" title="Help">
+                                        <lightning:icon class="slds-button__icon" size="xx-small" iconName="utility:info" alternativeText="Approved" title="Approved" />
+                                        <span class="slds-assistive-text">Help</span>
+                                    </button>
+                                    <div aura:id="DistiVolMsgId" class="slds-popover slds-popover_tooltip slds-nubbin_bottom-left slds-fall-into-ground" role="tooltip" id="help" style="position:absolute;bottom:27px;left:-15px">
+                                        <div class="slds-popover__body" style="width:160px;">Total volume sold by the distributor in the market across all principles</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="slds-p-horizontal_medium">
+                                    <lightning:input class="slds-input" variant="label-hidden" type="number" name="input8" required="true" value="{!v.CountryWrapper.distributorVol}" label="Enter Distributor Volume" onchange = "{!c.onDistributorAndFCIBudgetVolChange}" disabled= "{!v.isButtonActive}" />
+                                </div>
+                            </div>
+                            <div class="slds-form-element slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1" style="padding-top:27px;">
+                                <label class="slds-form-element__label" for="input-id-01">FCI Budget Volume(MT)</label>
+                                <div class="slds-p-horizontal_medium">
+                                    <!--<lightning:formattedNumber value="{!v.CountryWrapper.FCIBudgetVol}" style="decimal" minimumFractionDigits="0" class="formattedRegion"/>-->
+                                    <lightning:input class="slds-input" variant="label-hidden" type="number" name="input8" required="true" value="{!v.CountryWrapper.FCIBudgetVol}" label="Enter FCI Budget Volume" onchange = "{!c.onDistributorAndFCIBudgetVolChange}" disabled= "{!v.isButtonActive}" />
+                                </div>
+                            </div>
+                            <div class="slds-form-element slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 centerClass" style="padding-top:27px;">
+                                <label class="slds-form-element__label" for="input-id-01">Share of Wallet FCI Volume</label>
+                                <div class="slds-p-horizontal_medium">
+                                    <lightning:formattedNumber value="{!v.ShareOfWalletVolume}" style="percent" maximumFractionDigits="2"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-grid slds-wrap slds-grid_vertical-align-start slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-align_absolute-center">    
+                            <!--Header Part--> 
+                            <div class="slds-form-element slds-col slds-p-horizontal_medium slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-form-element">
+                                <label class="slds-form-element__label">Other Principals</label>
+                                <div style="position:relative;display:inline;">
+                                    <button onmouseover="{!c.handleMouseOver}" data-tooltipId = "otherprincipaltooltip" onmouseout="{!c.handleMouseOut}" class="slds-button slds-button_icon slds-button slds-button_icon" aria-describedby="help" aria-disabled="true" title="Help">
+                                        <lightning:icon class="slds-button__icon" size="xx-small" iconName="utility:info" alternativeText="Approved" title="Approved" />
+                                        <span class="slds-assistive-text">Help</span>
+                                    </button>
+                                    <div aura:id="otherprincipaltooltip" class="slds-popover slds-popover_tooltip slds-nubbin_bottom-left slds-fall-into-ground" role="tooltip" id="help" style="position:absolute;bottom:27px;left:-15px">
+                                        <div class="slds-popover__body" style="width:160px;">Add the principals which you represent next to FCI for this specific (sub) segment. If you cannot find the principal(s), enter the name in the other comments field.</div>
+                                    </div>
+                                </div>
+                                <lightning:dualListbox name="languages"
+                                                       aura:id="other"
+                                                       variant="label-hidden"
+                                                       label= "Other Principals"
+                                                       sourceLabel="Available"
+                                                       selectedLabel="Selected"
+                                                       options="{!v.OtherPrincipalOptions}"
+                                                       value="{!v.OtherPrincipalOptionsSelected}"
+                                                       size = "3"
+                                                       onchange="{! c.onOtherPrincipalsChange }" />
+                            </div>
+                            <div class="slds-form-element slds-p-horizontal_medium slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                                <lightning:textarea name="othercomments" label="Other Comments" disabled="{!v.disableComments}" placeholder="Comments if you choose 'Others' in principal (MAX - 255 Characters)." value="{!v.CountryWrapper.OtherComments}" maxlength="255" messageWhenTooLong="A maximum of 255 characters are allowed."/>
+                            </div>
+                        </div>
+                    </div>
+                <!--div>-->
+            </div>
+        </div>
+    </lightning:card>
+    <lightning:card class="slds-var-m-around_xx-small slds-theme_shade">
+        <div class="slds-section slds-is-close" aura:id="strategyDisti">
+            <h3 class="slds-section__title">
+                <button aria-controls="expando-unique-id" class="slds-button slds-section__title-action" onclick="{!c.strategyDistiExpand}">
+                    <lightning:icon class="slds-section__title-action-icon slds-button__icon slds-button__icon_left" iconName="utility:chevrondown" alternativeText="Connected" size="x-small" title="x-small size" />
+                    <span class="slds-truncate" title="Share Of Wallet">Strategy Distributor for FCI Portfolio</span>
+                </button>
+            </h3>
+            <div class="slds-section__content slds-border_top slds-border_bottom" id="expando-unique-id">
+                <!--<div class="slds-form slds-form_stacked">-->
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-grid slds-wrap slds-grid_vertical slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 centerClass slds-border_right">
+                            <div class="slds-form-element slds-col slds-p-horizontal_medium slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1" >
+                                <label class="slds-form-element__label">Business Strategy</label>
+                                <div style="position:relative;display:inline;">
+                                    <button onmouseover="{!c.handleMouseOver}" data-tooltipId = "businessStrategyToolTip" onmouseout="{!c.handleMouseOut}" class="slds-button slds-button_icon slds-button slds-button_icon" aria-describedby="help" aria-disabled="true" title="Help">
+                                        <lightning:icon class="slds-button__icon" size="xx-small" iconName="utility:info" alternativeText="Approved" title="Approved" />
+                                        <span class="slds-assistive-text">Help</span>
+                                    </button>
+                                    <div aura:id="businessStrategyToolTip" class="slds-popover slds-popover_tooltip slds-nubbin_bottom-left slds-fall-into-ground" role="tooltip" id="help" style="position:absolute;bottom:27px;left:-15px">
+                                        <div class="slds-popover__body" style="width:160px;">Select your strategy for the upcoming year in relation to FCI business for this specific (sub) segment.</div>
+                                    </div>
+                                </div>
+                                <div class="slds-p-horizontal_medium">
+                                    <lightning:select name="select" variant="label-hidden" label="Business Strategy" aura:id="businessStrategyId" onchange="{! c.onBusinessStrategyChange }">
+                                        <aura:iteration items="{!v.BusinessStrategyOptions}" var="option">
+                                            <option text="{!option.value}" value="{!option.value}" selected="{!option.selected}"/>
+                                        </aura:iteration>
+                                    </lightning:select>
+                                </div>
+                                <!--<label class="slds-form-element__label" for="input-id-01">Business Strategy</label>
+                                <div class="slds-p-horizontal_medium">
+                                    <lightning:textarea name="businessStrategy" variant="label-hidden" required="true" value="{!v.CountryWrapper.businessStrategy}" placeholder="Compose your Business Strategy" maxlength="140" messageWhenTooLong="A maximum of 140 characters are allowed"/>
+                                </div>-->
+                            </div>
+                            <div class="slds-col slds-p-horizontal_medium slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-p-vertical_small">
+                                <!--<label class="slds-form-element__label" for="input-id-02">Market Trends</label>-->
+                                <div class="slds-form-element slds-col slds-p-horizontal_medium slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-form-element">
+                                    <label class="slds-form-element__label">Market Trends</label>
+                                    <div style="position:relative;display:inline;">
+                                        <button onmouseover="{!c.handleMouseOver}" data-tooltipId = "marketTrendstoolTip" onmouseout="{!c.handleMouseOut}" class="slds-button slds-button_icon slds-button slds-button_icon" aria-describedby="help" aria-disabled="true" title="Help">
+                                            <lightning:icon class="slds-button__icon" size="xx-small" iconName="utility:info" alternativeText="Approved" title="Approved" />
+                                            <span class="slds-assistive-text">Help</span>
+                                        </button>
+                                        <div aura:id="marketTrendstoolTip" class="slds-popover slds-popover_tooltip slds-nubbin_bottom-left slds-fall-into-ground" role="tooltip" id="help" style="position:absolute;bottom:27px;left:-15px">
+                                            <div class="slds-popover__body" style="width:160px;">Select the trends you see in your local markets, for this specific (sub) segment. You can select multiple trends.</div>
+                                        </div>
+                                    </div>
+                                    <lightning:dualListbox name="languages"
+                                                        aura:id="other"
+                                                        label= "Market Trends"
+                                                        variant="label-hidden"
+                                                        sourceLabel="Available"
+                                                        selectedLabel="Selected"
+                                                        options="{!v.AllMarketTrends}"
+                                                        value="{!v.AllMarketTrendsSelected}"
+                                                        size = "3"
+                                                        onchange="{! c.onMarketTrendsChange }"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-grid slds-wrap slds-grid_vertical slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 centerClass">
+                            <div class="slds-form-element slds-col slds-p-horizontal_medium slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1" >
+                                <label class="slds-form-element__label" for="input-id-02">Business Strategy Explanation</label>
+                                
+                                <div style="position:relative; display:inline;">
+                                    <button onmouseover="{!c.handleMouseOver}" data-tooltipId="growthOppMsgId"  onmouseout="{!c.handleMouseOut}" class="slds-button slds-button_icon slds-button slds-button_icon" aria-describedby="help" aria-disabled="true" title="Help">
+                                        <lightning:icon class="slds-button__icon" size="xx-small" iconName="utility:info" alternativeText="Approved" title="Approved" />
+                                        <span class="slds-assistive-text">Help</span>
+                                    </button>
+                                    <div aura:id="growthOppMsgId" class="slds-popover slds-popover_tooltip slds-nubbin_bottom-left slds-fall-into-ground" role="tooltip" id="help" style="position:absolute;bottom:27px;left:-15px">
+                                        <div class="slds-popover__body" style="width:160px;">Explain in more detail the tactics you will use supporting your strategy in order to achieve your business goals.</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="slds-p-horizontal_medium">
+                                    <lightning:textarea name="growthOpportunities" variant="label-hidden" required="true" value="{!v.CountryWrapper.growthOpportunity}" placeholder="Compose your Growth Opportunities" maxlength="2500" messageWhenTooLong="A maximum of 2500 characters are allowed"/>
+                                </div>
+                            </div>
+                            <!-- <div class="slds-form-element slds-col slds-p-horizontal_medium slds-p-top_x-large slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 centerClass" >
+                                <label class="slds-form-element__label" for="input-id-03">Market Information</label>
+                                
+                                <div style="position:relative;display:inline;">
+                                    <button onmouseover="{!c.handleMouseOver}" data-tooltipId="marketInfoMsgId"  onmouseout="{!c.handleMouseOut}" class="slds-button slds-button_icon slds-button slds-button_icon" aria-describedby="help" aria-disabled="true" title="Help">
+                                        <lightning:icon class="slds-button__icon" size="xx-small" iconName="utility:info" alternativeText="Approved" title="Approved" />
+                                        <span class="slds-assistive-text">Help</span>
+                                    </button>
+                                    <div aura:id="marketInfoMsgId" class="slds-popover slds-popover_tooltip slds-nubbin_bottom-left slds-fall-into-ground" role="tooltip" id="help" style="position:absolute;bottom:27px;left:-15px">
+                                        <div class="slds-popover__body" style="width:160px;">Your Market Information</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="slds-p-horizontal_medium">
+                                    <lightning:textarea name="growthOpportunities" variant="label-hidden" required="true" value="{!v.CountryWrapper.marketInfo}" placeholder="Compose your Market Information" maxlength="140" messageWhenTooLong="A maximum of 140 characters are allowed"/>
+                                </div>
+                            </div> -->
+                            
+                        </div>
+                        <div class="slds-grid slds-wrap slds-grid_vertical-align-start slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-border_top">    
+                            <!--Header Part--> 
+                            <div class="slds-form-element slds-large-size_1-of-1 slds-scrollable_y centerClass" style="height:296px;">
+                                <div class="slds-page-header">
+                                    <h1 class="slds-page-header__title">Enter Competitors Detail</h1>
+                                </div>
+                                
+                                <!--Table Part-->           
+                                <table class="slds-table slds-table_bordered slds-table_cell-buffer"> 
+                                    <thead>
+                                        <tr class="slds-text-title_caps">
+                                            <th scope="col">
+                                                <div class="slds-truncate centerClass">S.No</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate centerClass" title="Name">Name</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate centerClass" title="Competitor">Competitor</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate centerClass" title="Direct Supply?">Direct Supply?</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate centerClass" title="Distributor Names">Distributor Names</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate centerClass" title="Actions">Actions</div>
+                                            </th>
+                                        </tr>
+                                    </thead>   
+                                    <tbody>
+                                        
+                                        <aura:iteration items="{!v.otherPrincpalsList}" var="item" indexVar="index">
+                                            <c:MyCountryPlanOtherPrincipals allCompetitorsList="{!v.otherPrincpalsList}" rowIndex = "{!index}" otherPrincipalsObj = "{!item}" />
+                                        </aura:iteration>
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                <!--</div>-->
+            </div>
+        </div>
+    </lightning:card>
+    <lightning:card class="slds-var-m-around_xx-small slds-theme_shade">
+        <div class="slds-section slds-is-close" aura:id="WITYInfo">
+            <h3 class="slds-section__title">
+                <button aria-controls="expando-unique-id" class="slds-button slds-section__title-action" onclick="{!c.wityExpand}">
+                    <lightning:icon class="slds-section__title-action-icon slds-button__icon slds-button__icon_left" iconName="utility:chevrondown" alternativeText="Connected" size="x-small" title="x-small size" />
+                    <span class="slds-truncate" title="WITY Information">SWOT</span>
+                </button>
+            </h3>
+            <div class="slds-section__content slds-border_top slds-border_bottom" id="expando-unique-id">
+                <!--<div class="slds-form slds-form_stacked">-->
+                    <div class="slds-grid slds-wrap">
+                        <div aura:id="strengthsDiv" class="slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 centerClass slds-border_right slds-border_bottom">
+                            <label class="slds-form-element__label" for="input-id-01">Our Strength</label>
+                            
+                            <div style="position:relative;display:inline;">
+                                <button onmouseover="{!c.handleMouseOver}" data-tooltipId="strengthMsgId"  onmouseout="{!c.handleMouseOut}" class="slds-button slds-button_icon slds-button slds-button_icon" aria-describedby="help" aria-disabled="true" title="Help">
+                                    <lightning:icon class="slds-button__icon" size="xx-small" iconName="utility:info" alternativeText="Approved" title="Approved" />
+                                    <span class="slds-assistive-text">Help</span>
+                                </button>
+                                <div aura:id="strengthMsgId" class="slds-popover slds-popover_tooltip slds-nubbin_bottom-left slds-fall-into-ground" role="tooltip" id="help" style="position:absolute;bottom:27px;left:-15px">
+                                    <div class="slds-popover__body" style="width:160px;">Strength in relationship to FCI, for this specific (sub) segment. Add 4 strengths.  Keep your text short &amp; clear.</div>
+                                </div>
+                            </div>
+                            
+                            <div class="slds-p-horizontal_medium">
+                                <lightning:textarea name="Strengths" variant="label-hidden" required="true" value="{!v.CountryWrapper.distributorStrengths}" placeholder="Compose your Strengths" maxlength="2500" messageWhenTooLong="A maximum of 2500 characters are allowed"/>
+                            </div>
+                        </div>
+                        <div aura:id="weaknessDiv" class="slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 centerClass slds-border_left slds-border_bottom">
+                            <label class="slds-form-element__label" for="input-id-01">Our Weakness</label>
+                            
+                            <div style="position:relative;display:inline;">
+                                <button onmouseover="{!c.handleMouseOver}" data-tooltipId="weaknessMsgId"  onmouseout="{!c.handleMouseOut}" class="slds-button slds-button_icon slds-button slds-button_icon" aria-describedby="help" aria-disabled="true" title="Help">
+                                    <lightning:icon class="slds-button__icon" size="xx-small" iconName="utility:info" alternativeText="Approved" title="Approved" />
+                                    <span class="slds-assistive-text">Help</span>
+                                </button>
+                                <div aura:id="weaknessMsgId" class="slds-popover slds-popover_tooltip slds-nubbin_bottom-left slds-fall-into-ground" role="tooltip" id="help" style="position:absolute;bottom:27px;left:-15px">
+                                    <div class="slds-popover__body" style="width:160px;">Weakness in relationship to FCI, for this specific (sub) segment. Add 4 weaknesses.  Keep your text short &amp; clear.</div>
+                                </div>
+                            </div>
+                            
+                            <div class="slds-p-horizontal_medium">
+                                <lightning:textarea name="Weaknesses" variant="label-hidden" required="true" value="{!v.CountryWrapper.distributorWeaknesses}" placeholder="Compose your Weaknesses" maxlength="2500" messageWhenTooLong="A maximum of 2500 characters are allowed"/>
+                            </div>
+                        </div>
+                        <div aura:id="oppyDiv" class="slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 centerClass slds-border_top slds-border_right">
+                            <label class="slds-form-element__label" for="input-id-01">Opportunities</label>
+                            
+                            <div style="position:relative;display:inline;">
+                                <button onmouseover="{!c.handleMouseOver}" data-tooltipId="oppMsgId"  onmouseout="{!c.handleMouseOut}" class="slds-button slds-button_icon slds-button slds-button_icon" aria-describedby="help" aria-disabled="true" title="Help">
+                                    <lightning:icon class="slds-button__icon" size="xx-small" iconName="utility:info" alternativeText="Approved" title="Approved" />
+                                    <span class="slds-assistive-text">Help</span>
+                                </button>
+                                <div aura:id="oppMsgId" class="slds-popover slds-popover_tooltip slds-nubbin_bottom-left slds-fall-into-ground" role="tooltip" id="help" style="position:absolute;bottom:27px;left:-15px">
+                                    <div class="slds-popover__body" style="width:160px;">Which 3 opportunities do you see in the market which you can win together with FCI, for this specific (sub) segment. Keep your text short &amp; clear.</div>
+                                </div>
+                            </div>
+                            
+                            <div class="slds-p-horizontal_medium">
+                                <lightning:textarea name="Opportunities" variant="label-hidden" required="true" value="{!v.CountryWrapper.distributorOpportunities}" placeholder="Compose your Opportunities" maxlength="2500" messageWhenTooLong="A maximum of 2500 characters are allowed"/>
+                            </div>
+                        </div>
+                        <div aura:id="threatsDiv" class="slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 centerClass slds-border_top slds-border_left">
+                            <label class="slds-form-element__label" for="input-id-01">Threats</label>
+                            
+                            <div style="position:relative;display:inline;">
+                                <button onmouseover="{!c.handleMouseOver}" data-tooltipId="threatsMsgId"  onmouseout="{!c.handleMouseOut}" class="slds-button slds-button_icon slds-button slds-button_icon" aria-describedby="help" aria-disabled="true" title="Help">
+                                    <lightning:icon class="slds-button__icon" size="xx-small" iconName="utility:info" alternativeText="Approved" title="Approved" />
+                                    <span class="slds-assistive-text">Help</span>
+                                </button>
+                                <div aura:id="threatsMsgId" class="slds-popover slds-popover_tooltip slds-nubbin_bottom-left slds-fall-into-ground" role="tooltip" id="help" style="position:absolute;bottom:27px;left:-15px">
+                                    <div class="slds-popover__body" style="width:160px;">Which 3 threats  do you see in the market which you can win together with FCI, for this specific (sub) segment. Keep your text short &amp; clear.</div>
+                                </div>
+                            </div>
+                            
+                            <div class="slds-p-horizontal_medium">
+                                <lightning:textarea name="Threats" variant="label-hidden" required="true" value="{!v.CountryWrapper.distributorThreats}" placeholder="Compose your Threats" maxlength="2500" messageWhenTooLong="A maximum of 2500 characters are allowed"/>
+                            </div>
+                        </div>
+                    </div>
+                <!--</div>-->
+            </div>
+        </div>
+    </lightning:card>
+    
+    <div class="slds-align_absolute-center btn_btm slds-p-top_x-small slds-var-m-around_xx-small slds-theme_shade">
+        <lightning:button class="slds-button_stretch" onclick="{!c.handleCancel}" label="Cancel"/>
+        <lightning:button class="slds-button_stretch" variant="brand" onclick="{!c.handleSave}" label="Save"/>          
+    </div>
+    
+</aura:component>

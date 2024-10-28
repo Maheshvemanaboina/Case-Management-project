@@ -1,0 +1,4 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickActionWithoutHeader" access="global" >
+    <aura:attribute name="recordId" type="string"></aura:attribute>
+    <c:createSAPCaseLWC recordId="{!v.recordId}" onclosequickaction="{!c.closemodal}"></c:createSAPCaseLWC>
+</aura:component>

@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Adult Nutrition</fullName>
+        <default>false</default>
+        <label>Adult Nutrition</label>
+    </customValue>
+    <customValue>
+        <fullName>Adult Nutrition | Food &amp; Beverages</fullName>
+        <default>false</default>
+        <label>Adult Nutrition | Food &amp; Beverages</label>
+    </customValue>
+    <customValue>
+        <fullName>Butter</fullName>
+        <default>false</default>
+        <label>Butter</label>
+    </customValue>
+    <customValue>
+        <fullName>Central Legal</fullName>
+        <default>false</default>
+        <label>Central Legal</label>
+    </customValue>
+    <customValue>
+        <fullName>Central Pricing</fullName>
+        <default>false</default>
+        <label>Central Pricing</label>
+    </customValue>
+    <customValue>
+        <fullName>Cheese</fullName>
+        <default>false</default>
+        <label>Cheese</label>
+    </customValue>
+    <customValue>
+        <fullName>Cheese Retail</fullName>
+        <default>false</default>
+        <label>Cheese Retail</label>
+    </customValue>
+    <customValue>
+        <fullName>China</fullName>
+        <default>false</default>
+        <label>China</label>
+    </customValue>
+    <customValue>
+        <fullName>Early Life Nutrition &amp; Cell Nutrition</fullName>
+        <default>false</default>
+        <label>Early Life Nutrition &amp; Cell Nutrition</label>
+    </customValue>
+    <customValue>
+        <fullName>Export</fullName>
+        <default>false</default>
+        <label>Export</label>
+    </customValue>
+    <customValue>
+        <fullName>FCI Innovation</fullName>
+        <default>false</default>
+        <label>FCI Innovation</label>
+    </customValue>
+    <customValue>
+        <fullName>HoB</fullName>
+        <default>false</default>
+        <label>HoB</label>
+    </customValue>
+    <customValue>
+        <fullName>Industry</fullName>
+        <default>false</default>
+        <label>Industry</label>
+    </customValue>
+    <customValue>
+        <fullName>Milkpowder</fullName>
+        <default>false</default>
+        <label>Milkpowder</label>
+    </customValue>
+    <customValue>
+        <fullName>Other</fullName>
+        <default>false</default>
+        <label>Other</label>
+    </customValue>
+    <customValue>
+        <fullName>APAC</fullName>
+        <default>false</default>
+        <label>APAC</label>
+    </customValue>
+    <customValue>
+        <fullName>Food &amp; Beverages</fullName>
+        <default>false</default>
+        <label>Food &amp; Beverages</label>
+    </customValue>
+    <customValue>
+        <fullName>Animal Nutrition</fullName>
+        <default>false</default>
+        <label>Animal Nutrition</label>
+    </customValue>
+    <customValue>
+        <fullName>BMP &amp; Liquids</fullName>
+        <default>false</default>
+        <label>BMP &amp; Liquids</label>
+    </customValue>
+    <customValue>
+        <fullName>Rest of Sub Saharan Africa</fullName>
+        <default>false</default>
+        <label>Rest of Sub Saharan Africa</label>
+    </customValue>
+    <customValue>
+        <fullName>Belgium</fullName>
+        <default>false</default>
+        <label>Belgium</label>
+    </customValue>
+    <customValue>
+        <fullName>Germany</fullName>
+        <default>false</default>
+        <label>Germany</label>
+    </customValue>
+    <customValue>
+        <fullName>Malaysia</fullName>
+        <default>false</default>
+        <label>Malaysia</label>
+    </customValue>
+    <customValue>
+        <fullName>Rest of World</fullName>
+        <default>false</default>
+        <label>Rest of World</label>
+    </customValue>
+    <customValue>
+        <fullName>Southwest Europe (Spain, Italy, France)</fullName>
+        <default>false</default>
+        <label>Southwest Europe (Spain, Italy, France)</label>
+    </customValue>
+    <customValue>
+        <fullName>Consumer Dairy Netherlands</fullName>
+        <default>false</default>
+        <label>Consumer Dairy Netherlands</label>
+    </customValue>
+    <customValue>
+        <fullName>Americas</fullName>
+        <default>false</default>
+        <label>Americas</label>
+    </customValue>
+    <customValue>
+        <fullName>UK&amp;I</fullName>
+        <default>false</default>
+        <label>UK&amp;I</label>
+    </customValue>
+    <customValue>
+        <fullName>CD Hong Kong</fullName>
+        <default>false</default>
+        <label>CD Hong Kong</label>
+    </customValue>
+    <customValue>
+        <fullName>Philippines</fullName>
+        <default>false</default>
+        <label>Philippines</label>
+    </customValue>
+    <customValue>
+        <fullName>QSR EU</fullName>
+        <default>false</default>
+        <label>QSR EU</label>
+    </customValue>
+    <customValue>
+        <fullName>MENA</fullName>
+        <default>false</default>
+        <label>MENA</label>
+    </customValue>
+    <customValue>
+        <fullName>Nigeria</fullName>
+        <default>false</default>
+        <label>Nigeria</label>
+    </customValue>
+    <customValue>
+        <fullName>Lattiz</fullName>
+        <default>false</default>
+        <label>Lattiz</label>
+    </customValue>
+    <customValue>
+        <fullName>Hungary</fullName>
+        <default>false</default>
+        <label>Hungary</label>
+    </customValue>
+    <customValue>
+        <fullName>Indonesia</fullName>
+        <default>false</default>
+        <label>Indonesia</label>
+    </customValue>
+    <customValue>
+        <fullName>Pakistan</fullName>
+        <default>false</default>
+        <label>Pakistan</label>
+    </customValue>
+    <customValue>
+        <fullName>Romania</fullName>
+        <default>false</default>
+        <label>Romania</label>
+    </customValue>
+    <customValue>
+        <fullName>Thailand</fullName>
+        <default>false</default>
+        <label>Thailand</label>
+    </customValue>
+    <customValue>
+        <fullName>Vietnam</fullName>
+        <default>false</default>
+        <label>Vietnam</label>
+    </customValue>
+    <customValue>
+        <fullName>Hong Kong</fullName>
+        <default>false</default>
+        <label>Hong Kong</label>
+    </customValue>
+    <customValue>
+        <fullName>Greece</fullName>
+        <default>false</default>
+        <label>Greece</label>
+    </customValue>
+    <customValue>
+        <fullName>Trading</fullName>
+        <default>false</default>
+        <label>Trading</label>
+    </customValue>
+    <customValue>
+        <fullName>Export SN</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Export SN</label>
+    </customValue>
+    <customValue>
+        <fullName>Dutch Nutrition</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Dutch Nutrition</label>
+    </customValue>
+    <customValue>
+        <fullName>DLMI (Malaysia)</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Asia - Malaysia</label>
+    </customValue>
+    <customValue>
+        <fullName>Singapore</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Asia - Singapore</label>
+    </customValue>
+    <customValue>
+        <fullName>Russia</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Russia</label>
+    </customValue>
+    <customValue>
+        <fullName>Philippines AMC</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Asia - Philippines AMC</label>
+    </customValue>
+    <customValue>
+        <fullName>Netherlands - OOH NL</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Netherlands - OOH NL</label>
+    </customValue>
+    <customValue>
+        <fullName>Netherlands - Branded NL</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Netherlands - Branded NL</label>
+    </customValue>
+    <customValue>
+        <fullName>Middle East</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>CD MENAP - MENA</label>
+    </customValue>
+    <customValue>
+        <fullName>Growth Markets - Zijerveld Int.</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Growth Markets - Zijerveld Int.</label>
+    </customValue>
+    <customValue>
+        <fullName>Growth Markets - UK &amp; Ireland</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Europe - UK &amp; Ireland</label>
+    </customValue>
+    <customValue>
+        <fullName>Asia - Vietnam</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Asia - Vietnam</label>
+    </customValue>
+    <customValue>
+        <fullName>Asia - Hong Kong</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Asia - Hong Kong</label>
+    </customValue>
+    <customValue>
+        <fullName>Asia - Thailand</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Asia - Thailand</label>
+    </customValue>
+    <customValue>
+        <fullName>Europe - Romania</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Europe - Romania</label>
+    </customValue>
+    <customValue>
+        <fullName>CD MENAP - Pakistan</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>CD MENAP - Pakistan</label>
+    </customValue>
+    <customValue>
+        <fullName>Europe - Hungary</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Europe - Hungary</label>
+    </customValue>
+    <customValue>
+        <fullName>Asia - Indonesia</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Asia - Indonesia</label>
+    </customValue>
+    <customValue>
+        <fullName>Growth Markets - Spain (incl. Canarias and Millan Vincente)</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Europe - Spain</label>
+    </customValue>
+    <customValue>
+        <fullName>Industry EMEA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Industry EMEA</label>
+    </customValue>
+    <customValue>
+        <fullName>Growth Markets - Italy</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Europe - Italy</label>
+    </customValue>
+    <customValue>
+        <fullName>Growth Markets - France</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Europe - France</label>
+    </customValue>
+    <customValue>
+        <fullName>Growth Markets - Future Markets Europe &amp; B2B</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Europe - B2B</label>
+    </customValue>
+    <customValue>
+        <fullName>Growth Markets - Latin - America/Pacific</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Americas - Latin America / Pacific</label>
+    </customValue>
+    <customValue>
+        <fullName>Growth Markets - North America</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Americas - North America</label>
+    </customValue>
+    <customValue>
+        <fullName>Europe - Greece</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Europe - Greece</label>
+    </customValue>
+    <customValue>
+        <fullName>DACH Germany</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Europe - Germany</label>
+    </customValue>
+    <customValue>
+        <fullName>BeLux</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Europe - Belux</label>
+    </customValue>
+    <customValue>
+        <fullName>Foodservice BOH - Global Accounts</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Foodservice BOH - Global Accounts</label>
+    </customValue>
+    <customValue>
+        <fullName>Foodservice BOH - Foodservice</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Foodservice BOH - Foodservice</label>
+    </customValue>
+    <customValue>
+        <fullName>Africa</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Sub-Sahara</label>
+    </customValue>
+    <customValue>
+        <fullName>Zijerveld</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Zijerveld</label>
+    </customValue>
+    <customValue>
+        <fullName>Early Life Nutrition/Cell Nutrition</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Early Life Nutrition/Cell Nutrition</label>
+    </customValue>
+    <customValue>
+        <fullName>H&amp;B Europe</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>H&amp;B Europe</label>
+    </customValue>
+    <customValue>
+        <fullName>IT</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>IT</label>
+    </customValue>
+    <customValue>
+        <fullName>Industry China</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Industry China</label>
+    </customValue>
+    <customValue>
+        <fullName>Sub-Sahara_Deleted</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Sub-Sahara-Deleted</label>
+    </customValue>
+    <customValue>
+        <fullName>Cream</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Cream</label>
+    </customValue>
+    <customValue>
+        <fullName>Europe - Netherlands / Export Europe</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Europe - Netherlands / Export Europe</label>
+    </customValue>
+    <customValue>
+        <fullName>Europe - Netherlands / Retail</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Europe - Netherlands / Retail</label>
+    </customValue>
+    <customValue>
+        <fullName>QSR &amp; Beverages</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>QSR &amp; Beverages</label>
+    </customValue>
+    <customValue>
+        <fullName>SEAP</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>SEAP</label>
+    </customValue>
+    <customValue>
+        <fullName>Netherlands</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Europe - Netherlands / OOH</label>
+    </customValue>
+    <description>(FCI)(DE)</description>
+    <masterLabel>Business Segment</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

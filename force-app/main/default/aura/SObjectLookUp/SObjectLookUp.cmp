@@ -1,0 +1,130 @@
+<aura:component implements="flexipage:availableForAllPageTypes,lightning:availableForFlowScreens" controller="SObjectLookUpController" description="A generic component for Custom Lookup. Parent Component to SObjectLookUpItem">
+
+<!--Declare Attributes-->
+    <aura:attribute name="timer" type="Object"
+                    description="attribute to make sure, Search is called when user has done typing"/>
+
+    <aura:attribute name="objectAPIName" type="String" required="true"
+                    description="Object API name used for searching records"/>
+         
+    <aura:attribute name="fieldAPIName" type="String" required="true" default="Name"
+                    description="Holds the fieldAPIname to fetch the recordLabel(Record Name) from"/>
+     
+    <aura:attribute name="iconName" type="String" default="standard:contact"
+                    description="Icon for lookup records"/>
+     
+    <aura:attribute name="placeholder" type="String" default="Search..."
+                    description="Placeholder text for input search filed"/>
+     
+    <!-- <aura:attribute name="fieldLabel" type="String" required="true"
+                    description="input search field Label"/> -->
+     
+    <aura:attribute name="selectedRecordId" type="String"
+                    description="Used to store the selected record id.
+                                 While calling this component from other component,
+                                 set this attribute to the lookup field API name"/>
+     
+    <aura:attribute name="selectedRecordLabel" type="String"
+                    description="This is used to show the selected record Label in search input"/>
+     
+    <aura:attribute name="metaFieldsAPI" type="String[]" default="Email"
+                    description="Field API for the fields to be shown under the record Label.
+                                 Must be comma separated. Example: Email,Phone"/>
+
+    <aura:attribute name="recordTypeDeveloperNames" type="String[]"
+                    description="If search result is required to be filtered by recordtypes, then mention developer
+                                names corresponding to the ObjectAPIName, Example: FCI_New_Business,FCI_Current_Business (Only Developer Names)"/>
+     
+    <aura:attribute name="sObjectRecords" type="Object[]" access="private"
+                    description="List of records returned from server side call"/>
+     
+    <aura:attribute name="recordLimit" type="Integer" access="public" default="10"
+                    description="Total number of record to be returned"/>
+    
+    <aura:attribute name="SearchKeyWord" type="string"
+                    description="Stores the search work entered by User"/>
+    
+    <aura:attribute name="whereFieldAPIName" type="String" required="true" default="Name"
+                    description="Specifies against which field the SearchKeyWord(User Input) will be matched in SOQL where clause"/>
+    
+    <aura:attribute name="Message" type="String" default=""
+                    description="Message in search result"/>
+    
+     <aura:attribute name="tilesFilter" type="String" default=""
+                    description="To restict display of mutpile files with same name.Used in Content Management either to update or delete of articles"/>
+    
+    <aura:attribute name="contactId" type="String" default=""
+                    description="To get the location specific accounts based on the contactId while adding additional customer locations"/>
+    
+    <!-- Attribute to apply filter on user object to get only the users who has knowledge user permission and library access -->
+    <aura:attribute name="contentOwnerFilter" type="Boolean" default="false"
+                    description="To get the users with knowledge user and library permissions, when searched from the content owner field"/>
+    
+    <aura:attribute name="sourceName" type="String"
+                    description="Name of the element"/> 
+    
+    
+    <!--B2B-326 -->
+    <aura:registerEvent name="onselect" type="c:SelectEvent" />
+    <aura:attribute name="onchange" type="Boolean" />
+    <!--B2B-326 -->
+
+
+    <aura:registerEvent name="SObjectNotifierEvent" type="c:sObjectLookupSelectEvent"
+                        description="Event used to send the selected record Id and Name(value from fieldAPIName) to Parent Component using it"/>
+    
+    <!-- Aura Method called from Parent to call Clear method  -->
+    <aura:method name="clearLookUp" action="{! c.clear }" access="PUBLIC"/>
+    
+    
+
+    <!-- Aura method to set values some values on init-->
+    <aura:method name="setLookup" action="{! c.setLookUpValue }">
+        <aura:attribute name="selectedRecordId" type="String"/>
+        <aura:attribute name="selectedRecordLabel" type="String"/> 
+    </aura:method>
+
+    <!--Declare Handlers-->
+    <aura:handler name="SObjectLookupEvent" event="c:sObjectLookupSelectEvent" action="{! c.handleLookupSelectEvent }"
+                  description="Event handler to get the selected record Id and record Label from SObjectLookupItem component"/>
+    
+                  <!-- -->
+    <div aura:id="searchResults" class="slds-form-element slds-lookup slds-is-close" data-select="single">
+        <!-- <label class="slds-form-element__label" for="lookup-348">{!v.label}</label> -->
+        <!--This part is for display search bar for lookup-->  
+        <div class="slds-form-element__control">
+            
+            <div class="slds-input-has-icon slds-input-has-icon--right">
+                <!-- This markup is for when an record is selected style="max-width: 300px;" -->
+                <div aura:id="selectedRecord-pill" class="slds-pill_container slds-hide">
+                    <lightning:pill class="pillSize slds-pill__label" label="{! v.selectedRecordLabel }" name="{! v.selectedRecordLabel }" onremove="{! c.clear }">
+                        <aura:set attribute="media">
+                            <lightning:icon iconName="{! v.iconName }" size="x-small" alternativeText="{! v.iconName }"/>
+                        </aura:set>
+                    </lightning:pill>
+                </div>
+                <div aura:id="lookUp-input" class="slds-show">
+                    <!--<lightning:icon class="slds-input__icon slds-input__icon_right slds-show" iconName="utility:close" size="x-small" alternativeText="search"/>-->
+                    <lightning:buttonIcon class="slds-input__icon slds-input__icon_right slds-show" iconName="utility:close" variant="bare" size="small" onclick="{! c.clearInputText }" alternativeText="Settings" title="Settings" />
+                    <span class="slds-icon_container  slds-combobox__input-entity-icon" title="record">
+                        <lightning:icon class="slds-icon slds-icon slds-icon_small slds-icon-text-default" iconName="{! v.iconName }" size="x-small" alternativeText="icon"/>
+                        <span class="slds-assistive-text"></span>
+                    </span>
+                    <ui:inputText updateOn="keyup" keyup="{! c.keyPressController }" class="slds-lookup__search-input slds-input leftPaddingClass" value="{! v.SearchKeyWord }" placeholder="{! v.placeholder }"/>
+                </div>   
+            </div>
+        </div>
+        <!--This part is for Display typehead lookup result List-->  
+        <ul style="min-height:40px;margin-top:0px !important" class="slds-listbox slds-listbox_vertical slds-dropdown slds-dropdown_fluid slds-lookup__menu slds" role="listbox">
+            <lightning:spinner class="slds-hide" variant="brand" size="small" aura:id="mySpinner"/>
+            <center> {!v.Message}</center>
+            <aura:iteration items="{!v.sObjectRecords}" var="eachRecord">
+                <c:SObjectLookUpItem record="{!eachRecord}"
+                                    fieldAPIName="{! v.fieldAPIName }" 
+                                    iconName="{! v.iconName}"
+                                    metaFieldsAPI="{! v.metaFieldsAPI }"/>
+            </aura:iteration>
+        </ul>
+    </div>
+     
+</aura:component>

@@ -1,0 +1,25 @@
+/**
+ * Created by KJM on 03/07/2019.
+ */
+
+.THIS table > thead > tr > th:nth-child(6){
+    text-align:center;
+}
+
+.THIS table > tbody > tr > th:nth-child(6) {
+    text-align: center;
+}
+
+.THIS table > thead > tr > th:nth-child(1) {
+    width: 70px;
+}
+
+.THIS table > tbody > tr > th:nth-child(1) {
+    text-align: center;
+}
+.THIS .fleft {
+    float:left;
+}
+.THIS th {
+    text-align:left!important;
+}

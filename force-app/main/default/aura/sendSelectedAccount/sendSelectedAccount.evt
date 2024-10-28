@@ -1,0 +1,8 @@
+<aura:event type="COMPONENT">
+    <aura:attribute name="selectedAccountsIds" type="List"/>
+    <aura:attribute name="selectedAccountsNames" type="List"/>
+    <aura:attribute name="isH1Account" type="Boolean"/>
+    <aura:attribute name="isH5Account" type="Boolean"/>
+    <aura:attribute name="selectedAccounts" type="List"/>
+    <aura:attribute name="isSaveEnabled" type="boolean"/>
+</aura:event>

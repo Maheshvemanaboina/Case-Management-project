@@ -1,0 +1,50 @@
+<aura:component controller="DisplayCoAsAtRecordPageHandler" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+   
+    <aura:attribute name="files" type="List"/>
+    <aura:attribute name="showSpinner" default="false" type="boolean"/>
+    <aura:attribute name="message" type="String" default=""/>
+    <aura:attribute name="allCoAFilesRelated" type="List"/>
+    
+   
+    
+    <article class="slds-card slds-card_boundary headerBottomBorder">
+        <div class="slds-grid slds-page-header" style="font-size:16px:bold;background-color:#F3F2F2;">
+            <div class="slds-media__body">
+                <h3 class="slds-card__header-title">
+                    <lightning:icon class="resizeIcon" size="medium" iconName="doctype:folder" title="Certificate Of Analysis"/>&nbsp;&nbsp;
+                    <b><span style="font-family:Salesforce sans">Certificate Of Analysis</span></b>&nbsp;
+                </h3>
+            </div>
+            <div class="slds-no-flex">
+                <lightning:button label="Retrieve CoA" iconName="doctype:pdf" onclick="{!c.fetchCoA}"/>
+            </div>
+        </div>
+        <div class="slds-scrollable slds-p-left_x-small slds-p-top_x-small slds-p-right_x-small" style="height:15rem;">
+                    <aura:if isTrue="{!v.showSpinner}">
+                        <lightning:spinner   variant="brand"/>
+                    </aura:if>
+                   <aura:if isTrue="{!v.message != null}"><b> {!v.message} </b></aura:if>
+                   <aura:if isTrue="{!v.allCoAFilesRelated.length > 0}">
+                    <table class="slds-table" id="ab">
+                        <tr>
+                            <th style="font-weight:bold">File</th>
+                            <th style="font-weight:bold">Preview</th>
+                            <th style="font-weight:bold">Download</th>
+                        </tr>
+                        <!-- Display List Of CoA -->
+                        <aura:iteration items="{!v.allCoAFilesRelated}" var="retrive">
+                            <tr>
+                                <td>
+                                    <div class="slds-cell-wrap">
+                                        <ui:outputRichText value="{!retrive.coAfileName}"/>
+                                    </div>
+                                </td>
+                                <td onclick="{!c.filePreview}" style="cursor: pointer;"  id="{!retrive.coAFileId}"><lightning:icon class="resizeIcon" size="small" iconName="action:preview" title="Preview"/></td> 
+                                <td> <a href="{!retrive.coaDownloadUrl}"><lightning:icon class="resizeIcon" size="small" iconName="action:download" title="Download"/></a><br/></td>
+                            </tr>
+                        </aura:iteration>
+                    </table>
+            </aura:if>
+        </div> 
+    </article>
+</aura:component>

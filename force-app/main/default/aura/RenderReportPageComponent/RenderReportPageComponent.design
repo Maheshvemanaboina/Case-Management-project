@@ -1,0 +1,7 @@
+<design:component>
+	<design:attribute name="relativeReportUri" label="Report URI" description="The relative link to the Report, including the Id" />
+    <design:attribute name="recordId" label="Record Id" default="recordId" description="The record Id to filer the report" />
+    <design:attribute name="recordIdFilterName" label="Record Id Filter Name" description="The record Id filter name on the report" />
+    <design:attribute name="reportId" label="Report Id" description="The report Id to load the report data from" />
+    <design:attribute name="reportTitle" label="Report Title" description="The report title" />
+</design:component>

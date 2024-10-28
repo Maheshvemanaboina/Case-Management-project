@@ -1,0 +1,14 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <div class="slds-box">
+        <div class="demo-only" style="padding:0.5rem;background:#16325c">
+            <div class="slds-text-color_inverse slds-text-title_caps">Segmentation Survey results scale:</div>
+            
+        </div>        
+        <ul class="slds-has-dividers_top-space">
+            <li class="slds-item">1		: Transactional supplier</li>
+            <li class="slds-item">2-4	: Managed supplierList Item</li>
+            <li class="slds-item">5-7		: Key supplier</li>
+            <li class="slds-item">8-10	: Strategic supplie</li>
+        </ul>
+    </div>
+</aura:component>

@@ -1,0 +1,31 @@
+<!--
+ - Created by krzys on 11/04/2019.
+ - Updated By Mohammad Rafi on 08/07/2021
+ -->
+
+<aura:component description="UploadOpportunity" controller="UploadOpportunityController" implements="forceCommunity:availableForAllPageTypes" >
+    <aura:attribute name="defaultCsvId" type="String" />
+    <aura:attribute name="localCsvId" type="String" />
+    <aura:attribute name="nonLocalCsvId" type="String" />
+      <!-- This attribute used to strore object name -->
+    <aura:attribute name="objectName" type="String" default="Opportunities"/>
+     <!-- This attribute used to store iframe src url -->
+    <aura:attribute name="iframUrl" type="String" />
+    <!-- This attribute used to store base url -->
+    <aura:attribute name="baseUrl" type="String" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <div class="slds-p-top_medium">
+        <div class="slds-text-align_center slds-text-heading_large">{! $Label.c.Upload + ' ' + v.objectName}</div>
+    </div>
+    <div class="slds-grid">
+        <div class="slds-col slds-size_6-of-12">
+            <c:UploadObject objectName="Opportunities" objectAPIName="Opportunity" templateNonLocaleId="{!v.nonLocalCsvId}" templateFileId="{!v.defaultCsvId}" templateLocaleId="{!v.localCsvId}" allowSkipExistingRec="true" allowOverwriteExistingRec="true" />
+        </div>
+        <div class="slds-col slds-size_6-of-12">
+            <div class="slds-col slds-p-top_medium mainContent">
+               <h3 class="slds-text-heading_small slds-m-bottom--small">Opportunities upload instruction document :</h3>
+               <iframe width="100%" height="395" scrolling="auto" src="{!v.iframUrl}" title="Account Instruction Document" name="InstructionDocument" frameborder="1"></iframe>
+            </div>
+        </div>
+    </div>      
+</aura:component>

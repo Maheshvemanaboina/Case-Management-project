@@ -1,0 +1,5 @@
+<design:component >
+    <design:attribute name="recordId" label="recordId" description="Salesforce Id of the record" />
+    <design:attribute name="designAttributeName" label="Design Attribute Name" description="This corresponds to the Design Attribute Name on a Tile Record, Must be unique accross a community" />
+    <design:attribute name="communityFullName" required="true" label="Community Name" description="Name of the Community. (Should correspond to one of the value from the Community Name field on Tile Object)" datasource="FCI Customer Community,DE Customer Community,FCI Distributor Community" default="FCI Distributor Community" />
+</design:component>

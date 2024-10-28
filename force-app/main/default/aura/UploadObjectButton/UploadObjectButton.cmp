@@ -1,0 +1,10 @@
+<!--
+ - Created by KJM on 08/04/2019.
+ -->
+
+<aura:component description="UploadObjectButton">
+    <aura:attribute name="objectNamePlural" type="String" required="true"/>
+    <aura:attribute name="pageRedirect" type="String" required="true" />
+
+    <lightning:button variant="neutral" label="{! 'Upload ' + v.objectNamePlural }" title="Base action" onclick="{! c.handleUploadButtonClick }"/>
+</aura:component>

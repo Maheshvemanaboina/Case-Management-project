@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Market_Segment__c</fullName>
+    <externalId>false</externalId>
+    <label>Market Segment</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Operating_Company__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetName>Market_Segment</valueSetName>
+        <valueSettings>
+            <controllingFieldValue>Medical Nutrition</controllingFieldValue>
+            <valueName>Medical</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>DMV</controllingFieldValue>
+            <controllingFieldValue>Kievit</controllingFieldValue>
+            <valueName>Food Ingredients</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>DMV</controllingFieldValue>
+            <valueName>Performance Nutrition</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>DMV</controllingFieldValue>
+            <valueName>Other</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>DOMO</controllingFieldValue>
+            <valueName>Cell Nutrition</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>DOMO</controllingFieldValue>
+            <valueName>Infant Nutrition</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Kievit</controllingFieldValue>
+            <valueName>Beverages</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Nutrifeed</controllingFieldValue>
+            <valueName>Calf Feed</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Nutrifeed</controllingFieldValue>
+            <valueName>Piglet Feed</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Nutrifeed</controllingFieldValue>
+            <valueName>Trading Single Ingredients</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

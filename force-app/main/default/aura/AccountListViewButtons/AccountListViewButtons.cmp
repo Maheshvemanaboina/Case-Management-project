@@ -1,0 +1,26 @@
+<!--
+ - Created by krzys on 08/04/2019.
+ -->
+
+<aura:component description="AccountListViewButtons" controller="AccountListViewButtonsController" implements="forceCommunity:availableForAllPageTypes">
+    <aura:attribute name="recordTypeOptions" type="List"/>
+    <aura:attribute name="objectName" type="String" default="Account" />
+    <aura:attribute name="objectNamePlural" type="String" default="Accounts" />
+    <aura:attribute name="defaultFields" type="String" default=""/>
+    <aura:attribute type="Boolean" name="ismodalClicked"/>
+    
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <lightning:flow aura:id="flowData"/>
+    
+    <lightning:layout horizontalAlign="end">
+        <lightning:layoutItem padding="horizontal-small">
+            <c:CreateObjectButton recordTypeOptions = "{!v.recordTypeOptions}" objectLabel = "{!v.objectName}" objectName = "{!v.objectName}" defaultFieldValues = "{!v.defaultFields}"/>
+        </lightning:layoutItem>
+        <lightning:layoutItem aura:id="toggleArea" padding="horizontal-small">
+            <c:UploadObjectButton objectNamePlural = "{!v.objectNamePlural}" pageRedirect="account-upload"/>
+        </lightning:layoutItem>   
+    </lightning:layout>
+    
+</aura:component>

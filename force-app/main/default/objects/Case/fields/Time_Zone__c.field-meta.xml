@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Time_Zone__c</fullName>
+    <externalId>false</externalId>
+    <label>Time Zone</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>(GMT-12:00) International Date Line West</fullName>
+                <default>false</default>
+                <label>(GMT-12:00) International Date Line West</label>
+            </value>
+            <value>
+                <fullName>(GMT-11:00) Midway Island, Samoa</fullName>
+                <default>false</default>
+                <label>(GMT-11:00) Midway Island, Samoa</label>
+            </value>
+            <value>
+                <fullName>(GMT-10:00) Hawaii</fullName>
+                <default>false</default>
+                <label>(GMT-10:00) Hawaii</label>
+            </value>
+            <value>
+                <fullName>(GMT-09:00) Alaska</fullName>
+                <default>false</default>
+                <label>(GMT-09:00) Alaska</label>
+            </value>
+            <value>
+                <fullName>(GMT-08:00) Pacific Time (US and Canada)</fullName>
+                <default>false</default>
+                <label>(GMT-08:00) Pacific Time (US and Canada)</label>
+            </value>
+            <value>
+                <fullName>(GMT-07:00) Arizona, Mountain Time (US and Canada)</fullName>
+                <default>false</default>
+                <label>(GMT-07:00) Arizona, Mountain Time (US and Canada)</label>
+            </value>
+            <value>
+                <fullName>(GMT-06:00) Central Time (US and Canada), Mexico City</fullName>
+                <default>false</default>
+                <label>(GMT-06:00) Central Time (US and Canada), Mexico City</label>
+            </value>
+            <value>
+                <fullName>(GMT-05:00) Eastern Time (US and Canada), Bogota, Lima</fullName>
+                <default>false</default>
+                <label>(GMT-05:00) Eastern Time (US and Canada), Bogota, Lima</label>
+            </value>
+            <value>
+                <fullName>(GMT-04:00) Atlantic Time (Canada), Caracas, La Paz</fullName>
+                <default>false</default>
+                <label>(GMT-04:00) Atlantic Time (Canada), Caracas, La Paz</label>
+            </value>
+            <value>
+                <fullName>(GMT-03:30) Newfoundland</fullName>
+                <default>false</default>
+                <label>(GMT-03:30) Newfoundland</label>
+            </value>
+            <value>
+                <fullName>(GMT-03:00) Brasilia, Buenos Aires, Georgetown</fullName>
+                <default>false</default>
+                <label>(GMT-03:00) Brasilia, Buenos Aires, Georgetown</label>
+            </value>
+            <value>
+                <fullName>(GMT-02:00) Mid-Atlantic</fullName>
+                <default>false</default>
+                <label>(GMT-02:00) Mid-Atlantic</label>
+            </value>
+            <value>
+                <fullName>(GMT-01:00) Azores, Cape Verde Islands</fullName>
+                <default>false</default>
+                <label>(GMT-01:00) Azores, Cape Verde Islands</label>
+            </value>
+            <value>
+                <fullName>(GMT) Greenwich Mean Time: Dublin, Edinburgh, Lisbon, London</fullName>
+                <default>false</default>
+                <label>(GMT) Greenwich Mean Time: Dublin, Edinburgh, Lisbon, London</label>
+            </value>
+            <value>
+                <fullName>(GMT+01:00) Amsterdam, Berlin, Brussels, Copenhagen, Madrid, Paris</fullName>
+                <default>false</default>
+                <label>(GMT+01:00) Amsterdam, Berlin, Brussels, Copenhagen, Madrid, Paris</label>
+            </value>
+            <value>
+                <fullName>(GMT+02:00) Athens, Bucharest, Istanbul, Jerusalem, Helsinki</fullName>
+                <default>false</default>
+                <label>(GMT+02:00) Athens, Bucharest, Istanbul, Jerusalem, Helsinki</label>
+            </value>
+            <value>
+                <fullName>(GMT+03:00) Moscow, St. Petersburg, Volgograd</fullName>
+                <default>false</default>
+                <label>(GMT+03:00) Moscow, St. Petersburg, Volgograd</label>
+            </value>
+            <value>
+                <fullName>(GMT+03:30) Tehran</fullName>
+                <default>false</default>
+                <label>(GMT+03:30) Tehran</label>
+            </value>
+            <value>
+                <fullName>(GMT+04:00) Abu Dhabi, Muscat, Baku, Tbilisi</fullName>
+                <default>false</default>
+                <label>(GMT+04:00) Abu Dhabi, Muscat, Baku, Tbilisi</label>
+            </value>
+            <value>
+                <fullName>(GMT+04:30) Kabul</fullName>
+                <default>false</default>
+                <label>(GMT+04:30) Kabul</label>
+            </value>
+            <value>
+                <fullName>(GMT+05:00) Ekaterinburg, Islamabad, Karachi, Tashkent</fullName>
+                <default>false</default>
+                <label>(GMT+05:00) Ekaterinburg, Islamabad, Karachi, Tashkent</label>
+            </value>
+            <value>
+                <fullName>(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi</fullName>
+                <default>false</default>
+                <label>(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi</label>
+            </value>
+            <value>
+                <fullName>(GMT+05:45) Kathmandu</fullName>
+                <default>false</default>
+                <label>(GMT+05:45) Kathmandu</label>
+            </value>
+            <value>
+                <fullName>(GMT+06:00) Almaty, Dhaka, Colombo</fullName>
+                <default>false</default>
+                <label>(GMT+06:00) Almaty, Dhaka, Colombo</label>
+            </value>
+            <value>
+                <fullName>(GMT+06:30) Yangon</fullName>
+                <default>false</default>
+                <label>(GMT+06:30) Yangon</label>
+            </value>
+            <value>
+                <fullName>(GMT+07:00) Bangkok, Hanoi, Jakarta</fullName>
+                <default>false</default>
+                <label>(GMT+07:00) Bangkok, Hanoi, Jakarta</label>
+            </value>
+            <value>
+                <fullName>(GMT+08:00) Beijing, Perth, Singapore, Hong Kong</fullName>
+                <default>false</default>
+                <label>(GMT+08:00) Beijing, Perth, Singapore, Hong Kong</label>
+            </value>
+            <value>
+                <fullName>(GMT+09:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk</fullName>
+                <default>false</default>
+                <label>(GMT+09:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk</label>
+            </value>
+            <value>
+                <fullName>(GMT+09:30) Adelaide, Darwin</fullName>
+                <default>false</default>
+                <label>(GMT+09:30) Adelaide, Darwin</label>
+            </value>
+            <value>
+                <fullName>(GMT+10:00) Brisbane, Melbourne, Sydney, Guam</fullName>
+                <default>false</default>
+                <label>(GMT+10:00) Brisbane, Melbourne, Sydney, Guam</label>
+            </value>
+            <value>
+                <fullName>(GMT+11:00) Magadan, Solomon Islands, New Caledonia</fullName>
+                <default>false</default>
+                <label>(GMT+11:00) Magadan, Solomon Islands, New Caledonia</label>
+            </value>
+            <value>
+                <fullName>(GMT+12:00) Fiji, Kamchatka, Marshall Islands, Wellington</fullName>
+                <default>false</default>
+                <label>(GMT+12:00) Fiji, Kamchatka, Marshall Islands, Wellington</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

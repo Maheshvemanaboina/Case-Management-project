@@ -1,0 +1,74 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickActionWithoutHeader" access="global"  controller="SRM_AddParticipantsController">
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="mydata" type="Object"/>
+    <aura:attribute name="mycolumns" type="List"/>
+    <aura:attribute name="meetingSummary" type="Object"/>
+    <aura:attribute name="recordLoadError" type="String"/>
+    <aura:attribute name="meetingStructureId" type="String"/>
+    <aura:attribute name="noRecordsFound" type="Boolean" />
+    <aura:attribute name="selectedRows" type="Object"/>
+    <aura:attribute name="fields" type="String[]" default="['User__c','Type__c','Meeting_Summary__c']" />
+    <aura:attribute name="showSubmitButton" type="Boolean" />
+    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+    
+    <!--Custom Styles for Modal Header and Footer--> 
+    <aura:html tag="style">
+        .cuf-content {
+        padding: 0 0rem !important;
+        }
+        .slds-p-around--medium {
+        padding: 0rem !important;
+        }       
+        .slds-modal__content{
+        overflow-y:hidden !important;
+        height:unset !important;
+        max-height:unset !important;
+        }
+    </aura:html>    
+    <force:recordData aura:id="recordLoader"
+                      recordId="{!v.recordId}"
+                      fields="Meeting_Structure__c"
+                      targetFields="{!v.meetingSummary}"
+                      targetError="{!v.recordLoadError}"
+                      recordUpdated="{!c.recordUpdated}" 
+                      />
+    <div class="modal-header slds-modal__header slds-size_1-of-1">
+        <h4 class="title slds-text-heading--medium">Add Participants</h4>
+    </div>
+    <div class="slds-modal__content slds-p-around--x-small slds-align_absolute-center slds-size_1-of-1 slds-is-relative">
+        <form class="slds-form--stacked">
+            <lightning:accordion aura:id="accordion" activeSectionName="B" onsectiontoggle="{! c.handleSectionToggle }">
+                
+                <lightning:accordionSection name="B" label="Add Existing Participants">
+                    <lightning:datatable data="{! v.mydata }"
+                                         columns="{! v.mycolumns }"
+                                         keyField="id"
+                                         onrowselection="{! c.getSelectedName }"/>
+                </lightning:accordionSection> 
+                <lightning:accordionSection name="A" label="Add New Participant" >
+                    <article class="slds-card">
+                        
+                        <footer class="slds-card__footer slds-border_bottom slds-border_right slds-border_left">
+                            <lightning:recordEditForm aura:id="recordEditForm"
+                                                      objectApiName="Participants__c" onsuccess="{!c.handleSuccess}">
+                                <lightning:messages />
+                                <lightning:inputField fieldName="User__c" />
+                                <lightning:inputField fieldName="Meeting_Summary__c" value="{!v.recordId}"/>
+                                <lightning:inputField fieldName="Type__c" />
+                                <lightning:button class="slds-m-top_small" type="submit" label="Add" />
+                            </lightning:recordEditForm>
+                        </footer>
+                    </article>
+                </lightning:accordionSection>
+            </lightning:accordion>
+            
+        </form> 
+    </div>
+    <div class="modal-footer slds-modal__footer ">
+        <aura:if isTrue="{!v.showSubmitButton}">
+            <lightning:button variant="Brand" class="slds-button" label="Submit" onclick="{!c.handleSubmit}" />
+        </aura:if> 
+        <lightning:button variant="Neutral" class="slds-button" label="Cancel" onclick="{!c.handleClose}"/>
+    </div>
+    <!--End of Modal Footer-->
+</aura:component>

@@ -1,0 +1,5 @@
+<aura:event type="COMPONENT" description="Event fired when a user selects a value from list of Records for sObject">
+    <aura:attribute name="recordId" type="String" required="true" description="Used to send selected record Id"/>
+    <aura:attribute name="recordLabel" type="String" required="true" description="Used to send selected record Label" />
+    <aura:attribute name="sourceName" type="String" description="Used to send the control name" />
+</aura:event>

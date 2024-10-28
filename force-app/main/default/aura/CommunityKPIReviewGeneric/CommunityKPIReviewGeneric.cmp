@@ -1,0 +1,55 @@
+<aura:component implements="force:lightningQuickAction,flexipage:availableForRecordHome,force:hasRecordId,lightning:actionOverride" access="global">
+    
+    <aura:attribute name="rowData" type="Object"/>
+    <aura:attribute name="rowId" type="String"/>
+    <aura:attribute name="eachRowList" type="List"/>
+    <aura:attribute name="commActId" type="String"/>
+    <aura:attribute name="rowIndex" type="String"/>
+    <aura:attribute name="confirmedorNot" type="Boolean" default="false"/>
+    <aura:attribute name="showEditIcon" type="Boolean" default="true"/>
+    <aura:attribute name="smComment" type="String" default= '' />
+    <aura:registerEvent name="commEvent" type="c:CommunityKPIReviewEvent"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <!-- Table Row -->   
+    <tr aria-selected="false" class="slds-hint-parent">
+        <aura:iteration items="{!v.eachRowList}" var="eachItem" indexVar="index">
+            <aura:if isTrue="{!and(eachItem.key != 'Id',eachItem.key != 'confirmed')}">
+                <aura:if isTrue="{!eachItem.key != 'Approval_Rejection_Reason__c'}">
+                    <td aria-readonly="true" class="slds-cell-edit slds-cell_action-mode" role="gridcell">
+                      <span class="slds-grid slds-grid_align-spread">
+                        <span class="slds-truncate" >{!eachItem.value}</span>
+                      </span>
+       				 </td>
+                </aura:if>               
+            </aura:if>
+			<aura:if isTrue="{!eachItem.key == 'Approval_Rejection_Reason__c'}">
+            	<td aria-readonly="true" class="slds-cell-edit slds-cell_action-mode" role="gridcell">
+                    <aura:if isTrue="{!v.showEditIcon}">
+                      <span class="slds-grid slds-grid_align-spread">
+                        <span class="slds-truncate" >{!eachItem.value}</span>
+                          <span class="slds-truncate slds-p-right_xx-small"><lightning:buttonIcon iconName="utility:edit" name="editIcon" onclick="{!c.handleEditComments}" size="x-small" alternativeText="Edit" title="Edit" /></span>
+                      </span>
+                        <aura:set attribute="else">
+                        	<lightning:textarea name="apprRejComments" aura:id="smComments" onblur="{!c.handleEditComments}" variant="label-hidden" placeholder="Please type your comments here" value="{!eachItem.value}" />
+                        </aura:set>
+                    </aura:if>
+       				 </td>
+            </aura:if>            
+            <aura:if isTrue="{!eachItem.key == 'confirmed'}">
+                <aura:if isTrue="{!v.confirmedorNot}">
+                    <td>
+                        <div onclick="{!c.handleConfirmClick}" data-val="{!v.rowId}" class="slds-text-body_small"><lightning:icon size="xx-small" iconName="action:approval" alternativeText="Approved" /></div>
+                    </td>
+                    <aura:set attribute="else">
+                        <td>
+                            <div onclick="{!c.handleConfirmClick}" data-val="{!v.rowId}" class="slds-text-body_small"><lightning:icon size="xx-small" iconName="action:close" alternativeText="NotApproved" /></div>
+                        </td>
+                    </aura:set>
+                </aura:if>
+            </aura:if>
+        </aura:iteration>
+        
+    </tr>
+</aura:component>

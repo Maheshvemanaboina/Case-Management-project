@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Gut Heath</fullName>
+        <default>false</default>
+        <label>Gut Heath</label>
+    </customValue>
+    <customValue>
+        <fullName>Brain Health (Sleep and Stress)</fullName>
+        <default>false</default>
+        <label>Brain Health (Sleep and Stress)</label>
+    </customValue>
+    <customValue>
+        <fullName>Immune Health</fullName>
+        <default>false</default>
+        <label>Immune Health</label>
+    </customValue>
+    <customValue>
+        <fullName>Broad Biotis</fullName>
+        <default>false</default>
+        <label>Broad Biotis</label>
+    </customValue>
+    <masterLabel>Health Benefit Areas</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

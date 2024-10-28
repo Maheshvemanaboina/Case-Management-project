@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sample_Application__c</fullName>
+    <externalId>false</externalId>
+    <label>Sample Application</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Application_Type__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>new</fullName>
+                <default>false</default>
+                <label>new</label>
+            </value>
+            <value>
+                <fullName>old</fullName>
+                <default>false</default>
+                <label>old</label>
+            </value>
+            <value>
+                <fullName>EM9, WPI-r - Standard Recipe</fullName>
+                <default>false</default>
+                <label>EM9, WPI-r - Standard Recipe(PAN)</label>
+            </value>
+            <value>
+                <fullName>EM9, WPI-r, Crisps - Standard Recipe</fullName>
+                <default>false</default>
+                <label>EM9, WPI-r, Crisps - Standard Recipe(PAN)</label>
+            </value>
+            <value>
+                <fullName>GOS Meusli Bar</fullName>
+                <default>false</default>
+                <label>GOS Meusli Bar(PAN)</label>
+            </value>
+            <value>
+                <fullName>CaCas S (8%) - Prodimed Vanilla</fullName>
+                <default>false</default>
+                <label>CaCas S (8%) - Prodimed Vanilla(PAN)</label>
+            </value>
+            <value>
+                <fullName>CaCas S (8%) - Prodimed Chocolate</fullName>
+                <default>false</default>
+                <label>CaCas S (8%) - Prodimed Chocolate(PAN)</label>
+            </value>
+            <value>
+                <fullName>Protein (4%) + GOS Clear Water - Grapefruit + Pomegranate</fullName>
+                <default>false</default>
+                <label>Protein (4%) + GOS Clear Water - Grapefruit + Pomegranate(PAN)</label>
+            </value>
+            <value>
+                <fullName>Hypotonic Clear Protein Water (4%) - Tropical Acai</fullName>
+                <default>false</default>
+                <label>Hypotonic Clear Protein Water (4%) - Tropical Acai(PAN)</label>
+            </value>
+            <value>
+                <fullName>Micelate Prestige - Peach Elderflower Protein Shot (15%)</fullName>
+                <default>false</default>
+                <label>Micelate Prestige - Peach Elderflower Protein Shot (15%)(PAN)</label>
+            </value>
+            <value>
+                <fullName>WPI-c Whey Protein Shot (10%)</fullName>
+                <default>false</default>
+                <label>WPI-c Whey Protein Shot (10%)(PAN)</label>
+            </value>
+            <value>
+                <fullName>GOS Shot</fullName>
+                <default>false</default>
+                <label>GOS Shot(PAN)</label>
+            </value>
+            <value>
+                <fullName>15% Protein Gel - Pouch</fullName>
+                <default>false</default>
+                <label>15% Protein Gel - Pouch(MN)</label>
+            </value>
+            <value>
+                <fullName>15% Protein Gel - Cup</fullName>
+                <default>false</default>
+                <label>15% Protein Gel - Cup(PAN)</label>
+            </value>
+            <value>
+                <fullName>CaCas I - Overnight Coffee Frappe(PAN)</fullName>
+                <default>false</default>
+                <label>CaCas I - Overnight Coffee Frappe(PAN)</label>
+            </value>
+            <value>
+                <fullName>Nutri Whey Hydro - White Peach(PAN)</fullName>
+                <default>false</default>
+                <label>Nutri Whey Hydro - White Peach(PAN)</label>
+            </value>
+            <value>
+                <fullName>Nutri Whey Native - Coconut Lime(PAN)</fullName>
+                <default>false</default>
+                <label>Nutri Whey Native - Coconut Lime(PAN)</label>
+            </value>
+            <value>
+                <fullName>Whey Protein Isolate Instant - Vanilla Chai(PAN)</fullName>
+                <default>false</default>
+                <label>Whey Protein Isolate Instant - Vanilla Chai(PAN)</label>
+            </value>
+            <value>
+                <fullName>WPI-i + EPA/DHA 750mg(MN)</fullName>
+                <default>false</default>
+                <label>WPI-i + EPA/DHA 750mg(MN)</label>
+            </value>
+            <value>
+                <fullName>Sarcopenia Powder(MN)</fullName>
+                <default>false</default>
+                <label>Sarcopenia Powder(MN)</label>
+            </value>
+            <value>
+                <fullName>Complete Powder (DRM Solution)(MN)</fullName>
+                <default>false</default>
+                <label>Complete Powder (DRM Solution)(MN)</label>
+            </value>
+            <value>
+                <fullName>WPI-c Whey Protein Shot (10%)(MN)</fullName>
+                <default>false</default>
+                <label>WPI-c Whey Protein Shot (10%)(MN)</label>
+            </value>
+            <value>
+                <fullName>GOS Shot(MN)</fullName>
+                <default>false</default>
+                <label>GOS Shot(MN)</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Bars</controllingFieldValue>
+            <valueName>EM9, WPI-r - Standard Recipe</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Bars</controllingFieldValue>
+            <valueName>EM9, WPI-r, Crisps - Standard Recipe</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Bars</controllingFieldValue>
+            <valueName>GOS Meusli Bar</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Gels</controllingFieldValue>
+            <valueName>15% Protein Gel - Pouch</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Gels</controllingFieldValue>
+            <valueName>15% Protein Gel - Cup</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Protein Shots</controllingFieldValue>
+            <valueName>Micelate Prestige - Peach Elderflower Protein Shot (15%)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Protein Shots</controllingFieldValue>
+            <valueName>WPI-c Whey Protein Shot (10%)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Protein Shots</controllingFieldValue>
+            <valueName>GOS Shot</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Protein Shots</controllingFieldValue>
+            <valueName>WPI-c Whey Protein Shot (10%)(MN)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Protein Shots</controllingFieldValue>
+            <valueName>GOS Shot(MN)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Ready to Drink</controllingFieldValue>
+            <valueName>CaCas S (8%) - Prodimed Vanilla</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Ready to Drink</controllingFieldValue>
+            <valueName>CaCas S (8%) - Prodimed Chocolate</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Ready to Drink</controllingFieldValue>
+            <valueName>Protein (4%) + GOS Clear Water - Grapefruit + Pomegranate</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Ready to Drink</controllingFieldValue>
+            <valueName>Hypotonic Clear Protein Water (4%) - Tropical Acai</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Shakes</controllingFieldValue>
+            <valueName>CaCas I - Overnight Coffee Frappe(PAN)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Shakes</controllingFieldValue>
+            <valueName>Nutri Whey Hydro - White Peach(PAN)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Shakes</controllingFieldValue>
+            <valueName>Nutri Whey Native - Coconut Lime(PAN)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Shakes</controllingFieldValue>
+            <valueName>Whey Protein Isolate Instant - Vanilla Chai(PAN)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Shakes</controllingFieldValue>
+            <valueName>WPI-i + EPA/DHA 750mg(MN)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Shakes</controllingFieldValue>
+            <valueName>Sarcopenia Powder(MN)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Shakes</controllingFieldValue>
+            <valueName>Complete Powder (DRM Solution)(MN)</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

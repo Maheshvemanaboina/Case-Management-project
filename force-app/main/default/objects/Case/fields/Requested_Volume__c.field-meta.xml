@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Requested_Volume__c</fullName>
+    <description>Disti user enters the volume to be added in the forecast while requesting the forecast change</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Volume to be added in forecast</inlineHelpText>
+    <label>Requested Volume</label>
+    <length>10</length>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

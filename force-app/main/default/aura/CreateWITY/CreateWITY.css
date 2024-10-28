@@ -1,0 +1,110 @@
+.THIS {
+}
+.THIS .slds-truncate {
+    white-space:normal!important;
+}
+.THIS .slds-p-around_medium {
+    padding:0px!important;
+}
+.THIS .slds-p-around--medium {
+    padding:0px!important;
+}
+.THIS .popup_header {
+    border-bottom:1px solid #cacaca;
+    padding-bottom:13px;
+    padding-top:13px;
+}
+
+.THIS .popup_header {
+      position: relative;
+    top: 48px;
+    left: 0;
+    width: 100%;
+    background: #ffffff;
+    z-index:9;
+}
+/* .THIS .slds-section__content {
+    margin-top:48px;
+    margin-bottom:48px;
+} */
+.THIS .footerpopup {
+       position: relative;
+    /* bottom: 48px;
+    left: 0; */
+    width: 100%;
+    background: #ffffff;
+    /* z-index: 9; */
+    padding: 10px;
+    text-align: right;
+}
+.THIS th {
+    padding-left:5px !important;
+    padding-right:5px !important;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+    font-size:12px;
+    font-weight:bold!important;
+}
+.THIS td {
+    font-size:12px;
+}
+.THIS .slds-form-element__help{
+    font-size:8px;
+}
+.THIS .slds-form-element__helper{
+    font-size:8px;
+}
+.THIS .label-hidden > label {
+    display: none;
+}
+.THIS .slds-section__title > button > span {
+    order: 2;
+    padding-left: 5px;
+}
+
+.THIS .slds-section__title > button > .slds-icon-utility-chevronright {
+    order: 1;
+    padding-left: 5px;
+}
+
+/* .THIS .slds-section__title > button > .slds-icon-utility-chevronright > span > lightning-primitive-icon > .slds-icon {
+} */
+
+.THIS .slds-is-open > .slds-section__title > button > .slds-icon-utility-chevronright {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+}
+/* B2B144 */
+.THIS .background {
+    background-color: #F5F5F5; 
+}
+.THIS .results-container {
+    max-height: 200px;
+    overflow-y: auto;
+}
+.THIS .margin1{
+    margin-left: -90px;
+}
+.THIS .margin2{
+    margin-left: -135px;
+}
+.THIS .padding{
+    padding-bottom: 10px ;
+}
+.THIS .padding1{
+    padding-top: 10px ;
+    font-weight: inherit !important;
+    font-size: 19px;
+}
+.THIS .padding2{
+    margin-top: -25px;
+    font-weight: inherit !important;
+    font-size: 19px;
+}
+.THIS .container {
+    height: 100%;
+    max-height: 350px;
+    overflow-y: auto;
+  }
+/* B2B144 */

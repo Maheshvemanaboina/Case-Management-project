@@ -1,0 +1,39 @@
+<!--
+ - Created by Krishna on 11/02/2021.
+ -->
+
+<aura:component description="UploadQuoteLineGroup" controller="UploadFileCtlr" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
+    <aura:attribute name="csvObject" type="CSVObject"/>
+    <aura:attribute name="csvString" type="String"/>
+    <aura:attribute name="result" type="String"/>
+    <aura:attribute name="isLoading" type="Boolean" default="false"/>
+  
+    <div class="slds-card">
+            <aura:if isTrue="{!v.isLoading}">
+                    <lightning:spinner alternativeText="Loading" size="large" />
+            </aura:if>
+        <div class="slds-card__body slds-card__body_inner">
+            <input  type="file" class="file" aura:id="file" onchange="{!c.handleUploadFinished}"/>
+            <aura:if isTrue="{!not(empty(v.csvObject))}">
+                <table class="slds-table">
+                    <thead>
+                        <tr>
+                            <aura:iteration items="{!v.csvObject.headers}" var="header">
+                                <th>{!header.column_name}</th>
+                            </aura:iteration>
+                        </tr>
+                    </thead>
+                    <tbody id="table_body">
+                        <aura:iteration items="{!v.csvObject.lines}" var="line">
+                            <tr>
+                                <aura:iteration items="{!line}" var="cell">
+                                    <td>{!cell}</td>
+                                </aura:iteration>
+                            </tr>
+                        </aura:iteration>
+                    </tbody>
+                </table>
+            </aura:if>
+        </div> 
+    </div>
+</aura:component>
